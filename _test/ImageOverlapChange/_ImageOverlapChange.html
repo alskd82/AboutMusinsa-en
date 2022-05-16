@@ -1,0 +1,191 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<title>ImageOverlapChange</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href='https://swiperjs.com/images/favicon.png' rel='shortcut icon'>
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<style>
+body { display:flex; justify-content:center; align-items:center; flex-direction:column; margin:0; padding:0; height:100vh; background:#fff; } 
+section { display:block; overflow:hidden; position:relative; width:100%; height:calc(100vw * .6); }
+
+.img-container { overflow:hidden; position:relative; width:100%; height:100%; background:#000; }
+.img-container > .img-wrap { overflow:hidden; position:absolute; width:100%; height:100%; }
+.img-container .img-bg { position:absolute; left:0; top:0; width:100%; height:100%; background:no-repeat center center / cover; }
+</style>
+</head>
+
+<body>
+<section class="swiper-container-horizontal">
+    <div class="img-container">
+        <div class="img-wrap">
+            <div class="img-bg"></div>
+        </div>
+    </div>
+
+    <div class="swiper-button-prev" role="button"></div>
+    <div class="swiper-button-next" role="button"></div>
+    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" role="button"></span>
+        <span class="swiper-pagination-bullet" role="button"></span>
+        <span class="swiper-pagination-bullet" role="button"></span>
+        <span class="swiper-pagination-bullet" role="button"></span>
+    </div>
+</section>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"> </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bezier-easing@2.1.0/dist/bezier-easing.js"></script>
+<!-- <script src="./ImageOverlapChange.js"></script> -->
+<script type="text/javascript">
+class ImageLoader {
+    constructor( images, callback ) {
+        if( images === undefined ) return;
+
+        this.arr = [];
+        images.forEach( src => this.arr.push(this.loadImage(src)) );
+
+        const p = Promise.all(this.arr);
+        p.then( image => callback(image) );
+        p.catch( err => console.log(err) );
+    }
+
+    loadImage( url ) {
+        return new Promise( (resolve, reject) => {
+            const image = new Image();
+            image.onload = () => resolve(image);
+            image.onerror = () => reject(new Error(`Could not load image ${url}`));
+            image.src = url;
+        });
+    }
+}
+
+class ImageOverlapChange {
+    constructor( settings ) {
+        if( settings.imgSrc === undefined ) return;
+
+        const defaults = {
+            duration: .75,
+            ease: 'Cubic.easeInOut',
+            hideImgOpacity: 0,
+            imgs: [],
+            overlap: false,
+            overlapRatio: 50,
+            axis: 'x'
+        }
+
+        this.options = { ...defaults, ...settings };
+        this.overlap = this.options.overlap;
+        this.overlapRatio = this.options.overlapRatio;
+        this.hideImgOpacity = this.options.hideImgOpacity;
+        this.axis = this.options.axis;
+        this.duration = this.options.duration;
+        this.ease = this.options.ease;
+        this.slidesLength = this.options.imgSrc.length;
+        this.activeIndex = 0;
+        this.container = document.querySelector(settings.container);
+        this.wrapper = document.querySelector(settings.wrapper);
+        this.prevSlide, this.nextSlide;
+        this.animated = false;
+        this.direction = 1;
+        this.imgs = [];
+
+        new ImageLoader( this.options.imgSrc, this.completeImageLoad.bind(this) );
+    }
+
+    completeImageLoad( resolve ) {
+        this.imgs = resolve;
+        this.wrapper.children[0].style.backgroundImage = `url(${this.imgs[0].src})`;
+        console.log('complete all image load');
+    }
+
+    prev() {
+        this.changeSlide(this.activeIndex-1, 'left');
+    }
+
+    next() {
+        this.changeSlide(this.activeIndex+1, 'right');
+    }
+
+    changeSlide( index, direction ) {
+        this.activeIndex = index % this.slidesLength;
+        if( this.activeIndex === -1 ) this.activeIndex = this.slidesLength - 1;
+
+        this.animated = true;
+        this.direction = direction === 'right' ? 1 : -1;
+        this.prevSlide = this.container.children[this.container.children.length-1];
+        this.nextSlide = this.prevSlide.cloneNode(true);
+        this.nextSlide.children[0].style.backgroundImage = `url(${this.imgs[this.activeIndex].src})`;
+        this.container.appendChild( this.nextSlide );
+
+        const dir = this.direction;
+        gsap.set( this.nextSlide, {[`${this.axis}Percent`]:100*dir, opacity:1} )
+        gsap.to( this.nextSlide, this.duration, {xPercent:0, yPercent:0, opacity:1, ease:this.ease} );
+        gsap.to( this.prevSlide, this.duration, {[`${this.axis}Percent`]:100*-dir, opacity:this.hideImgOpacity, ease:this.ease, onComplete:this.completeSlide.bind(this)} );
+
+        if( this.overlap ) {
+            gsap.set( this.nextSlide.children[0], {[`${this.axis}Percent`]:this.overlapRatio*-dir});
+            gsap.to( this.nextSlide.children[0], this.duration, {xPercent:0, yPercent:0, ease:this.ease} );
+            gsap.to( this.prevSlide.children[0], this.duration, {[`${this.axis}Percent`]:this.overlapRatio*dir, ease:this.ease} );
+        }
+    }
+
+    completeSlide() {
+        this.prevSlide.parentNode.removeChild(this.prevSlide);
+        this.animated = false;
+    }
+}
+
+let imgUrls = [
+    "https://pbs.twimg.com/media/ExUElF7VcAMx7jx.jpg",
+    "https://img.huffingtonpost.com/asset/5cb04c561f0000c6007f1a5f.jpeg?ops=scalefit_630_noupscale",
+    "https://file2.nocutnews.co.kr/newsroom/image/2021/03/25/202103251659468108_0.jpg",
+    "https://pds.joins.com/news/component/htmlphoto_mmdata/202103/30/0d115e5d-a4fe-4ff8-9689-6b77a730d19d.jpg",
+]
+
+const slider = new ImageOverlapChange({
+    container: '.img-container',
+    wrapper: '.img-wrap',
+    imgSrc: imgUrls,      // 이미지 경로
+    hideImgOpacity: .25, // 사라질 이미지 오퍼시티
+    axis: 'y',          // 방향설정
+    overlap: true,     // 겹쳐서 이동할 것인지
+    overlapRatio: 75, // 몇 퍼센트로 겹칠 것인지
+    ease: BezierEasing(0.4,0,0.2,1)
+})
+
+document.querySelector('.swiper-button-prev').addEventListener('click', () => {
+    if( !slider.animated ) {
+        slider.prev();
+        updateIndicator(slider.activeIndex);
+    }
+});
+
+document.querySelector('.swiper-button-next').addEventListener('click', () => {
+    if( !slider.animated ) {
+        slider.next();
+        updateIndicator(slider.activeIndex);
+    }
+});
+
+const indicators = document.querySelectorAll('.swiper-pagination-bullet');
+indicators.forEach( btn => {
+    btn.addEventListener('click', evt => {
+        if( !slider.animated ) {
+            var index = [...evt.target.parentNode.children].indexOf(evt.target);
+            slider.changeSlide(index, slider.activeIndex<index?'right':'left');
+            updateIndicator(index);
+        }
+    });
+});
+
+function updateIndicator( index ) {
+    const active = 'swiper-pagination-bullet-active';
+    indicators.forEach( btn => btn.classList.remove(active) );
+    indicators[index].classList.add(active);
+}
+</script>
+</body>
+</html>

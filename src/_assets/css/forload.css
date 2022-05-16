@@ -1,0 +1,94 @@
+@charset "UTF-8";
+/*///////////////////////////////*/
+/*=== Loading BODY ===================*/
+body.before-load .page-wrap {
+  -webkit-transition: 500ms cubic-bezier(0.25, 1, 0.5, 1);
+  transition: 500ms cubic-bezier(0.25, 1, 0.5, 1);
+  -webkit-clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+}
+
+body.before-load .section-nav {
+  -webkit-transform: translate3d(0, -100px, 0);
+          transform: translate3d(0, -100px, 0);
+}
+
+body.loaded .page-wrap {
+  -webkit-transition: 1s cubic-bezier(0.6, 0, 0, 1);
+  transition: 1s cubic-bezier(0.6, 0, 0, 1);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+body.loaded .section-nav {
+  -webkit-transition: 1s cubic-bezier(0.25, 1, 0.5, 1) 0.5s;
+  transition: 1s cubic-bezier(0.25, 1, 0.5, 1) 0.5s;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+/*//////////////////////////////////////*/
+/*=== Billboard TEXT ===================*/
+.h1-billboard_title {
+  visibility: hidden;
+}
+
+.h1-billboard_title.is-active {
+  visibility: visible;
+}
+
+/*//////////////////////////////////////*/
+/*=== Common Motion ===================*/
+[data-stagger],
+[data-stagger-alpha],
+[data-stagger-y],
+[data-stagger-batch] {
+  opacity: 0;
+}
+
+[data-stagger-y],
+[data-stagger-batch] {
+  -webkit-transform: translate3d(0, 80px, 0);
+          transform: translate3d(0, 80px, 0);
+}
+
+/*//////////////////////////////////////*/
+/*=== From Our Newsroom ===================*/
+/* 
+처음엔 안보이게 설정 ... 특정 시점에 등장 모션 적용
+*/
+.section-news .news_item {
+  -webkit-transform: translate3d(0, 80px, 0);
+          transform: translate3d(0, 80px, 0);
+  opacity: 0;
+  -webkit-transition: 1.5s cubic-bezier();
+  transition: 1.5s cubic-bezier();
+}
+
+.section-news .news_item .news_item-link {
+  -webkit-transition: 300ms cubic-bezier(0.33, 0.45, 0, 1);
+  transition: 300ms cubic-bezier(0.33, 0.45, 0, 1);
+}
+
+.section-news .news_item:hover .news_item-link {
+  -webkit-transform: translate3d(0, -20px, 0);
+          transform: translate3d(0, -20px, 0);
+  -webkit-transition: 400ms cubic-bezier(0.33, 0.45, 0, 1);
+  transition: 400ms cubic-bezier(0.33, 0.45, 0, 1);
+}
+
+.section-news .news_item.is-active {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/*///////////////////////////////*/
+/*=== Show now ===================*/
+/*
+마우스 따라다니는 효과를 위해 
+*/
+.img-arrow-wrap {
+  pointer-events: none;
+}
+/*# sourceMappingURL=forload.css.map */

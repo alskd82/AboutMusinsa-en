@@ -1,0 +1,17 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.9.9"
+  },"dependencies": {
+    "@barba/core": "^2.9.7",
+    "gsap": "file:gsap-bonus.tgz",
+    "imagesloaded": "^5.0.0"
+  }
+}
