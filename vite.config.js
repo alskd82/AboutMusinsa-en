@@ -60,5 +60,8 @@ export default defineConfig({
     },
     plugins:[
         CustomHmr()
-    ]
+    ],
+    server: {
+        host : true
+    }
 })

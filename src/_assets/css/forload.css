@@ -85,9 +85,7 @@ body.loaded .section-nav {
 
 /*///////////////////////////////*/
 /*=== Show now ===================*/
-/*
-마우스 따라다니는 효과를 위해 
-*/
+/* 마우스 따라다니는 효과를 위해  */
 .img-arrow-wrap {
   pointer-events: none;
 }

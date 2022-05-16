@@ -24,6 +24,11 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.3/lottie_svg.min.js"></script>
     <script defer src="https://image.msscdn.net/webflow/static/libs/odometer/odometer.min.js"></script>
 
+    <script>
+        let vh = window.innerHeight * 0.01;
+        document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
+    </script>
+
     <script defer type="module" src="../_assets/m_index.js"> </script>
 
     <link rel="stylesheet" href="../_assets/css/forload.css">
@@ -39,13 +44,19 @@
         </div>
         <div class="m_nav-wrap">
             <div class="container-768_m-nav">
-                <div class="m_nav-link-wrap"><a href="/en/m" aria-current="page" class="m_nav-link w--current">Home</a>
-                    <div class="m_nav-about"><a href="/en/m/about/history" class="m_nav-link">About</a>
-                        <div class="m_nav-link_smn-wrap"><a href="/en/m/about/history"
-                                class="m_nav-link_smn">History</a><a href="/en/m/about/impact"
-                                class="m_nav-link_smn">Impact</a></div>
-                    </div><a href="/en/m/service" class="m_nav-link">Service</a><a href="/en/m/newsroom"
-                        class="m_nav-link">Newsroom</a>
+                <div class="m_nav-link-wrap">
+
+                    <a href="/m/m.html" aria-current="page" class="m_nav-link w--current">Home</a>
+                    <div class="m_nav-about">
+                        <a href="/m/m_history.html" class="m_nav-link">About</a>
+                        <div class="m_nav-link_smn-wrap">
+                            <a href="/m/m_history.html" class="m_nav-link_smn">History</a>
+                            <a href="/m/m_impact.html" class="m_nav-link_smn">Impact</a>
+                        </div>
+                    </div>
+                    <a href="/m/m_service.html" class="m_nav-link">Service</a>
+                    <a href="/m/m_newsroom.html" class="m_nav-link">Newsroom</a>
+
                 </div>
             </div>
         </div>
@@ -63,9 +74,9 @@
                         <div class="m_billboard_img-wrap">
                             <div class="m_billboard_img is-back is-home"></div>
                         </div>
-                        <div class="m_arrow-bottom"><img
-                                src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/627c8788fcfd56444ff1ce70_ic_arrow_bottom.svg"
-                                loading="lazy" alt="" /></div>
+                        <div class="m_arrow-bottom">
+                            <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/627c8788fcfd56444ff1ce70_ic_arrow_bottom.svg" loading="lazy" alt="" />
+                        </div>
                     </div>
                 </section>
 
@@ -123,138 +134,163 @@
 
                         <div id="sliderHistoryCMS" data-stagger-y="true" class="m_history-slider w-dyn-list">
                             <div role="list" class="m_history-slider_list w-dyn-items">
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases
-                                                a broad range of sports brands</h4>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
                                             <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b37d089a6b1e4e63bfa_history_kids_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Opened [MUSINSA Kids], a chic online
-                                                fashion and lifestyle store for kids</h4>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
                                             <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b231abe2a272137ad7e_history_m-a_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Pursued the M&amp;A of [29CM], an online
-                                                lifestyle select store Pursued the M&amp;A of [StyleShare]</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2021</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b19049c35d08646844e_history_golf_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Opened [MUSINSA Golf], which offers a
-                                                wide selection of golf fashion</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2021</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b137678a20a03d4c51e_history_boutique_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Opened [MUSINSA Boutique], an online
-                                                select store for luxuries</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2021</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b0c774f09046f236719_history_soldout_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Launched [soldout], a platform for
-                                                trading limited editions</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2020</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b04fbc4ea45bcb7fa6d_history_beauty_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Launched [MUSINSA Beauty], a stylish
-                                                online beauty store</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2020</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626afc0801674036feb362_history_standard_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Launched [MUSINSA Standard], which offers
-                                                essential casual clothing for men, women, and children</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2017</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626af4774f09fa902366cd_history_store_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Launched [MUSINSA Store], an online
-                                                fashion store</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2009</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626ae2625d5623e92fe9a9_history_magazine_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Published [MUSINSA Magazine], which
-                                                provides insights on the latest fashion trends and brand stories</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2005</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626ac90292df4b71a24e48_history_musinsa_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Launched [MUSINSA.com], a fashion
-                                                community portal</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2003</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
-                                <div role="listitem" class="m_history-slider_item w-dyn-item"><a
-                                        href="/en/about/history" class="m_history-slider_link w-inline-block">
-                                        <div class="m_history-slider_img-wrap"><img
-                                                src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626ac90292df4b71a24e48_history_musinsa_904x678.jpg"
-                                                loading="lazy" alt="" class="m_history-slider_img" /></div>
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_history-slider_item w-dyn-item">
+                                    <a href="/m/m_history.html" class="m_history-slider_link w-inline-block">
+                                        <div class="m_history-slider_img-wrap">
+                                            <img src="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg"
+                                                loading="lazy" alt="" class="m_history-slider_img" />
+                                            </div>
                                         <div class="m_history-slider_item-txt">
-                                            <h4 class="m_history_slider-title">Started [MUSINSA], an online community
-                                                for sneaker fans</h4>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">2001</div>
+                                            <h4 class="m_history_slider-title">Opened [MUSINSA Player], which showcases a broad range of sports brands</h4>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">2022</div>
                                         </div>
-                                    </a></div>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -266,15 +302,12 @@
                             <header>
                                 <h2 class="h2-mu24 is-pb24 is-center">Service</h2>
                             </header>
-                            <div class="m_home-service_img-wrap"><a data-num="3" data-focus="#Soldout"
-                                    href="/en/service"
-                                    class="m_home-service_img is-back is-musinsa w-inline-block"></a><a data-num="3"
-                                    data-focus="#Soldout" href="/en/service"
-                                    class="m_home-service_img is-back is-29cm w-inline-block"></a><a data-num="3"
-                                    data-focus="#Soldout" href="/en/service"
-                                    class="m_home-service_img is-back is-soldout w-inline-block"></a><a data-num="3"
-                                    data-focus="#Soldout" href="/en/service"
-                                    class="m_home-service_img is-back is-styleshare w-inline-block"></a></div>
+                            <div class="m_home-service_img-wrap">
+                                <a data-num="3" data-focus="#Soldout" href="/m/m_service.html" class="m_home-service_img is-back is-musinsa w-inline-block"></a>
+                                <a data-num="3" data-focus="#Soldout" href="/m/m_service.html" class="m_home-service_img is-back is-29cm w-inline-block"></a>
+                                <a data-num="3" data-focus="#Soldout" href="/m/m_service.html" class="m_home-service_img is-back is-soldout w-inline-block"></a>
+                                <a data-num="3" data-focus="#Soldout" href="/m/m_service.html" class="m_home-service_img is-back is-styleshare w-inline-block"></a>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -284,45 +317,53 @@
                         <header>
                             <h2 data-stagger-alpha="true" class="h2-mu24 is-center">From Our Newsroom</h2>
                         </header>
+
                         <div id="w-node-_0d6191a7-f553-211f-076b-16785404bd8a-57f04e50"
                             class="m_news-slider w-dyn-list">
                             <div role="list" class="m_news-slider_list w-dyn-items">
-                                <div role="listitem" class="m_news-slider_item w-dyn-item"><a href="#"
-                                        class="m_news-slider_link stop-barba w-inline-block">
+                                
+                                <div role="listitem" class="m_news-slider_item w-dyn-item">
+                                    <a href="#" class="m_news-slider_link stop-barba w-inline-block">
                                         <div class="m_news-slider_img-wrap">
                                             <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278af7d83e32bb43886e354_221230_newsroom_en-min.jpg&quot;)"
-                                                class="news_item-img is-back"></div>
+                                                class="news_item-img is-back">
+                                            </div>
                                         </div>
                                         <header class="m_news-slider_item-header">
-                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU
-                                                ARE IN MUSINSA&quot;</h3>
+                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU ARE IN MUSINSA&quot;</h3>
                                             <div class="mu14-150 is-b3b3b3 is-pt12">December 30, 2021</div>
                                         </header>
-                                    </a></div>
-                                <div role="listitem" class="m_news-slider_item w-dyn-item"><a href="#"
-                                        class="m_news-slider_link stop-barba w-inline-block">
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_news-slider_item w-dyn-item">
+                                    <a href="#" class="m_news-slider_link stop-barba w-inline-block">
                                         <div class="m_news-slider_img-wrap">
-                                            <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278af2f58ba7caf789673eb_220307_newsroom_en-min.jpg&quot;)"
-                                                class="news_item-img is-back"></div>
+                                            <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278af7d83e32bb43886e354_221230_newsroom_en-min.jpg&quot;)"
+                                                class="news_item-img is-back">
+                                            </div>
                                         </div>
                                         <header class="m_news-slider_item-header">
-                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU
-                                                ARE IN MUSINSA&quot;</h3>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">March 7, 2021</div>
+                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU ARE IN MUSINSA&quot;</h3>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">December 30, 2021</div>
                                         </header>
-                                    </a></div>
-                                <div role="listitem" class="m_news-slider_item w-dyn-item"><a href="#"
-                                        class="m_news-slider_link stop-barba w-inline-block">
+                                    </a>
+                                </div>
+
+                                <div role="listitem" class="m_news-slider_item w-dyn-item">
+                                    <a href="#" class="m_news-slider_link stop-barba w-inline-block">
                                         <div class="m_news-slider_img-wrap">
-                                            <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278aef5896c263fc8401710_221013_newsroom_en-min.jpg&quot;)"
-                                                class="news_item-img is-back"></div>
+                                            <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278af7d83e32bb43886e354_221230_newsroom_en-min.jpg&quot;)"
+                                                class="news_item-img is-back">
+                                            </div>
                                         </div>
                                         <header class="m_news-slider_item-header">
-                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU
-                                                ARE IN MUSINSA&quot;</h3>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">October 13, 2021</div>
+                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU ARE IN MUSINSA&quot;</h3>
+                                            <div class="mu14-150 is-b3b3b3 is-pt12">December 30, 2021</div>
                                         </header>
-                                    </a></div>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -330,17 +371,19 @@
 
                 <section class="m_section-shopnow">
                     <div class="m_container-wide">
+                        
                         <header class="m_shopnow_header">
-                            <h2 class="h2-mu16 is-mb12">SHOP NOW</h2><a href="#"
-                                class="gotostore_txt-wrap w-inline-block">
+                            <h2 class="h2-mu16 is-mb12">SHOP NOW</h2>
+                            <a href="#" class="gotostore_txt-wrap w-inline-block">
                                 <div class="m_gotostore_title">MUSINSA GROBAL.COM</div>
-                                <div class="m_img-arrow-wrap"><img
-                                        src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fad2a694417966e351960_gotoStore_arrow.svg"
+                                <div class="m_img-arrow-wrap">
+                                    <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fad2a694417966e351960_gotoStore_arrow.svg"
                                         loading="lazy" alt="" class="m_img-arrow" />
                                     <div class="m_img-arrow-bg"></div>
                                 </div>
                             </a>
                         </header>
+
                         <div class="m_shopnow_img-wrap">
                             <div class="m_shopnow_img is-back"></div>
                         </div>
@@ -350,36 +393,49 @@
                 <footer class="m_section-footer">
                     <div class="container-768">
                         <div class="m_footer_wrap">
-                            <div class="m_footer-logo"><img
-                                    src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb047dced7eb2bd71dbd7_logo_musinsa.svg"
-                                    loading="lazy" alt="" /></div>
-                            <div class="m_footer-list">
-                                <div id="w-node-_8719c3e0-9766-edec-af6f-7d48e72d314f-e72d3149" class="div-block-2"><a
-                                        href="#" class="m_footer-item w-inline-block">
-                                        <div class="m_footer-item_link">MUSINSA.COM</div>
-                                    </a><a href="#" class="m_footer-item w-inline-block">
-                                        <div class="m_footer-item_link is-last">HELP CENTER</div>
-                                    </a></div>
-                                <div id="w-node-_8719c3e0-9766-edec-af6f-7d48e72d3156-e72d3149" class="div-block-2"><a
-                                        href="#" class="m_footer-item w-inline-block">
-                                        <div class="m_footer-item_link">TERMS OF SERVICE</div>
-                                    </a><a href="#" class="m_footer-item w-inline-block">
-                                        <div class="m_footer-item_link is-last">PRIVACY</div>
-                                    </a></div>
+
+                            <div class="m_footer-logo">
+                                <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb047dced7eb2bd71dbd7_logo_musinsa.svg" loading="lazy" alt="" />
                             </div>
+
+                            <div class="m_footer-list">
+                                <div id="w-node-_8719c3e0-9766-edec-af6f-7d48e72d314f-e72d3149" class="div-block-2">
+                                    <a href="#" class="m_footer-item w-inline-block">
+                                        <div class="m_footer-item_link">MUSINSA.COM</div>
+                                    </a>
+                                    
+                                    <a href="#" class="m_footer-item w-inline-block">
+                                        <div class="m_footer-item_link is-last">HELP CENTER</div>
+                                    </a>
+                                </div>
+
+                                <div id="w-node-_8719c3e0-9766-edec-af6f-7d48e72d3156-e72d3149" class="div-block-2">
+                                    <a href="#" class="m_footer-item w-inline-block">
+                                        <div class="m_footer-item_link">TERMS OF SERVICE</div>
+                                    </a>
+                                    <a href="#" class="m_footer-item w-inline-block">
+                                        <div class="m_footer-item_link is-last">PRIVACY</div>
+                                    </a>
+                                </div>
+                            </div>
+
                             <div class="mu-14">© MUSINSA Inc. 2022. We love our users!</div>
-                            <div class="m_footer_sns"><a href="#" class="m_footer_sns-link w-inline-block"><img
-                                        src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a502b2e5908c34c5e_facebook.svg"
-                                        loading="lazy" alt="" /></a><a href="#"
-                                    class="m_footer_sns-link w-inline-block"><img
-                                        src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a55baed06a0042765_instgram.svg"
-                                        loading="lazy" alt="" /></a><a href="#"
-                                    class="m_footer_sns-link w-inline-block"><img
-                                        src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a8ab88f70f2acf115_youtube.svg"
-                                        loading="lazy" alt="" /></a><a href="#"
-                                    class="m_footer_sns-link w-inline-block"><img
-                                        src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47aa2c9d77543d543e5_twitter.svg"
-                                        loading="lazy" alt="" /></a></div>
+
+                            <div class="m_footer_sns">
+                                <a href="#" class="m_footer_sns-link w-inline-block">
+                                    <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a502b2e5908c34c5e_facebook.svg" loading="lazy" alt="" />
+                                </a>
+                                <a href="#" class="m_footer_sns-link w-inline-block">
+                                    <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a55baed06a0042765_instgram.svg" loading="lazy" alt="" />
+                                </a>
+                                <a href="#" class="m_footer_sns-link w-inline-block">
+                                    <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a8ab88f70f2acf115_youtube.svg" loading="lazy" alt="" />
+                                </a>
+                                <a href="#" class="m_footer_sns-link w-inline-block">
+                                    <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47aa2c9d77543d543e5_twitter.svg" loading="lazy" alt="" />
+                                </a>
+                            </div>
+                            
                         </div>
                     </div>
                 </footer>

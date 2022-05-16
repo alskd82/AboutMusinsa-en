@@ -1,4 +1,8 @@
 @charset "UTF-8";
+:root {
+  --vh: 1vh;
+}
+
 body {
   -webkit-transition: 300ms;
   transition: 300ms;
@@ -242,6 +246,35 @@ a {
   transition: 250ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/*//////////////////////////////////////*/
+/*=== For Mobile ===================*/
+.m_billboard_img-wrap {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.m_nav-wrap {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  -webkit-clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+          clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+  -webkit-transition: -webkit-clip-path 300ms cubic-bezier(0.3, 0, 0.7, 0.4);
+  transition: -webkit-clip-path 300ms cubic-bezier(0.3, 0, 0.7, 0.4);
+  transition: clip-path 300ms cubic-bezier(0.3, 0, 0.7, 0.4);
+  transition: clip-path 300ms cubic-bezier(0.3, 0, 0.7, 0.4), -webkit-clip-path 300ms cubic-bezier(0.3, 0, 0.7, 0.4);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.m_nav-wrap.is-active {
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  -webkit-transition: -webkit-clip-path 400ms cubic-bezier(0.33, 0.45, 0, 1);
+  transition: -webkit-clip-path 400ms cubic-bezier(0.33, 0.45, 0, 1);
+  transition: clip-path 400ms cubic-bezier(0.33, 0.45, 0, 1);
+  transition: clip-path 400ms cubic-bezier(0.33, 0.45, 0, 1), -webkit-clip-path 400ms cubic-bezier(0.33, 0.45, 0, 1);
+}
+
 /*///////////////////////////////*/
 /*=== odometer ===================*/
 .odometer.odometer-auto-theme {
@@ -312,12 +345,12 @@ a {
           transform: translateY(0);
 }
 
+.odometer.odometer-auto-theme .odometer-value {
+  text-align: center;
+}
+
 .odometer.odometer-auto-theme {
   font-family: "Helvetica Neue", sans-serif;
   line-height: 1.1em;
-}
-
-.odometer.odometer-auto-theme .odometer-value {
-  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */
