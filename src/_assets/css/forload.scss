@@ -75,3 +75,18 @@ body.loaded{
 .img-arrow-wrap{ pointer-events: none;}
 
 
+/*//////////////////////////////////////*/
+/*=== For Mobile ===================*/
+
+.m_nav-wrap{
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+    transition: clip-path 300ms $ease-exit;
+    transform: translate3d(0,0,0);
+}
+
+.m_nav-wrap.is-active{
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    transition: clip-path 400ms $ease-standard;
+}
