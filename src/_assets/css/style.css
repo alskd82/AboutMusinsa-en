@@ -13,6 +13,22 @@ body.is-blue {
   background-color: #0030ff;
 }
 
+body.fixed {
+  position: fixed;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
+}
+
+body.fixed .page-wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -264,39 +280,17 @@ a {
 }
 
 .m_section-history .swiper {
-  margin: 0 auto;
-  position: relative;
-  overflow: visible;
-  z-index: 1;
-  padding-top: 48px;
+  margin-left: -20px;
+  margin-right: -20px;
 }
 
 .m_section-history .swiper-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-transition-property: -webkit-transform;
-  transition-property: -webkit-transform;
-  transition-property: transform;
-  transition-property: transform, -webkit-transform;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  margin: 0;
+  padding-left: 20px;
 }
 
 .m_section-history .swiper-slide {
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  -webkit-transition-property: -webkit-transform;
-  transition-property: -webkit-transform;
-  transition-property: transform;
-  transition-property: transform, -webkit-transform;
+  margin-right: 8px;
 }
 
 /*///////////////////////////////*/

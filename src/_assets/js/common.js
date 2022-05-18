@@ -58,6 +58,10 @@ history.pushState(null, null, `?p=${urlParams.get('p', cmsNum)}`)
 //===============================================================================================================================
 /*===== debounce & throttle ======================*/
 //===============================================================================================================================
+function $( $selector, $context ) {
+    const context = $context || document;
+    return ( $selector.indexOf('#') > -1 ) ? context.getElementById( $selector.replace('#','') ) : context.querySelector( $selector );
+}
 
 function debounce(threshold, fn, immediate) {
     var slice = [].slice;

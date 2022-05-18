@@ -4,6 +4,18 @@
 
 body { transition: 300ms; will-change: background-color;}
 body.is-blue { background-color: $body-blue; }
+body.fixed{
+    position: fixed;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    overflow: hidden;
+
+    .page-wrap{
+        position: fixed; left: 0; top: 0; right: 0; bottom: 0;
+        width: 100vw;
+    }
+}
+
 a { color: inherit; text-decoration: none; }
 .is-hide { display: none; }
 .is-overflow-hidden{ overflow: hidden; }
@@ -149,17 +161,29 @@ a { color: inherit; text-decoration: none; }
     position: absolute; left: 0; top: 0;
 }
 
+
 .m_section-history{
-    .swiper{ margin:0 auto; position: relative; overflow: visible; z-index: 1; padding-top: 48px; }
-    .swiper-wrapper { 
-        position: relative; width: 100%; height: 100%;
-        z-index: 1;
-        display: flex;
-        transition-property: transform;
-        box-sizing: content-box;
+    .swiper{ 
+        margin-left: -20px;
+        // margin:0 auto; position: relative; overflow: visible; z-index: 1; padding-top: 48px; 
     }
-    .swiper-slide { flex-shrink: 0; width: 100%; height: 100%; position: relative; transition-property: transform; }
+    .swiper-wrapper { 
+        // position: relative; width: 100%; height: 100%;
+        // z-index: 1;
+        // display: flex;
+        // transition-property: transform;
+        // box-sizing: content-box;
+        margin: 0;
+        padding-left: 20px;
+    }
+    .swiper-slide { 
+        margin-right: 8px;
+        // flex-shrink: 0; width: 100%; height: 100%; position: relative; transition-property: transform; 
+
+    }
 }
+
+
 
 /*///////////////////////////////*/
 /*=== odometer ===================*/

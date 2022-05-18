@@ -1,26 +1,3 @@
-// function $( $selector, $context ) {
-//     const context = $context || document;
-//     return ( $selector.indexOf('#') > -1 ) ? context.getElementById( $selector.replace('#','') ) : context.querySelector( $selector );
-// }
-
-// function debounce( fn, wait, immediate ){
-//     var slice = [].slice;
-//     var timeout;
-//     if (wait == null) wait = 100;
-//     timeout = null;
-//     return function(){
-//         var args, delayed, obj;
-//         args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-//         obj = this;
-//         delayed = function() {
-//             if (!immediate) fn.apply(obj, args); 
-//             return timeout = null;
-//     };
-//     if (timeout) clearTimeout(timeout);
-//     else if (immediate) fn.apply(obj, args);
-//     return timeout = setTimeout(delayed, wait);
-//     };
-// }
 
 function throttle ( fn, delay ) {
     var timer;
@@ -33,6 +10,12 @@ function throttle ( fn, delay ) {
         return fn.apply(null, arguments);
     };
 };
+
+
+import { gsap } from "gsap";
+import { Draggable } from "gsap/Draggable";
+import { InertiaPlugin } from "gsap/InertiaPlugin";
+gsap.registerPlugin(Draggable, InertiaPlugin);
 
 //===============================================================================================================================
 /*=====  ScrollSmoother ======================*/
@@ -391,72 +374,72 @@ class ImageOverlapChange {
     }
 }
 
-/*
-
-*/
-
-const historyCMS = document.querySelector('#sliderHistoryCMS')
-const historyYear = document.querySelector('#sliderYear');
-const historyTitle = document.querySelector('#sliderTitle');
-const historyPageNum = document.querySelector('#sliderPageNum span')
-
-let historyCMS_IMAGE = []
-let historyCMS_Year = []
-let historyCMS_Title = []
-historyCMS.querySelectorAll(`.history-slider_img-wrap`).forEach( (el,i) =>{
-    historyCMS_IMAGE.push( el.src );
-    historyCMS_Year.push( historyCMS.querySelector(`.history-slider_item:nth-child(${i+1}) .mu24-150`).innerHTML );
-    historyCMS_Title.push( historyCMS.querySelector(`.history-slider_item:nth-child(${i+1}) .history_swiper-title`).innerHTML );
-});
-
-historyYear.innerHTML = historyCMS_Year[0]
-historyTitle.innerHTML = historyCMS_Title[0]
-
-const slider = new ImageOverlapChange({
-    container: ".history-slider_img-container",
-    wrapper: ".history-slider_img-wrap",
-    imgSrc: historyCMS_IMAGE,
-    axis: 'x',
-    hideSlideOpacity: .25, // 사라질 슬라이더 오퍼시티 0 ~ 1
-    showSlideOpacity: 1,   // 나타날 슬라이더 오퍼시티 0 ~ 1
-    overlap: true, 
-    hideOverlapRatio: .75,   // 사라질 슬라이더 오버랩 정도 0 ~ 1
-    showOverlapRatio: .75,   // 나타날 슬라이더 오버랩 정도 0 ~ 1
-    duration: .5,
-    ease: BezierEasing(0.4,0,0.2,1),
-
-    // draggable: false,
-    // dragCursor: "grab",
-    // dragActiveCursor: "grabbing",
-    // dragEndEase: "Quint.easeOut",
-    // velocity: 200,
-    // mouseWheel: false,
-
-    // intervalTime: 3, // second
-    debug: false,
-})
+export default ImageOverlapChange
 
 
 
+// const historyCMS = document.querySelector('#sliderHistoryCMS')
+// const historyYear = document.querySelector('#sliderYear');
+// const historyTitle = document.querySelector('#sliderTitle');
+// const historyPageNum = document.querySelector('#sliderPageNum span')
 
-document.querySelector('#historySliderBtR').addEventListener('click', e =>{
-    slider.next()
-    changeText(slider.activeIndex)
-})
-document.querySelector('#historySliderBtL').addEventListener('click', e =>{
-    slider.prev()
-    changeText(slider.activeIndex)
-})
+// let historyCMS_IMAGE = []
+// let historyCMS_Year = []
+// let historyCMS_Title = []
+// historyCMS.querySelectorAll(`.history-slider_img-wrap`).forEach( (el,i) =>{
+//     historyCMS_IMAGE.push( el.src );
+//     historyCMS_Year.push( historyCMS.querySelector(`.history-slider_item:nth-child(${i+1}) .mu24-150`).innerHTML );
+//     historyCMS_Title.push( historyCMS.querySelector(`.history-slider_item:nth-child(${i+1}) .history_swiper-title`).innerHTML );
+// });
 
-function changeText(n){
-    const tl = gsap.timeline({})
-    tl.to( historyTitle , { opacity: 0 , duration: .1, onComplete: () =>{
-        historyTitle.innerHTML = historyCMS_Title[n]
-    }} )
-    tl.to( historyTitle , { opacity: 1 , duration: .4, delay: .2} )
+// historyYear.innerHTML = historyCMS_Year[0]
+// historyTitle.innerHTML = historyCMS_Title[0]
 
-    historyYear.innerHTML = historyCMS_Year[n]
-    historyPageNum.innerHTML = n + 1
-}
+// const slider = new ImageOverlapChange({
+//     container: ".history-slider_img-container",
+//     wrapper: ".history-slider_img-wrap",
+//     imgSrc: historyCMS_IMAGE,
+//     axis: 'x',
+//     hideSlideOpacity: .25, // 사라질 슬라이더 오퍼시티 0 ~ 1
+//     showSlideOpacity: 1,   // 나타날 슬라이더 오퍼시티 0 ~ 1
+//     overlap: true, 
+//     hideOverlapRatio: .75,   // 사라질 슬라이더 오버랩 정도 0 ~ 1
+//     showOverlapRatio: .75,   // 나타날 슬라이더 오버랩 정도 0 ~ 1
+//     duration: .5,
+//     ease: BezierEasing(0.4,0,0.2,1),
 
-// slider.delayedCall()
+//     // draggable: false,
+//     // dragCursor: "grab",
+//     // dragActiveCursor: "grabbing",
+//     // dragEndEase: "Quint.easeOut",
+//     // velocity: 200,
+//     // mouseWheel: false,
+
+//     // intervalTime: 3, // second
+//     debug: false,
+// })
+
+
+
+
+// document.querySelector('#historySliderBtR').addEventListener('click', e =>{
+//     slider.next()
+//     changeText(slider.activeIndex)
+// })
+// document.querySelector('#historySliderBtL').addEventListener('click', e =>{
+//     slider.prev()
+//     changeText(slider.activeIndex)
+// })
+
+// function changeText(n){
+//     const tl = gsap.timeline({})
+//     tl.to( historyTitle , { opacity: 0 , duration: .1, onComplete: () =>{
+//         historyTitle.innerHTML = historyCMS_Title[n]
+//     }} )
+//     tl.to( historyTitle , { opacity: 1 , duration: .4, delay: .2} )
+
+//     historyYear.innerHTML = historyCMS_Year[n]
+//     historyPageNum.innerHTML = n + 1
+// }
+
+// // slider.delayedCall()
