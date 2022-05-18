@@ -135,24 +135,31 @@ a { color: inherit; text-decoration: none; }
 
 /*//////////////////////////////////////*/
 /*=== For Mobile ===================*/
+// body.fixed{ position: fixed; left: 0; right: 0; top: 0; bottom: 0; }
+
 .m_billboard_img-wrap{
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
 }
 
-.m_nav-wrap{
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
-    transition: clip-path 300ms $ease-exit;
-    transform: translate3d(0,0,0);
+.m_growth_lottie-area{
+    background-color: black;
+}
+.m_growth_lottie-area > svg {
+    position: absolute; left: 0; top: 0;
 }
 
-.m_nav-wrap.is-active{
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    transition: clip-path 400ms $ease-standard;
+.m_section-history{
+    .swiper{ margin:0 auto; position: relative; overflow: visible; z-index: 1; padding-top: 48px; }
+    .swiper-wrapper { 
+        position: relative; width: 100%; height: 100%;
+        z-index: 1;
+        display: flex;
+        transition-property: transform;
+        box-sizing: content-box;
+    }
+    .swiper-slide { flex-shrink: 0; width: 100%; height: 100%; position: relative; transition-property: transform; }
 }
-
 
 /*///////////////////////////////*/
 /*=== odometer ===================*/
@@ -176,4 +183,5 @@ a { color: inherit; text-decoration: none; }
     // margin-left: -10px;
     line-height: 1.1em;
 }
+
 
