@@ -4,7 +4,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin );
 
 
-import {ease , scrollIntoView, getRelativePosition  } from "./utils.js"
+import {ease , scrollIntoView, getRelativePosition  } from "./common"
 
 //===============================================================================================================================
 /*=====  About > History  ======================*/

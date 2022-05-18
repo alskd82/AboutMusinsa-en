@@ -1,5 +1,5 @@
 import {gsap} from "gsap";
-import{ ease } from "../utils.js";
+import{ ease } from "../common";
 
 
 class LoadMore {

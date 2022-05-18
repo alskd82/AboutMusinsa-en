@@ -2,7 +2,7 @@ import path_graph from "../global_graph_pc.json";
 
 import BezierEasing from "./class/BezierEasing.js";
 import { TextSplitWordsShow, TextSlitLinesMasking } from './class/TextMotion.js';
-import { getRelativePosition, ease, scrollIntoView } from "./utils";
+import { getRelativePosition, ease, scrollIntoView } from "./common";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

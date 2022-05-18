@@ -9,16 +9,16 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother, SplitText);
 
 import BezierEasing from "./js/class/BezierEasing.js";
-import { scrollIntoView, ease } from "./js/utils.js";
 
 import LoadFromOurNews from "./js/class/LoadFromOurNews.js"
-import { Navi, Footer , forScrollVariable_Reset, navShowHide, nav } from "./js/PC_Nav.js"
+import { Navi, Footer , forScrollVariable_Reset, navShowHide, nav } from "./js/nav.js"
 
-import { BillboardText, StaggerMotion, ShopNow, smoother, createSmoother } from "./js/PC_Common.js";
-import { HomeInit, HomeST } from "./js/PC_Home.js"
-import { OurStroy, AboutInit, AboutST } from "./js/PC_About.js"
-import { Service } from "./js/PC_Service.js"
-import Newsroom from "./js/Newsroom"
+import { scrollIntoView, ease, BillboardText, StaggerMotion, ShopNow, smoother, createSmoother } from "./js/common.js";
+
+import { HomeInit, HomeST } from "./js/page_home.js"
+import { OurStroy, AboutInit, AboutST } from "./js/page_about.js"
+import { Service } from "./js/page_service.js"
+import Newsroom from "./js/page_newsroom"
 
 let nameSpace;              //namesapce = "home"| "history" | "imapact" | "service"
 let ourstoryIndi;           // ourstory 하단 인디게이터

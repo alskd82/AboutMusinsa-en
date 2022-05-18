@@ -9,7 +9,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother, SplitText);
 
 import BezierEasing from "./js/class/BezierEasing.js";
-import { scrollIntoView, ease } from "./js/utils.js";
+import { scrollIntoView, ease } from "./js/common";
 
 
 //===============================================================================================================================

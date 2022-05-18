@@ -9,9 +9,11 @@
   },
   "devDependencies": {
     "vite": "^2.9.9"
-  },"dependencies": {
+  },
+  "dependencies": {
     "@barba/core": "^2.9.7",
     "gsap": "file:gsap-bonus.tgz",
-    "imagesloaded": "^5.0.0"
+    "imagesloaded": "^5.0.0",
+    "swiper": "^8.1.5"
   }
 }

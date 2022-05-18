@@ -25,6 +25,18 @@
     <script defer src="https://image.msscdn.net/webflow/static/libs/odometer/odometer.min.js"></script>
 
     <script>
+        if(window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) window.location = "microsoft-edge:" + window.location.href;
+        
+        var isMobile = false;
+        var mobileInfo = new Array('Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows CE', 'SAMSUNG', 'LG', 'MOT', 'SonyEricsson','windows phone os 7');
+        for (var info in mobileInfo){
+            if (navigator.userAgent.match(mobileInfo[info]) != null){
+                isMobile = true;
+                break;
+            }
+        }
+        if(!isMobile) window.location = "/";
+
         let vh = window.innerHeight * 0.01;
         document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
     </script>

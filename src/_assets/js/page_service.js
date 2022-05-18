@@ -4,7 +4,7 @@ import {
     ease, 
     scrollIntoView ,
     // smoother
-} from "./utils.js";
+} from "./common";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

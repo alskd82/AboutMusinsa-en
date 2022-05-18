@@ -1,6 +1,6 @@
 
 // import BezierEasing from "./class/BezierEasing.js";
-import { getRelativePosition, ease } from "./utils";
+import { getRelativePosition, ease } from "./common";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
