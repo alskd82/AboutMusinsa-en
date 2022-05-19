@@ -17,6 +17,10 @@ body.is-blue {
   background-color: #0030ff;
 }
 
+body.is-white {
+  background-color: white;
+}
+
 body.fixed {
   position: fixed;
   height: 100vh;

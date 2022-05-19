@@ -8,7 +8,12 @@ import { getRelativePosition, ease, scrollIntoView } from "./common";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-gsap.registerPlugin(ScrollTrigger, SplitText);
+import { Draggable } from "gsap/Draggable";
+import { InertiaPlugin } from "gsap/InertiaPlugin";
+
+gsap.registerPlugin(ScrollTrigger, SplitText, Draggable, InertiaPlugin );
+
+import Swiper from "swiper"
 
 // import {smoother} from "../index.js"
 
@@ -372,21 +377,21 @@ const HomeHistory_Mobile = (function(exports){
         //     snapX.push( (gsap.getProperty(slide, 'width')+8) * -i )
         // })
 
-        // Draggable.create(".m_section-history .swiper-wrapper", {
-        //     type:"x",
-        //     edgeResistance: 0.65,
-        //     bounds: {
-        //         minX: -gsap.getProperty('.swiper-slide', 'width') * (document.querySelectorAll('.swiper-slide').length) - 40,
-        //         maxX: 0
-        //     },
-        //     snap: snapX,
-        //     inertia: true,
-        //     onDragEnd: function() {
+        Draggable.create(".m_section-history .swiper-wrapper", {
+            type:"x",
+            edgeResistance: 0.65,
+            // bounds: {
+            //     minX: -gsap.getProperty('.swiper-slide', 'width') * (document.querySelectorAll('.swiper-slide').length) - 40,
+            //     maxX: 0
+            // },
+            // snap: snapX,
+            // inertia: true,
+            // onDragEnd: function() {
                 
-        //         let xx = InertiaPlugin.getVelocity( ".m_section-history .swiper-wrapper", 'x')
-        //         console.log("drag ended" , xx);
-        //     }
-        // });
+            //     let xx = InertiaPlugin.getVelocity( ".m_section-history .swiper-wrapper", 'x')
+            //     console.log("drag ended" , xx);
+            // }
+        });
 
     }
 

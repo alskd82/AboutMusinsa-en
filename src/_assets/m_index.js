@@ -3,14 +3,13 @@ import imagesLoaded from "imagesloaded"
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 
 gsap.registerPlugin(
-    ScrollTrigger, ScrollToPlugin, ScrollSmoother, SplitText, 
+    ScrollTrigger, ScrollToPlugin, SplitText, 
     Draggable, InertiaPlugin,
 );
 
@@ -22,7 +21,17 @@ import { HomeInit, HomeST } from "./js/page_home"
 // import ImageOverlapChange from "./js/class/ImageOverlapChange"
 
 import path_graph from "./global_graph_mo.json";
-import Swiper from 'swiper';
+
+
+/* 페이지 이동시 스크롤 잠시 고정 */
+let scrollY = 0;
+let reqID;
+const pageTransitionScrollFix =()=>{
+    // console.log( `scrollY : ${scrollY}`)
+    window.scrollTo(0, scrollY);
+    reqID = window.requestAnimationFrame( pageTransitionScrollFix );
+    // window.cancelAnimationFrame(reqID);
+};
 
 
 let nameSpace;              //namesapce = "home"| "history" | "imapact" | "service"
@@ -49,6 +58,8 @@ document.addEventListener('DOMContentLoaded' , e=>{
         limitCallbacks: true,
         ignoreMobileResize: true
     })
+
+    // window.addEventListener('scroll', e=> console.log( window.pageYOffset ) )
 })
 
 
@@ -61,14 +72,22 @@ const load =()=>{
     
     /* 빌보드 영역만 먼저 로드하고 끝나면 화면 보이게 => 이후 전체이미지 로드 */
     if(nameSpace === "home"){
+        const vid = document.querySelector('video');
         const poster = new Image()
-        poster.src = document.querySelector('video').getAttribute('poster');
+        poster.src = vid.getAttribute('poster');
         poster.onload =()=>{
             gsap.delayedCall(.2 ,function(){
                 loadingComplete();
                 document.querySelector('video').play();
-            }) 
+            }); 
         }
+        // vid.addEventListener('canplaythrough', e=>{
+        //     gsap.delayedCall(.2 ,function(){
+        //         loadingComplete();
+        //         document.querySelector('video').play();
+        //     }); 
+        // })
+
         imageLoad('.body-black');
 
     } else if(nameSpace != "newsroom"){
@@ -116,7 +135,7 @@ const imageLoad =( selector, opt={ onComplete: undefined }) =>{
             imgCount++;
             if( imgCount === loader.images.length && typeof(opt.onComplete)=== "function" ) opt.onComplete();
         })
-    })
+    });
 };
 
 
@@ -145,6 +164,7 @@ const pageBeforeEnter =()=>{
     else if(nameSpace === "newsroom")    Navi.naviActive(3)
 
     ScrollTrigger.getAll().forEach((st,i)=> st.kill() );
+    document.body.classList.remove("is-blue");
     setTimeout(() => { window.scrollTo(0,0) }, 150);
 
     BillboardText.init(nameSpace);
@@ -188,7 +208,7 @@ const pageTransitionComplete =()=>{
     else if(nameSpace === "service"){
         if(!focusInPage) return;
         console.log(focusInPage)
-        // goToFocus( focusInPage , 1 )
+        goToFocus( focusInPage , 1 )
         focusInPage = null;
     }
 }
@@ -212,12 +232,20 @@ const barbaInit =()=> {
                     console.log(`barbr once: ${nameSpace} enter`);
                 },
                 
-                beforeLeave:({current}) => pageBeforeLeave(),
+                beforeLeave({current}){
+                    scrollY = window.pageYOffset;
+                    pageTransitionScrollFix();
+
+                    pageBeforeLeave()
+                },
 
                 /* Leave Animation */
                 leave(data) {
                     console.log(`leave: ${nameSpace}`)
-                    return gsap.to( data.current.container, {opacity: 0, duration: 0.6, ease: ease.standard} )
+
+                    return gsap.to( data.current.container, {
+                        opacity: 0, duration: .6, ease: ease.standard
+                    });
                 },
                 beforeEnter({current, next}){
                     if(current.container) current.container.remove();
@@ -226,6 +254,7 @@ const barbaInit =()=> {
 
                 // /* Enter Animation */
                 enter(data){   
+                    window.cancelAnimationFrame(reqID);
                     pageEnter();                
                     // gsap.set( data.next.container, { opacity: 0 } );
                     gsap.fromTo( data.next.container, {opacity: 0}, {opacity: 1, duration: 1, delay:.15, ease: ease.standard , onComplete: pageTransitionComplete} )
@@ -266,7 +295,6 @@ const Navi = (function(exports){
 
     const addEvent=()=>{
         btMenu.addEventListener('click', e=>{
-            // gsap.set( navWrap, { height: window.innerHeight });
             !document.body.classList.contains('fixed') ? naviOpen(): naviClose()
         });
         
@@ -343,6 +371,8 @@ const Link = (function(exports){
         gsap.utils.toArray(".m_history-slider_link").forEach((link, i)=>{  // ------------------------------------------------------------------ 홈 : 어바웃 히스토리로 연결
             link.addEventListener('click', e =>{  
                 e.preventDefault();
+                document.body.classList.remove("is-blue");
+
                 // const mn = e.currentTarget.parentNode;
                 // focusInPage = mn.dataset.num
                 // console.log( `history index: ${ mn.dataset.num }` );
@@ -358,6 +388,8 @@ const Link = (function(exports){
                 e.preventDefault();
                 // console.log(e.currentTarget.tagName.toLowerCase())
                 // const url = document.querySelector('.nav_list > .nav_item:nth-child(3) a').href
+                
+                document.body.classList.remove("is-blue");
                 focusInPage = e.currentTarget.dataset.focus;
             });
         });
@@ -377,18 +409,5 @@ const Link = (function(exports){
 const goToFocus =(id, time)=>{
     console.log( `focusInPage: ${id}`);
 
-    // gsap.killTweensOf( forScrollVariable_Reset );
-    // nav.isNavShowHideBlock(true); 
-    // document.querySelector(".section-nav").classList.add('is-blured')    
-    // const opts ={
-    //     duration: time, ease: ease.material,
-    //     onUpdate:()=> nav.isNavShowHideBlock(true) ,
-    //     onComplete: ()=> gsap.delayedCall( .5 , forScrollVariable_Reset )
-    // }
-
-    // if(smoother){
-    //     gsap.to(smoother, { scrollTop: smoother.offset(id, "top top"), ...opts });
-    // } else {
-    //     gsap.to(window, { scrollTo: id, ...opts });
-    // }
+    gsap.to(window, { scrollTo: id, duration: time, ease: ease.material});
 }

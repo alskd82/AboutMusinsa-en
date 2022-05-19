@@ -6,6 +6,7 @@
 
 body { transition: 300ms; will-change: background-color;}
 body.is-blue { background-color: $body-blue; }
+body.is-white{ background-color: white;}
 body.fixed{
     position: fixed;
     height: 100vh;

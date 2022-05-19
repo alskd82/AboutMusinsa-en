@@ -21,13 +21,13 @@ class LoadFromOurNews {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
 
-                console.log( doc )
+                // console.log( doc )
                 // ------ items ---------- //
                 this.homeArr = doc.querySelectorAll('#home .news_item-link')
                 this.historyArr = doc.querySelectorAll('#history .news_item-link')
                 this.impactArr = doc.querySelectorAll('#impact .news_item-link');
 
-                console.log( this.homeArr )
+                // console.log( this.homeArr )
 
                 this.replaceLink();
             }
