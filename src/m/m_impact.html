@@ -8,8 +8,7 @@
     <meta content="Impact" property="og:title" />
     <meta content="Impact" property="twitter:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.43bcf08f7.css"
-        rel="stylesheet" type="text/css" />
+    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.30fbee971.css" rel="stylesheet" type="text/css" />
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
     <script type="text/javascript">
         ! function (o, c) {
@@ -19,6 +18,45 @@
                 .className += t + "touch")
         }(window, document);
     </script>
+
+    <script>
+        if(window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) window.location = "microsoft-edge:" + window.location.href;
+        
+        var isMobile = false;
+        var mobileInfo = new Array('Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows CE', 'SAMSUNG', 'LG', 'MOT', 'SonyEricsson','windows phone os 7');
+        for (var info in mobileInfo){
+            if (navigator.userAgent.match(mobileInfo[info]) != null){
+                isMobile = true;
+                break;
+            }
+        }
+        if(!isMobile){ // PC 화면으로 리디렉션 //
+            if(window.location.href.indexOf('/m') != -1){
+                if(window.location.href.indexOf('/history') != -1)          window.location = "/about/history.html";
+                else if(window.location.href.indexOf('/impact') != -1)      window.location = "/about/impact.html";
+                else if(window.location.href.indexOf('/service') != -1)     window.location = "/service.html";
+                else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/newsroom.html";
+                else{
+                    window.location = "/";
+                }
+            }
+        }
+        /*
+        if(isMobile){ // 모바일로 리디렉션 //
+            if(window.location.href.indexOf('/history') != -1)          window.location = "/m/m_history.html";
+            else if(window.location.href.indexOf('/impact') != -1)      window.location = "/m/m_impact.html";
+            else if(window.location.href.indexOf('/service') != -1)     window.location = "/m/m_service.html";
+            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/m/m_newsroom.html";
+            else{
+                window.location = "/m/m.html";
+            }
+        }
+        */
+
+        let vh = window.innerHeight * 0.01;
+        document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
+    </script>
+
     <link href="https://uploads-ssl.webflow.com/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="https://uploads-ssl.webflow.com/img/webclip.png" rel="apple-touch-icon" />
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.3/lottie_svg.min.js"></script>
@@ -33,6 +71,8 @@
 </head>
 
 <body class="body-black before-load">
+
+    <div class="before-load loading"> <svg class="loading-circle"> <circle cx='50%' cy='50%' r=30></circle> </svg> </div>
 
     <nav class="m_section-nav">
         <div class="m_ham-wrap">
@@ -70,9 +110,9 @@
                         <div class="m_billboard_img-wrap">
                             <div class="m_billboard_img is-back is-impact"></div>
                         </div>
-                        <div class="m_arrow-bottom"><img
-                                src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/627c8788fcfd56444ff1ce70_ic_arrow_bottom.svg"
-                                loading="lazy" alt="" /></div>
+                        <div class="m_arrow-bottom">
+                            <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/627c8788fcfd56444ff1ce70_ic_arrow_bottom.svg" loading="lazy" alt="" />
+                        </div>
                     </div>
                 </section>
 
@@ -94,8 +134,8 @@
                 <section class="m_section-mission">
                     <div class="container-768">
                         <header>
-                            <h2 data-stagger-alpha="true" class="h2-mu16 is-pb12">Mission</h2>
-                            <h3 data-stagger="true" class="h3-mu32">Brand success is the reason why we are MUSINSA.</h3>
+                            <h2 data-stagger-y="true" class="h2-mu16 is-pb12">Mission</h2>
+                            <h3 data-stagger-y="true" class="h3-mu32">Brand success is the reason why we are MUSINSA.</h3>
                         </header>
                         <ul role="list" class="m_impact-grid_list">
                             <li data-stagger-y="true" class="impact-grid_item">
@@ -108,7 +148,7 @@
                                     experiences and innovate the fashion business.</p>
                             </li>
                         </ul>
-                        <div class="m_impact-img_wrap">
+                        <div data-stagger-y="true" class="m_impact-img_wrap">
                             <div class="impact-img_mission is-back"></div>
                         </div>
                     </div>
@@ -117,8 +157,8 @@
                 <section class="m_section-res">
                     <div class="container-768">
                         <header>
-                            <h2 data-stagger-alpha="true" class="h2-mu16 is-pb12">Responsibility</h2>
-                            <h3 data-stagger="true" class="h3-mu32">We are growing hand in hand with our partner brands
+                            <h2  data-stagger-y="true" class="h2-mu16 is-pb12">Responsibility</h2>
+                            <h3  data-stagger-y="true" class="h3-mu32">We are growing hand in hand with our partner brands
                                 and are creating a new fashion ecosystem.</h3>
                         </header>
                         <ul role="list" class="m_impact-grid_list">
@@ -136,7 +176,7 @@
                                     social issue, and engage in various environmental activities.</p>
                             </li>
                         </ul>
-                        <div class="m_impact-img_wrap">
+                        <div data-stagger-y="true" class="m_impact-img_wrap">
                             <div class="impact-img_res is-back"></div>
                         </div>
                     </div>
@@ -144,69 +184,60 @@
 
                 <section class="m_section-news">
                     <div class="container-768">
-                        <header>
-                            <h2 data-stagger-alpha="true" class="h2-mu24 is-center">From Our Newsroom</h2>
-                        </header>
-                        <div id="w-node-f5cddc33-e263-5cd1-a5b9-47b7143c7f61-b73bfedf" class="m_news-slider w-dyn-list">
-                            <div role="list" class="m_news-slider_list w-dyn-items">
-                                <div role="listitem" class="m_news-slider_item w-dyn-item"><a href="#"
-                                        class="m_news-slider_link stop-barba w-inline-block">
-                                        <div class="m_news-slider_img-wrap">
-                                            <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278af7d83e32bb43886e354_221230_newsroom_en-min.jpg&quot;)"
-                                                class="news_item-img is-back"></div>
-                                        </div>
-                                        <header class="m_news-slider_item-header">
-                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU
-                                                ARE IN MUSINSA&quot;</h3>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">December 30, 2021</div>
-                                        </header>
-                                    </a></div>
-                                <div role="listitem" class="m_news-slider_item w-dyn-item"><a href="#"
-                                        class="m_news-slider_link stop-barba w-inline-block">
-                                        <div class="m_news-slider_img-wrap">
-                                            <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278af2f58ba7caf789673eb_220307_newsroom_en-min.jpg&quot;)"
-                                                class="news_item-img is-back"></div>
-                                        </div>
-                                        <header class="m_news-slider_item-header">
-                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU
-                                                ARE IN MUSINSA&quot;</h3>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">March 7, 2021</div>
-                                        </header>
-                                    </a></div>
-                                <div role="listitem" class="m_news-slider_item w-dyn-item"><a href="#"
-                                        class="m_news-slider_link stop-barba w-inline-block">
-                                        <div class="m_news-slider_img-wrap">
-                                            <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278aef5896c263fc8401710_221013_newsroom_en-min.jpg&quot;)"
-                                                class="news_item-img is-back"></div>
-                                        </div>
-                                        <header class="m_news-slider_item-header">
-                                            <h3 class="h3-mu20">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU
-                                                ARE IN MUSINSA&quot;</h3>
-                                            <div class="mu14-150 is-b3b3b3 is-pt12">October 13, 2021</div>
-                                        </header>
-                                    </a></div>
+                    <header>
+                        <h2 data-stagger-y="true" class="h2-mu24 is-center">From Our Newsroom</h2>
+                    </header>
+                    <div data-stagger-y="true" class="m_news-slider">
+                        <div class="m_news-slider_list">
+                        <article class="m_news-slider_item"><a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
+                            <div class="m_news-slider_img-wrap">
+                                <div class="news_item-img is-back"></div>
                             </div>
+                            <header class="m_news-slider_item-header">
+                                <h3 class="h3-mu20">Heading</h3>
+                                <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
+                            </header>
+                            </a></article>
+                        <article class="m_news-slider_item"><a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
+                            <div class="m_news-slider_img-wrap">
+                                <div class="news_item-img is-back"></div>
+                            </div>
+                            <header class="m_news-slider_item-header">
+                                <h3 class="h3-mu20">Heading</h3>
+                                <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
+                            </header>
+                            </a></article>
+                        <article class="m_news-slider_item"><a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
+                            <div class="m_news-slider_img-wrap">
+                                <div class="news_item-img is-back"></div>
+                            </div>
+                            <header class="m_news-slider_item-header">
+                                <h3 class="h3-mu20">Heading</h3>
+                                <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
+                            </header>
+                            </a></article>
                         </div>
+                    </div>
                     </div>
                 </section>
 
                 <section class="m_section-shopnow">
-                    <div class="m_container-wide">
+                    <a href="#" class="m_container-wide stop-barba w-inline-block">
                         <header class="m_shopnow_header">
-                            <h2 class="h2-mu16 is-mb12">SHOP NOW</h2><a href="#"
-                                class="gotostore_txt-wrap w-inline-block">
+                            <h2 class="h2-mu16 is-mb12">SHOP NOW</h2>
+                            <div class="gotostore_txt-wrap">
                                 <div class="m_gotostore_title">MUSINSA GROBAL.COM</div>
-                                <div class="m_img-arrow-wrap"><img
-                                        src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fad2a694417966e351960_gotoStore_arrow.svg"
-                                        loading="lazy" alt="" class="m_img-arrow" />
+                                <div class="m_img-arrow-wrap">
+                                    <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fad2a694417966e351960_gotoStore_arrow.svg" loading="lazy" alt="" class="m_img-arrow" />
                                     <div class="m_img-arrow-bg"></div>
                                 </div>
-                            </a>
+                            </div>
                         </header>
+
                         <div class="m_shopnow_img-wrap">
                             <div class="m_shopnow_img is-back"></div>
                         </div>
-                    </div>
+                    </a>
                 </section>
 
                 <footer class="m_section-footer">

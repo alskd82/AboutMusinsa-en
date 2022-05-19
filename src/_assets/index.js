@@ -338,7 +338,7 @@ const Link = (function(exports){
                 e.preventDefault();
                 // console.log(e.currentTarget.tagName.toLowerCase())
                 const url = document.querySelector('.nav_list > .nav_item:nth-child(3) a').href
-                focusInPage = focus;
+                focusInPage = e.currentTarget.dataset.focus;
             });
         });
 

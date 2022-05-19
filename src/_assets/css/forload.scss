@@ -82,11 +82,24 @@ body.loaded{
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
     clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
-    transition: clip-path 300ms $ease-exit;
+    transition: clip-path 400ms $ease-exit 100ms;
     transform: translate3d(0,0,0);
 }
 
 .m_nav-wrap.is-active{
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    transition: clip-path 400ms $ease-standard;
+    transition: clip-path 500ms $ease-standard;
+}
+
+
+@keyframes arrow-bottom {
+    0%{ transform: translate3d(0,0,0); animation-timing-function: cubic-bezier(0.33,0,0.1,1); }
+    50%{ transform: translate3d(0,10px,0); animation-timing-function: cubic-bezier(0.6,0,0.4,1); }
+    100%{ transform: translate3d(0,0,0); }
+}
+.m_arrow-bottom{ opacity: 0; transform: translate3d(0,-20px,0); transition: 500ms $ease-standard;}
+.m_arrow-bottom.is-active{
+    opacity: 1;
+    transform: translate3d(0,0,0);
+    img{ animation: arrow-bottom 1s infinite; }
 }

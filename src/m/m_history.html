@@ -8,8 +8,7 @@
     <meta content="Mobile -hist" property="og:title" />
     <meta content="Mobile -hist" property="twitter:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.43bcf08f7.css"
-        rel="stylesheet" type="text/css" />
+    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.30fbee971.css" rel="stylesheet" type="text/css" />
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
     <script type="text/javascript">
         ! function (o, c) {
@@ -24,6 +23,44 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.3/lottie_svg.min.js"></script>
     <script defer src="https://image.msscdn.net/webflow/static/libs/odometer/odometer.min.js"></script>
 
+    <script>
+        if(window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) window.location = "microsoft-edge:" + window.location.href;
+        
+        var isMobile = false;
+        var mobileInfo = new Array('Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows CE', 'SAMSUNG', 'LG', 'MOT', 'SonyEricsson','windows phone os 7');
+        for (var info in mobileInfo){
+            if (navigator.userAgent.match(mobileInfo[info]) != null){
+                isMobile = true;
+                break;
+            }
+        }
+        if(!isMobile){ // PC 화면으로 리디렉션 //
+            if(window.location.href.indexOf('/m') != -1){
+                if(window.location.href.indexOf('/history') != -1)          window.location = "/about/history.html";
+                else if(window.location.href.indexOf('/impact') != -1)      window.location = "/about/impact.html";
+                else if(window.location.href.indexOf('/service') != -1)     window.location = "/service.html";
+                else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/newsroom.html";
+                else{
+                    window.location = "/";
+                }
+            }
+        }
+        /*
+        if(isMobile){ // 모바일로 리디렉션 //
+            if(window.location.href.indexOf('/history') != -1)          window.location = "/m/m_history.html";
+            else if(window.location.href.indexOf('/impact') != -1)      window.location = "/m/m_impact.html";
+            else if(window.location.href.indexOf('/service') != -1)     window.location = "/m/m_service.html";
+            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/m/m_newsroom.html";
+            else{
+                window.location = "/m/m.html";
+            }
+        }
+        */
+
+        let vh = window.innerHeight * 0.01;
+        document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
+    </script>
+
     <script defer type="module" src="../_assets/m_index.js"> </script>
 
     <link rel="stylesheet" href="../_assets/css/forload.css">
@@ -33,6 +70,8 @@
 </head>
 
 <body class="body-black before-load">
+
+    <div class="before-load loading"> <svg class="loading-circle"> <circle cx='50%' cy='50%' r=30></circle> </svg> </div>
     
     <nav class="m_section-nav">
         <div class="m_ham-wrap">
@@ -78,186 +117,141 @@
 
                 <section class="m_section-ourstory">
                     <div class="container-768">
-                        <div data-year="2022" class="ourstory_cms w-dyn-list">
+                        <div class="ourstory_cms w-dyn-list">
                             <div role="list" class="ourstory_cms-list w-dyn-items">
+                                
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
                                         <h2 class="h2-mu16 is-pb12">2022</h2>
-                                        <h3 class="h3-mu32"> Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA Player is a sports platform that trades any
-                                            and all products related to indoor sports like ball games, as well as to
-                                            outdoor sports like hiking and camping. It offers various contents and
-                                            promotional events for customers who love and truly enjoy sports.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
                                         <h2 class="h2-mu16 is-pb12">2022</h2>
-                                        <h3 class="h3-mu32">Opened [MUSINSA Kids], a chic online fashion and lifestyle
-                                            store for kids</h3>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA Kids is a store that caters to the needs of
-                                            young parents looking to style their children with brand fashion. MUSINSA
-                                            Kids introduces the Kids lines of popular brands and suggests family looks
-                                            with matching outfits for parents and children.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b37d089a6b1e4e63bfa_history_kids_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2021</h2>
-                                        <h3 class="h3-mu32">Pursued the M&amp;A of [29CM], an online lifestyle select
-                                            store Pursued the M&amp;A of [StyleShare]</h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48 w-dyn-bind-empty"></p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b231abe2a272137ad7e_history_m-a_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2021</h2>
-                                        <h3 class="h3-mu32">Opened [MUSINSA Golf], which offers a wide selection of golf
-                                            fashion</h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA Golf, which targets young golfers in their
-                                            20s and 30s, is a store committed to introducing differentiated and stylish
-                                            fashion brands and products . It offers varied fashion styles, not only for
-                                            longtime golfers but also for beginner golfers.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b19049c35d08646844e_history_golf_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2021</h2>
-                                        <h3 class="h3-mu32">Opened [MUSINSA Boutique], an online select store for
-                                            luxuries</h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA Boutique, a luxury select store that
-                                            officially partners with various global brands, introduces products from
-                                            these labels to consumers in Korea. It collaborates with these brands on
-                                            online sales and marketing to help their businesses succeed in Korea.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b137678a20a03d4c51e_history_boutique_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2020</h2>
-                                        <h3 class="h3-mu32">Launched [soldout], a platform for trading limited editions
-                                        </h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">Soldout is a resale platform that embodies the
-                                            expertise and know-how of MUSINSA, which started as an online community for
-                                            shoe maniacs. Although soldout’s beginnings were humble and limited to
-                                            sneakers, it now trades massive collections of limited editions that include
-                                            clothing, fashion accessories, lifestyle and tech products, etc.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b0c774f09046f236719_history_soldout_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2020</h2>
-                                        <h3 class="h3-mu32">Launched [MUSINSA Beauty], a stylish online beauty store
-                                        </h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA Beauty makes professional beauty trend
-                                            recommendations based on MUSINSA’s accumulated know-how. It provides a wide
-                                            range of information on beauty products, such as their rankings and magazine
-                                            contents, and suggests styles that match the makeup.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b04fbc4ea45bcb7fa6d_history_beauty_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2017</h2>
-                                        <h3 class="h3-mu32">Launched [MUSINSA Standard], which offers essential casual
-                                            clothing for men, women, and children</h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA Standard, an in-house brand of MUSINSA,
-                                            sells quality products at reasonable prices. It showcases basic items of
-                                            various fits and colors, among which slacks and blazer jackets have been
-                                            gaining much popularity.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626afc0801674036feb362_history_standard_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2009</h2>
-                                        <h3 class="h3-mu32">Launched [MUSINSA Store], an online fashion store</h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA Store established itself as an online select
-                                            store specializing in the sale of authentic designer and streetwear brands.
-                                            It offers products with a one-of-a-kind mood and design that are hard to
-                                            find in department stores and serves as a medium for promoting countless
-                                            brands.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626af4774f09fa902366cd_history_store_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2005</h2>
-                                        <h3 class="h3-mu32">Published [MUSINSA Magazine], which provides insights on the
-                                            latest fashion trends and brand stories</h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA Magazine quickly emerged as a representative
-                                            channel for communicating various fashion news—designer interviews,
-                                            on-the-scene reporting of brand showcases, product releases, etc. It still
-                                            maintains the interest of fashion lovers as a channel that delivers
-                                            essential contents such as brand pictorials, street fashion looks, and
-                                            coordination and styling suggestions.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626ae2625d5623e92fe9a9_history_magazine_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2003</h2>
-                                        <h3 class="h3-mu32">Launched [MUSINSA.com], a fashion community portal</h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">As the number of community members increased,
-                                            MUSINSA turned into an online fashion portal where members can enjoy
-                                            everything about fashion, not just shoes. At the time, street snapshots
-                                            introducing people with remarkable fashion styles right from the streets
-                                            received much attention as one of the representative contents of
-                                            MUSINSA.com.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626ac90292df4b71a24e48_history_musinsa_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                                 <div role="listitem" class="m_ourstory_cms-item w-dyn-item">
-                                    <header class="m_ourstory_cms-header">
-                                        <h2 class="h2-mu16 is-pb12">2001</h2>
-                                        <h3 class="h3-mu32">Started [MUSINSA], an online community for sneaker fans</h3>
+                                    <header data-stagger-y="true" class="m_ourstory_cms-header">
+                                        <h2 class="h2-mu16 is-pb12">2022</h2>
+                                        <h3 class="h3-mu32">Opened [MUSINSA Player], which showcases a broad range of sports brands</h3>
                                     </header>
                                     <div class="m_ourstory_cms-content">
-                                        <p class="mu16-150 is-pb48">MUSINSA started as an online community for shoe
-                                            lovers. Our members shared and enjoyed the sneaker culture, exchanging
-                                            photos of and information about limited edition shoes of labels.</p>
-                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626ac90292df4b71a24e48_history_musinsa_904x678.jpg&quot;)"
-                                            class="ourstory_cms-img is-back"></div>
+                                        <p data-stagger-y="true" class="mu16-150">MUSINSA Player is a sports platform that trades any and all products related to indoor sports like ball games, as well as to outdoor sports like hiking and camping. It offers various contents and promotional events for customers who love and truly enjoy sports.</p>
+                                        <div data-stagger-y="true" style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/62626b43049c3543ba4685df_history_player_904x678.jpg&quot;)" class="m_ourstory_cms-img is-back"></div>                              
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -266,9 +260,9 @@
                 <section class="m_section-news">
                     <div class="container-768">
                     <header>
-                        <h2 data-stagger-alpha="true" class="h2-mu24 is-center">From Our Newsroom</h2>
+                        <h2 data-stagger-y="true" class="h2-mu24 is-center">From Our Newsroom</h2>
                     </header>
-                    <div class="m_news-slider">
+                    <div data-stagger-y="true" class="m_news-slider">
                         <div class="m_news-slider_list">
                         <article class="m_news-slider_item"><a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
                             <div class="m_news-slider_img-wrap">
@@ -303,22 +297,22 @@
                 </section>
 
                 <section class="m_section-shopnow">
-                    <div class="m_container-wide">
+                    <a href="#" class="m_container-wide stop-barba w-inline-block">
                         <header class="m_shopnow_header">
-                            <h2 class="h2-mu16 is-mb12">SHOP NOW</h2><a href="#"
-                                class="gotostore_txt-wrap w-inline-block">
+                            <h2 class="h2-mu16 is-mb12">SHOP NOW</h2>
+                            <div class="gotostore_txt-wrap">
                                 <div class="m_gotostore_title">MUSINSA GROBAL.COM</div>
-                                <div class="m_img-arrow-wrap"><img
-                                        src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fad2a694417966e351960_gotoStore_arrow.svg"
-                                        loading="lazy" alt="" class="m_img-arrow" />
+                                <div class="m_img-arrow-wrap">
+                                    <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fad2a694417966e351960_gotoStore_arrow.svg" loading="lazy" alt="" class="m_img-arrow" />
                                     <div class="m_img-arrow-bg"></div>
                                 </div>
-                            </a>
+                            </div>
                         </header>
+
                         <div class="m_shopnow_img-wrap">
                             <div class="m_shopnow_img is-back"></div>
                         </div>
-                    </div>
+                    </a>
                 </section>
 
                 <footer class="m_section-footer">

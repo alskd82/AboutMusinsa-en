@@ -1,4 +1,5 @@
 import path_graph from "../global_graph_pc.json";
+import path_graph_m from "../global_graph_mo.json";
 
 import BezierEasing from "./class/BezierEasing.js";
 import { TextSplitWordsShow, TextSlitLinesMasking } from './class/TextMotion.js';
@@ -18,11 +19,12 @@ const HomeGrowth = (function(exports){
     let sectionGrowth; 
     let lottieArea
     let graph;
+    let isDesktop;
 
     const lottie_Fn=(ele)=>{
         return lottie.loadAnimation({ 
             container: ele,  loop: false,  autoplay: false, 
-            animationData: path_graph,
+            animationData: isDesktop ? path_graph: path_graph_m,
         })
     };
 
@@ -39,9 +41,12 @@ const HomeGrowth = (function(exports){
 
     const init =()=>{
         sectionGrowth = document.querySelector('.section-growth');
+        if(!sectionGrowth) sectionGrowth = document.querySelector('.m_section-growth');
         if(!sectionGrowth) return;
+
+        isDesktop = sectionGrowth === document.querySelector('.section-growth') ? true : false
+        lottieArea = isDesktop ? document.querySelector('.growth_lottie-area') : document.querySelector('.m_growth_lottie-area')
         
-        lottieArea = document.querySelector('.growth_lottie-area');
         graph = lottie_Fn(lottieArea);
     };
 
@@ -51,6 +56,7 @@ const HomeGrowth = (function(exports){
 })({});
 
 
+
 //===============================================================================================================================
 /*=====  Home : Count ======================*/
 //===============================================================================================================================
@@ -58,12 +64,15 @@ const HomeCount = (function(exports){
     let sectionCount;
     let textmasking =[]
     let number = []
-    let odo = []
+    let odo = [];
+    let isDesktop;
 
     const odometer=()=>{
         number = [];
         odo = [];
-        document.querySelectorAll(".count_txt-num.is-num").forEach((num,i)=>{
+        const _countNumTxt = isDesktop ? '.count_txt-num.is-num' : '.m_count_txt-num.is-num';
+
+        document.querySelectorAll( _countNumTxt ).forEach((num,i)=>{
             number.push( parseInt(num.innerHTML) )
             num.innerHTML = "";
             odo.push( new Odometer({ el: num }))
@@ -72,7 +81,9 @@ const HomeCount = (function(exports){
 
     const textMasking =()=> {
         textmasking =[]
-        document.querySelectorAll('.count_txt-desc').forEach((desc, i)=>{
+
+        const _countDescArr = isDesktop ? '.count_txt-desc' : '.m_count_txt-desc';
+        document.querySelectorAll( _countDescArr ).forEach((desc, i)=>{
             textmasking.push(
                 new TextSlitLinesMasking({
                     splitText: new SplitText(desc, { type: "lines,words,chars", linesClass: "is-overflow-hidden" }),
@@ -85,18 +96,24 @@ const HomeCount = (function(exports){
 
     const st=()=>{
         if(!sectionCount) return;
+        const _trigger = isDesktop ? ".count_wrap" : ".m_count_wrap";
+        const _sysTxt = isDesktop ? sectionCount.querySelector('.system20-r') : sectionCount.querySelector('.m_system14-r');
+        const _notNum = isDesktop ? ".count_txt-num:not(.is-num)" : ".m_count_txt-num:not(.is-num)";
+        const _num = isDesktop ?  ".count_txt-num.is-num":  ".m_count_txt-num.is-num"
+        const _numArr = isDesktop ? document.querySelectorAll(".count_txt-num.is-num") : document.querySelectorAll(".m_count_txt-num.is-num")
+
 
         ScrollTrigger.create({
             // markers: true, id: "count",
-            trigger: ".count_wrap",
+            trigger: _trigger,
             start: `top 70%`,
             onEnter:()=>{
                 textmasking.forEach(txt => txt.play("lines"))
-                gsap.to( sectionCount.querySelector('.system20-r'),{ duration: 1, ease: "Quart.easeInOut", autoAlpha: 1 })
-                gsap.to( ".count_txt-num:not(.is-num)",{ duration: 1, ease: "Quart.easeInOut", autoAlpha: 1 })
+                gsap.to( _sysTxt ,{ duration: 1, ease: "Quart.easeInOut", autoAlpha: 1, delay:.2 })
+                gsap.to( _notNum ,{ duration: 1, ease: "Quart.easeInOut", autoAlpha: 1 })
 
-                gsap.to( ".count_txt-num.is-num",{ duration: .5, ease: "Quart.easeInOut", autoAlpha: 1 })
-                document.querySelectorAll(".count_txt-num.is-num").forEach((num,i)=> num.innerHTML = number[i] );
+                gsap.to( _num,{ duration: .5, ease: "Quart.easeInOut", autoAlpha: 1 })
+                _numArr.forEach((num,i)=> num.innerHTML = number[i] );
 
             },
             once: true,
@@ -105,10 +122,15 @@ const HomeCount = (function(exports){
 
     const init =()=>{
         sectionCount = document.querySelector('.section-count');
+        if(!sectionCount) sectionCount = document.querySelector('.m_section-count');
         if(!sectionCount) return;
 
-        gsap.set( ".count_txt-num", {autoAlpha: 0} )
-        gsap.set( sectionCount.querySelector('.system20-r'),{autoAlpha: 0})
+        isDesktop = (sectionCount === document.querySelector('.section-count')) ? true : false;
+
+        const _countTxt = isDesktop ? ".count_txt-num" : ".m_count_txt-num"
+        const _sysTxt = isDesktop ? '.system20-r' : '.m_system14-r'
+        gsap.set( _countTxt, {autoAlpha: 0} );
+        gsap.set( sectionCount.querySelector( _sysTxt ),{autoAlpha: 0})
 
         textMasking();
         odometer();
@@ -238,6 +260,7 @@ const HomeHistory = (function(exports){
 const HomeService = (function(exports){
     let sectionService;
     let zIndexLevel;
+    let isDesktop;
 
     const selectMn=(n)=>{
         sectionService.querySelectorAll('.home-service_item').forEach((el) =>{
@@ -289,6 +312,7 @@ const HomeService = (function(exports){
             onLeaveBack: () => document.body.classList.remove('is-blue'),
         });
 
+        if(!document.querySelector('.home-service_wrap')) return
         gsap.to('.home-service_wrap',{
             ...scrollIntoView,
             scrollTrigger:{
@@ -302,13 +326,17 @@ const HomeService = (function(exports){
 
     const init =()=>{
         sectionService = document.querySelector('.section-service');
+        if(!sectionService) sectionService = document.querySelector('.m_section-service');
         if(!sectionService) return;
 
-        zIndexLevel = 1;
-        addEvent();
-        selectMn("0");
+        isDesktop = sectionService === document.querySelector('.section-service') ? true : false;
 
-        gsap.set('.home-service_wrap', {y: 150, autoAlpha: 0})
+        if(isDesktop){
+            zIndexLevel = 1;
+            addEvent();
+            selectMn("0");
+            gsap.set('.home-service_wrap', {y: 150, autoAlpha: 0})
+        }
         
     };
 
@@ -318,11 +346,62 @@ const HomeService = (function(exports){
 })({});
 
 
+//===============================================================================================================================
+/*=====  Home : History - Mobile ======================*/
+//===============================================================================================================================
+const HomeHistory_Mobile = (function(exports){
+    let sectionHistory;
+    let swiper;
+
+    const init=()=>{
+        sectionHistory = document.querySelector('.m_section-history');
+        if(!sectionHistory) return;
+        // swiper = new Swiper('.swiper', { 
+        //     spaceBetween: 0 ,
+        //     observer: true,
+        //     observeParents: true,
+        //     slidesPerView : 'auto',
+        // });
+
+        sectionHistory.querySelectorAll(".m_history-slider_item").forEach( (ele,i)=> ele.dataset.num = i )
+
+        // const snapX = []
+        // document.querySelectorAll('.swiper-slide').forEach( (slide,i) =>{
+        //     let _x = (gsap.getProperty(slide, 'width')+8) * -i;
+        //     if(_x )
+        //     snapX.push( (gsap.getProperty(slide, 'width')+8) * -i )
+        // })
+
+        // Draggable.create(".m_section-history .swiper-wrapper", {
+        //     type:"x",
+        //     edgeResistance: 0.65,
+        //     bounds: {
+        //         minX: -gsap.getProperty('.swiper-slide', 'width') * (document.querySelectorAll('.swiper-slide').length) - 40,
+        //         maxX: 0
+        //     },
+        //     snap: snapX,
+        //     inertia: true,
+        //     onDragEnd: function() {
+                
+        //         let xx = InertiaPlugin.getVelocity( ".m_section-history .swiper-wrapper", 'x')
+        //         console.log("drag ended" , xx);
+        //     }
+        // });
+
+    }
+
+    exports.init = init;
+    return exports;
+})({})
+
+
 const HomeInit =()=>{
     HomeGrowth.init();
     HomeCount.init();
     HomeHistory.init(); HomeHistory.st();
     HomeService.init();
+
+    HomeHistory_Mobile.init()
 }
 
 const HomeST =()=>{

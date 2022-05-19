@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <title> INDEX </title>
 
-    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.25f8d089c.css" rel="stylesheet" type="text/css" />
+    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.30fbee971.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="./_assets/css/forload.css">
     <link rel="stylesheet" href="./_assets/css/style.css">
@@ -20,6 +20,7 @@
         }(window, document);
     </script>
     
+    <!-- 피씨 모바일 리디렉션 -->
     <script>
         if(window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) window.location = "microsoft-edge:" + window.location.href;
         
@@ -31,11 +32,34 @@
                 break;
             }
         }
-        if(isMobile) window.location = "/m/m.html";
+        /*
+        if(!isMobile){ // PC 화면으로 리디렉션 //
+            if(window.location.href.indexOf('/m') != -1){
+                if(window.location.href.indexOf('/history') != -1)          window.location = "/about/history.html";
+                else if(window.location.href.indexOf('/impact') != -1)      window.location = "/about/impact.html";
+                else if(window.location.href.indexOf('/service') != -1)     window.location = "/service.html";
+                else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/newsroom.html";
+                else{
+                    window.location = "/";
+                }
+            }
+        }
+        */
+        if(isMobile){ // 모바일로 리디렉션 //
+            if(window.location.href.indexOf('/history') != -1)          window.location = "/m/m_history.html";
+            else if(window.location.href.indexOf('/impact') != -1)      window.location = "/m/m_impact.html";
+            else if(window.location.href.indexOf('/service') != -1)     window.location = "/m/m_service.html";
+            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/m/m_newsroom.html";
+            else{
+                window.location = "/m/m.html";
+            }
+        }
 
         let vh = window.innerHeight * 0.01;
         document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
     </script>
+    <!-- //////////////////// -->
+    
 
     <link href="https://uploads-ssl.webflow.com/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="https://uploads-ssl.webflow.com/img/webclip.png" rel="apple-touch-icon" />

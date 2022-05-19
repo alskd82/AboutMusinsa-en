@@ -26,7 +26,6 @@ const scrollIntoView = {
     x:0, y:0
 }
 
-
 //===============================================================================================================================
 /*===== url 쿼리 받기  ======================*/
 //===============================================================================================================================
@@ -116,11 +115,14 @@ const BillboardText = (function(exports){
     let opts;
 
     const init =(nameSpace)=> {
-        if(!document.querySelector(".h1-billboard_title")) return
+        let h1 = document.querySelector(".h1-billboard_title");
+        if(!h1) h1 = document.querySelector(".m_h1-billboard_title")
+        if(!h1) return
+
         title = new TextSplitWordsShow()
         if(nameSpace === "home"){
             opts = {
-                words : new SplitText( '.h1-billboard_title', { type: "words" }).words,
+                words : new SplitText( h1, { type: "words" }).words,
                 splitIntersection: [[0] , [1,2,3,4], [5,6,7,8]],
                 duration: 1, ease: 'Quart.easeOut',
                 staggerTime: .1, gapTime: -.3,
@@ -129,7 +131,7 @@ const BillboardText = (function(exports){
             for(let key in opts) title[key] = opts[key];
         } else if(nameSpace === "service") {
             opts = {
-                words : new SplitText( '.h1-billboard_title', { type: "words" }).words,
+                words : new SplitText( h1, { type: "words" }).words,
                 splitIntersection: [[0] , [1,2,3] , [4,5,6,7]],
                 duration: 1, ease: 'Quart.easeOut',
                 staggerTime: .1, gapTime: -.3,
@@ -138,7 +140,7 @@ const BillboardText = (function(exports){
             for(let key in opts) title[key] = opts[key];
         } else {
             opts = {
-                words : new SplitText( '.h1-billboard_title', { type: "words" }).words,
+                words : new SplitText( h1, { type: "words" }).words,
                 splitIntersection: [[0] , [1]],
                 duration: 1, ease: 'Quart.easeOut',
                 staggerTime: .1, gapTime: -.3,
@@ -148,14 +150,15 @@ const BillboardText = (function(exports){
         }
 
         title.init();
-        
-        
         // title.play();
     }
 
     const play=()=>{
-        if(!document.querySelector(".h1-billboard_title")) return
-        document.querySelector(".h1-billboard_title").classList.add('is-active')
+        let h1 = document.querySelector(".h1-billboard_title");
+        if(!h1) h1 = document.querySelector(".m_h1-billboard_title")
+        if(!h1) return
+
+        h1.classList.add('is-active')
         title.play();
     }
 
@@ -171,13 +174,13 @@ const BillboardText = (function(exports){
 
 const StaggerMotion = (function(exports){
     let stagger;
-
+    
     const st =()=> {
         gsap.utils.toArray('[data-stagger]').forEach((ele, i)=>{    
             ScrollTrigger.create({
                 // markers: true, id: `stagger${i}`,
                 trigger: ele,
-                start: "top 80%",
+                start: !isMobile ? "top 80%": "top 92%",
                 onEnter: (self)=>{
                     gsap.set( ele, {autoAlpha: 1})
                     stagger[i].play()
@@ -190,7 +193,7 @@ const StaggerMotion = (function(exports){
             ScrollTrigger.create({
                 // markers: true, id: `y${i}`,
                 trigger: ele,
-                start: "top 80%",
+                start: !isMobile ? "top 80%": "top 92%",
                 onEnter:(self)=> {
                     gsap.to( ele, {...scrollIntoView} )
                     self.kill();
@@ -203,7 +206,7 @@ const StaggerMotion = (function(exports){
             ScrollTrigger.create({
                 // markers: true, id: `alpha${i}`,
                 trigger: ele,
-                start: "top 80%",
+                start: !isMobile ? "top 80%": "top 92%",
                 onEnter:(self)=> {
                     gsap.to( ele, {...scrollIntoView} )
                     self.kill();
@@ -352,31 +355,31 @@ const ShopNow = (function(exports){
     const st =()=>{
         if(!sectionShopNow) return;
 
+        if(!isMobile){
+            ani = gsap.fromTo( img, { 
+                y: -img * .75,// + gsap.getProperty(wrapper, 'height') 
+            }, { duration: 1, y: -350 });
+        } else {
+            ani = gsap.fromTo( img, { y: -gsap.getProperty('.m_shopnow_img-wrap', 'height')*0.75 }, { duration: 1, y: 0 });
+        }
         ScrollTrigger.create({
             // markers: true, id: "shownow",
             animation: ani,
             trigger: wrapper,
             start: `top bottom`, 
-            end: `end ${window.innerHeight - gsap.getProperty(wrapper, 'height') - gsap.getProperty('footer', 'height')}`,
+            end: `end ${100*vh - gsap.getProperty(wrapper, 'height') - gsap.getProperty('footer', 'height')}`,
             scrub: true,
         });
     }
 
     const init=()=>{
         sectionShopNow = document.querySelector('.section-shopnow');
+        if(!sectionShopNow) sectionShopNow = document.querySelector('.m_section-shopnow');
         if(!sectionShopNow) return;
         
-        wrapper = document.querySelector('.shopnow_img-wrap');
-        img = document.querySelector('.shopnow_img');
+        wrapper = !isMobile ? document.querySelector('.shopnow_img-wrap') : document.querySelector('.m_shopnow_img-wrap')
+        img = !isMobile ? document.querySelector('.shopnow_img') : document.querySelector('.m_shopnow_img');
 
-        // console.log( gsap.getProperty(wrapper, 'height') , gsap.getProperty(img, 'height') )
-        ani = gsap.fromTo( img, { 
-            y: -gsap.getProperty(img, 'height') * .75,// + gsap.getProperty(wrapper, 'height') 
-        }, {
-            duration: 1,
-            y: -350
-            
-        });
         // mouseFollow();
     };
 

@@ -8,7 +8,7 @@
     <meta content="Musinsa" property="og:title" />
     <meta content="Musinsa" property="twitter:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.1f910fd7e.css" rel="stylesheet" type="text/css" />
+    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.30fbee971.css" rel="stylesheet" type="text/css" />
 
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
     <script type="text/javascript">
@@ -35,7 +35,28 @@
                 break;
             }
         }
-        if(!isMobile) window.location = "/";
+        if(!isMobile){ // PC 화면으로 리디렉션 //
+            if(window.location.href.indexOf('/m') != -1){
+                if(window.location.href.indexOf('/history') != -1)          window.location = "/about/history.html";
+                else if(window.location.href.indexOf('/impact') != -1)      window.location = "/about/impact.html";
+                else if(window.location.href.indexOf('/service') != -1)     window.location = "/service.html";
+                else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/newsroom.html";
+                else{
+                    window.location = "/";
+                }
+            }
+        }
+        /*
+        if(isMobile){ // 모바일로 리디렉션 //
+            if(window.location.href.indexOf('/history') != -1)          window.location = "/m/m_history.html";
+            else if(window.location.href.indexOf('/impact') != -1)      window.location = "/m/m_impact.html";
+            else if(window.location.href.indexOf('/service') != -1)     window.location = "/m/m_service.html";
+            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/m/m_newsroom.html";
+            else{
+                window.location = "/m/m.html";
+            }
+        }
+        */
 
         let vh = window.innerHeight * 0.01;
         document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
@@ -48,7 +69,8 @@
 
 </head>
 
-<body class="body-black ">
+<body class="body-black before-load">
+    <div class="before-load loading"> <svg class="loading-circle"> <circle cx='50%' cy='50%' r=30></circle> </svg> </div>
 
     <nav class="m_section-nav">
         <div class="m_ham-wrap">
@@ -83,29 +105,25 @@
                         <header class="m_billboard_header">
                             <h1 class="m_h1-billboard_title">MUSINSA is where you can discover your true self</h1>
                         </header>
-                        <div class="m_billboard_img-wrap">
-                            <div class="m_billboard_img is-back is-home"></div>
-                        </div>
-                        <div class="m_arrow-bottom">
-                            <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/627c8788fcfd56444ff1ce70_ic_arrow_bottom.svg" loading="lazy" alt="" />
-                        </div>
+                        <div class="m_billboard_img-wrap w-embed"><video src="https://image.msscdn.net/webflow/static/newsroom/global/vid_mb.mp4" muted loop playsinline poster="https://image.msscdn.net/webflow/static/newsroom/global/poster_vid_mb.jpg" class="m_billboard_img"></video></div>
+                        <div class="m_arrow-bottom"><img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/627c8788fcfd56444ff1ce70_ic_arrow_bottom.svg" loading="lazy" alt="" /></div>
                     </div>
                 </section>
 
                 <section class="m_section-growth">
                     <div class="container-768">
                         <header>
-                            <h2 class="m_h2-mu16 is-pb12">Growth</h2>
-                            <h3 class="h3-mu32">
+                            <h2 data-stagger-alpha="true" class="m_h2-mu16 is-pb12">Growth</h2>
+                            <h3 data-stagger-y="true" class="h3-mu32">
                                 MUSINSA is an online fashion platform that is
                                 rapidly growing and becoming a game changer in the fashion market.</h3>
                         </header>
-                        <p class="m_mu16-150 is-pt20">
+                        <p data-stagger-y="true" class="m_mu16-150 is-pt20">
                             Musinsa has grown more than 200 times in
                             less than a decade since it surpassed 10 billion in transactions in 2013, creating a new
                             online fashion market.
                         </p>
-                        <div class="m_growth_lottie-area"></div>
+                        <div data-stagger-alpha="true" class="m_growth_lottie-area"></div>
                         <div class="m_system14-r">
                             * The 2021 figure indicates the sum of trades on MUSINSA Store, StyleShare, 29CM, and soldout.
                         </div>
@@ -140,20 +158,20 @@
                 <section class="m_section-history">
                     <div class="container-768">
                         <header>
-                            <h2 class="m_h2-mu16 is-pb12">History</h2>
-                            <h3 class="h3-mu32">
+                            <h2 data-stagger-alpha="true" class="m_h2-mu16 is-pb12">History</h2>
+                            <h3 data-stagger-y="true" class="h3-mu32">
                                 MUSINSA started as a sneaker community in 2001 and
                                 has been expanding into a distribution and marketing platform for fashion brands and
                                 designers.
                             </h3>
                         </header>
-                        <p class="m_mu16-150 is-pt20">
+                        <p data-stagger-y="true" class="m_mu16-150 is-pt20">
                             We deliver an engaging customer experience
                             to men, women, and children with a vast range of curated fashion brands and styles in
                             casual, formal, contemporary, luxury, and sportswear categories.
                         </p>
 
-                        <div id="sliderHistoryCMS" class="m_history-slider swiper w-dyn-list">
+                        <div data-stagger-y="true" id="sliderHistoryCMS" class="m_history-slider swiper w-dyn-list">
                             <div role="list" class="m_history-slider_list swiper-wrapper w-dyn-items">
                                 
                                 <div role="listitem" class="m_history-slider_item swiper-slide w-dyn-item">
@@ -347,13 +365,13 @@
                     <div class="container-768">
                         <div class="m_home-service_wrap">
                             <header>
-                                <h2 class="h2-mu24 is-pb24 is-center">Service</h2>
+                                <h2 data-stagger-alpha="true" class="h2-mu24 is-pb24 is-center">Service</h2>
                             </header>
                             <div class="m_home-service_img-wrap">
-                                <a data-num="1" data-focus="#Musinsa" href="/m/m_service.html" class="m_home-service_img is-back is-musinsa w-inline-block"></a>
-                                <a data-num="2" data-focus="#TwentyNine" href="/m/m_service.html" class="m_home-service_img is-back is-29cm w-inline-block"></a>
-                                <a data-num="3" data-focus="#StyleShare" href="/m/m_service.html" class="m_home-service_img is-back is-soldout w-inline-block"></a>
-                                <a data-num="4" data-focus="#Soldout" href="/m/m_service.html" class="m_home-service_img is-back is-styleshare w-inline-block"></a>
+                                <a data-stagger-y="true" data-num="1" data-focus="#Musinsa" href="/m/m_service.html" class="m_home-service_img is-back is-musinsa w-inline-block"></a>
+                                <a data-stagger-y="true" data-num="2" data-focus="#TwentyNine" href="/m/m_service.html" class="m_home-service_img is-back is-29cm w-inline-block"></a>
+                                <a data-stagger-y="true" data-num="3" data-focus="#StyleShare" href="/m/m_service.html" class="m_home-service_img is-back is-soldout w-inline-block"></a>
+                                <a data-stagger-y="true" data-num="4" data-focus="#Soldout" href="/m/m_service.html" class="m_home-service_img is-back is-styleshare w-inline-block"></a>
                             </div>
                         </div>
                     </div>
@@ -364,7 +382,7 @@
                     <header>
                         <h2 data-stagger-alpha="true" class="h2-mu24 is-center">From Our Newsroom</h2>
                     </header>
-                    <div class="m_news-slider">
+                    <div data-stagger-y="true" class="m_news-slider">
                         <div class="m_news-slider_list">
                         <article class="m_news-slider_item"><a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
                             <div class="m_news-slider_img-wrap">
@@ -399,19 +417,22 @@
                 </section>
 
                 <section class="m_section-shopnow">
-                    <div class="m_container-wide">
-                    <header class="m_shopnow_header">
-                        <h2 class="h2-mu16 is-mb12">SHOP NOW</h2><a href="#" class="gotostore_txt-wrap w-inline-block">
-                        <div class="m_gotostore_title">MUSINSA GROBAL.COM</div>
-                        <div class="m_img-arrow-wrap"><img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fad2a694417966e351960_gotoStore_arrow.svg" loading="lazy" alt="" class="m_img-arrow" />
-                            <div class="m_img-arrow-bg"></div>
+                    <a href="#" class="m_container-wide stop-barba w-inline-block">
+                        <header class="m_shopnow_header">
+                            <h2 class="h2-mu16 is-mb12">SHOP NOW</h2>
+                            <div class="gotostore_txt-wrap">
+                                <div class="m_gotostore_title">MUSINSA GROBAL.COM</div>
+                                <div class="m_img-arrow-wrap">
+                                    <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fad2a694417966e351960_gotoStore_arrow.svg" loading="lazy" alt="" class="m_img-arrow" />
+                                    <div class="m_img-arrow-bg"></div>
+                                </div>
+                            </div>
+                        </header>
+
+                        <div class="m_shopnow_img-wrap">
+                            <div class="m_shopnow_img is-back"></div>
                         </div>
-                        </a>
-                    </header>
-                    <div class="m_shopnow_img-wrap">
-                        <div class="m_shopnow_img is-back"></div>
-                    </div>
-                    </div>
+                    </a>
                 </section>
 
                 <footer class="m_section-footer">
