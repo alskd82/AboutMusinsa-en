@@ -6,7 +6,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin, SplitText);
+import { Draggable } from "gsap/Draggable";
+import { InertiaPlugin } from "gsap/InertiaPlugin";
+gsap.registerPlugin(
+    ScrollTrigger, ScrollSmoother, ScrollToPlugin, SplitText,
+    Draggable, InertiaPlugin,
+);
+
 
 
 //===============================================================================================================================
@@ -228,7 +234,7 @@ const StaggerMotion = (function(exports){
             )},
             
             onEnterBack: batch => gsap.set(batch, {autoAlpha: 1, y: 0, overwrite: true}),
-            start: "top 90%",
+            start: !isMobile ? "top 90%": "top 95%",
             // end: "top top",
             preventOverlaps: true
         });
@@ -357,7 +363,7 @@ const ShopNow = (function(exports){
 
         if(!isMobile){
             ani = gsap.fromTo( img, { 
-                y: -img * .75,// + gsap.getProperty(wrapper, 'height') 
+                y: -gsap.getProperty(img, 'height')  * .75,// + gsap.getProperty(wrapper, 'height') 
             }, { duration: 1, y: -350 });
         } else {
             ani = gsap.fromTo( img, { y: -gsap.getProperty('.m_shopnow_img-wrap', 'height')*0.75 }, { duration: 1, y: 0 });
@@ -387,6 +393,29 @@ const ShopNow = (function(exports){
     exports.init = init
     return exports;
 })({});
+
+
+//===============================================================================================================================
+/*=====  Mobile From Our Newsroom   ======================*/
+//===============================================================================================================================
+const FromOurNews_Mobile = (function(exports){
+    let list;
+
+    const init=()=>{
+        list = document.querySelector('.m_section-news .m_news-slider_list');
+        if(!list) return;
+        const limit = (gsap.getProperty( '.news_item-img', 'width')+8) * list.children.length - window.innerWidth + 40
+        Draggable.create(list, {
+            type:"x",
+            edgeResistance: .8,
+            bounds: {minX:0, maxX: -limit},
+            inertia: true,
+        });
+    }
+
+    exports.init = init;
+    return exports;
+})({})
 
 
 //===============================================================================================================================
@@ -425,6 +454,7 @@ export {
     BillboardText,
     StaggerMotion,
     ShopNow ,
-    smoother, createSmoother
+    smoother, createSmoother,
+    FromOurNews_Mobile,
 }
 

@@ -76,16 +76,21 @@ body.loaded{
 
 /*//////////////////////////////////////*/
 /*=== For Mobile ===================*/
+// .m_ham{
+//     background-color: transparent;
+// }
 
 .m_nav-wrap{
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
     clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
-    transition: clip-path 400ms $ease-exit 100ms;
+    transition: clip-path 450ms $ease-material 100ms;
     transform: translate3d(0,0,0);
+    // background-color: rgba(255,255,255,.5);
 }
 
 .m_nav-wrap.is-active{
+    // visibility: visible;
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     transition: clip-path 500ms $ease-standard;
 }

@@ -5,33 +5,26 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { Draggable } from "gsap/Draggable";
-import { InertiaPlugin } from "gsap/InertiaPlugin";
+// import { Draggable } from "gsap/Draggable";
+// import { InertiaPlugin } from "gsap/InertiaPlugin";
 
 gsap.registerPlugin(
     ScrollTrigger, ScrollToPlugin, SplitText, 
-    Draggable, InertiaPlugin,
+    // Draggable, InertiaPlugin,
 );
 
 import BezierEasing from "./js/class/BezierEasing.js";
-import { scrollIntoView, ease, BillboardText, StaggerMotion, ShopNow } from "./js/common";
+import { 
+    scrollIntoView, ease,
+    smoother, createSmoother, 
+    BillboardText, StaggerMotion, ShopNow, 
+    FromOurNews_Mobile 
+} from "./js/common";
+
 import LoadFromOurNews from "./js/class/LoadFromOurNews.js"
 import { HomeInit, HomeST } from "./js/page_home"
 
-// import ImageOverlapChange from "./js/class/ImageOverlapChange"
-
-import path_graph from "./global_graph_mo.json";
-
-
-/* 페이지 이동시 스크롤 잠시 고정 */
-let scrollY = 0;
-let reqID;
-const pageTransitionScrollFix =()=>{
-    // console.log( `scrollY : ${scrollY}`)
-    window.scrollTo(0, scrollY);
-    reqID = window.requestAnimationFrame( pageTransitionScrollFix );
-    // window.cancelAnimationFrame(reqID);
-};
+import Newsroom from "./js/page_newsroom"
 
 
 let nameSpace;              //namesapce = "home"| "history" | "imapact" | "service"
@@ -57,38 +50,52 @@ document.addEventListener('DOMContentLoaded' , e=>{
     ScrollTrigger.config({ 
         limitCallbacks: true,
         ignoreMobileResize: true
-    })
+    });
 
-    // window.addEventListener('scroll', e=> console.log( window.pageYOffset ) )
 })
 
 
 //===============================================================================================================================
 /*===== 로드  ======================*/
 //===============================================================================================================================
+
+
 const load =()=>{
     /* body 에 .load-before 가 있으면 빌보드영역만 로드, 아니면 전체 이미지 로드 */
     // document.body.classList.contains('load-before') ? sourceLoad('.section-billboard') : sourceLoad('.body-black');
     
     /* 빌보드 영역만 먼저 로드하고 끝나면 화면 보이게 => 이후 전체이미지 로드 */
     if(nameSpace === "home"){
-        const vid = document.querySelector('video');
-        const poster = new Image()
+        /*
+        const canvas = document.querySelector('.m_section-billboard canvas');
+        const video = document.querySelector('.m_section-billboard video');
+        const ctx = canvas.getContext("2d");
+
+        const drawCanvas=()=>{
+            // if( !e.classList.contains("is-active") ) return
+            canvas.width = video.videoWidth
+            canvas.height = video.videoHeight
+            ctx.drawImage(video, 0, 0, canvas.width , canvas.height );
+            window.requestAnimationFrame(drawCanvas);
+        }
+        
+        const play =()=>{
+            loadingComplete()
+            window.requestAnimationFrame(drawCanvas);
+            video.play();
+            document.querySelector('.canvas-video').classList.add('is-active');
+        }
+
+        imageLoad('.m_section-billboard' , { complete: gsap.delayedCall(.2, play) })
+        imageLoad('.body-black');
+        */
+        const vid = document.querySelector('video')
+        const poster = new Image();
         poster.src = vid.getAttribute('poster');
         poster.onload =()=>{
-            gsap.delayedCall(.2 ,function(){
-                loadingComplete();
-                document.querySelector('video').play();
-            }); 
+            gsap.delayedCall(.2, loadingComplete )
+            gsap.delayedCall( .8, ()=> vid.play() )
         }
-        // vid.addEventListener('canplaythrough', e=>{
-        //     gsap.delayedCall(.2 ,function(){
-        //         loadingComplete();
-        //         document.querySelector('video').play();
-        //     }); 
-        // })
-
-        imageLoad('.body-black');
 
     } else if(nameSpace != "newsroom"){
         imageLoad('.m_section-billboard' , { complete: gsap.delayedCall(.2,loadingComplete) })
@@ -112,13 +119,15 @@ const loadingComplete =()=> {
 
     document.querySelector('.loading').classList.remove('before-load');
     document.querySelector('div.m_billboard_img') && (function(){
-        gsap.fromTo( 'div.m_billboard_img', {scale: 1 } ,{scale: 1.15 ,ease: BezierEasing(0.6,0,0.1,1), duration: 2.0, delay: 0.2})
+        gsap.fromTo( 'div.m_billboard_img', {scale: 1 } ,{scale: 1.15 ,ease: BezierEasing(0.6,0,0.1,1), duration: 2.0, delay: 0})
     })()
 
-    gsap.delayedCall( 1, function(){ // ------------------------------------------------------------ 텍스트 모션 시작
-        BillboardText.play()
-        setTimeout(() => document.querySelector(".m_arrow-bottom").classList.add('is-active'), 1000);
-    }) 
+    if(nameSpace != 'newsroom'){
+        gsap.delayedCall( .85, function(){ // ------------------------------------------------------------ 텍스트 모션 시작
+            BillboardText.play()
+            setTimeout(() => document.querySelector(".m_arrow-bottom").classList.add('is-active'), 1000);
+        }) 
+    }
     
     ScrollTrigger.refresh(true)
 }
@@ -144,51 +153,50 @@ const imageLoad =( selector, opt={ onComplete: undefined }) =>{
 /*===== 페이지 이동 시 발생  ======================*/
 //===============================================================================================================================
 const pageBeforeLeave =()=>{
+
     if(nameSpace) console.log(`beforeLeave: ${nameSpace}`);
 
-    // Navi.naviClose(true);
-    Navi.naviClose();
+    // Navi.naviClose();
 
+    ScrollTrigger.getAll().forEach((st,i)=> st.kill() );
     document.body.classList.remove("is-blue");
     document.querySelector('.loading').classList.add('before-load');   
 }
 
 const pageBeforeEnter =()=>{
     nameSpace = document.querySelector(`[data-barba="container"]`).dataset.barbaNamespace;
-    console.log(`beforeEnter: ${nameSpace}`);
+    // console.log(`beforeEnter: ${nameSpace}`);
 
     if(nameSpace === "home")             Navi.naviActive(0)
     else if(nameSpace === "history")     Navi.naviActive(1)
     else if(nameSpace === "impact")      Navi.naviActive(1)
     else if(nameSpace === "service")     Navi.naviActive(2)
     else if(nameSpace === "newsroom")    Navi.naviActive(3)
-
-    ScrollTrigger.getAll().forEach((st,i)=> st.kill() );
-    document.body.classList.remove("is-blue");
-    setTimeout(() => { window.scrollTo(0,0) }, 150);
+    
+    // // createSmoother(true)
 
     BillboardText.init(nameSpace);
     StaggerMotion.init();
     ShopNow.init();
+    FromOurNews_Mobile.init();
 
     HomeInit();
+    Newsroom.init();
 
     Link.homeHistory();
     Link.homeService();
-    FromOurNews = new LoadFromOurNews({id: nameSpace, isDesktop: false })
+    FromOurNews = new LoadFromOurNews({id: nameSpace, isDesktop: false, src: "/fromournewsroom/from-our-newsroom/" })
 }
 
 const pageEnter =()=>{
-    console.log(`enter: ${nameSpace}`)
+    console.log(`enter: ${nameSpace}`)    
 
-    setTimeout(() =>{
-        StaggerMotion.st();
-        ShopNow.st();
+    StaggerMotion.st();
+    ShopNow.st();
 
-        HomeST();
-    
-        ScrollTrigger.refresh(true)
-    }, 500);
+    HomeST();
+
+    ScrollTrigger.refresh(true)
 
     load()
 
@@ -202,7 +210,7 @@ const pageTransitionComplete =()=>{
     if(nameSpace === "history"){
         if(!focusInPage) return
         console.log(focusInPage)
-        // goToFocus( document.querySelectorAll('.ourstory_cms-item')[focusInPage] , 1 )
+        goToFocus( document.querySelectorAll('.m_ourstory_cms-item')[focusInPage] , 1 )
         focusInPage = null;
     }
     else if(nameSpace === "service"){
@@ -233,31 +241,31 @@ const barbaInit =()=> {
                 },
                 
                 beforeLeave({current}){
-                    scrollY = window.pageYOffset;
-                    pageTransitionScrollFix();
-
                     pageBeforeLeave()
+                    // document.body.classList.remove("is-blue");
+                    // setTimeout(() => smoother ? smoother.scrollTo(0) : window.scrollTo( 0, 0 ) , 0)
                 },
 
                 /* Leave Animation */
                 leave(data) {
                     console.log(`leave: ${nameSpace}`)
 
-                    return gsap.to( data.current.container, {
-                        opacity: 0, duration: .6, ease: ease.standard
-                    });
+                    const _time = focusInPage ? .5 : 0.2;
+                    return gsap.to( data.current.container, { opacity: 0, duration: _time, ease: ease.standard });
                 },
                 beforeEnter({current, next}){
                     if(current.container) current.container.remove();
+                    setTimeout(() => smoother ? smoother.scrollTo(0) : window.scrollTo( 0, 0 ) , 0)
                     pageBeforeEnter();
                 },
 
                 // /* Enter Animation */
                 enter(data){   
-                    window.cancelAnimationFrame(reqID);
                     pageEnter();                
                     // gsap.set( data.next.container, { opacity: 0 } );
-                    gsap.fromTo( data.next.container, {opacity: 0}, {opacity: 1, duration: 1, delay:.15, ease: ease.standard , onComplete: pageTransitionComplete} )
+                    gsap.fromTo( data.next.container, {opacity: 0}, {opacity: 1, duration: 1, delay:.15, ease: ease.standard } )
+                    focusInPage && (() => gsap.delayedCall( .8, pageTransitionComplete))()
+                    
                 },
 
 
@@ -274,6 +282,8 @@ const barbaInit =()=> {
 const Navi = (function(exports){
     const btMenu = document.querySelector('.m_ham');
     const navWrap = document.querySelector('.m_nav-wrap');
+
+    let delayedCall;
     let pageY;
 
     const naviOpen =()=>{
@@ -281,7 +291,13 @@ const Navi = (function(exports){
         document.querySelector('.page-wrap').style.top = `-${pageY}px`;
         document.body.classList.add('fixed');
 
-        navWrap.classList.add('is-active')
+        navWrap.classList.add('is-active');
+        gsap.killTweensOf(naviInVisible);
+        navWrap.style.visibility = 'visible';
+
+        gsap.killTweensOf('.m_ham > svg.line > rect')
+        gsap.to( '.m_ham > svg.line:nth-child(1) > rect', .5, { rotation: 45, x:4, y:-4, fill: 'rgb(0,0,0)', ease: ease.standard });
+        gsap.to( '.m_ham > svg.line:nth-child(2) > rect' , .5, { rotation: -45, x:2.5, y:6, fill: 'rgb(0,0,0)', ease: ease.standard });
     }
 
     const naviClose =(isTop)=>{
@@ -290,11 +306,19 @@ const Navi = (function(exports){
     
         isTop ? window.scrollTo(0, 0) : window.scrollTo(0, pageY);
         
-        navWrap.classList.remove('is-active')
+        navWrap.classList.remove('is-active');
+        gsap.delayedCall( 0.8, naviInVisible );
+
+        gsap.killTweensOf('.m_ham > svg.line > rect')
+        gsap.to( '.m_ham > svg.line:nth-child(1) > rect', .4, { rotation: 0, x:0, y:0, fill: 'rgb(255,255,255)', ease: ease.material, delay:0.1 });
+        gsap.to( '.m_ham > svg.line:nth-child(2) > rect' , .4, { rotation: 0, x:0, y:0, fill: 'rgb(255,255,255)', ease: ease.material, delay:0.1 });
     }
+
+    const naviInVisible=()=> navWrap.style.visibility = 'hidden'
 
     const addEvent=()=>{
         btMenu.addEventListener('click', e=>{
+            
             !document.body.classList.contains('fixed') ? naviOpen(): naviClose()
         });
         
@@ -320,6 +344,7 @@ const Navi = (function(exports){
 
     const init =()=>{
         addEvent();
+        naviInVisible();
     }
 
     exports.naviActive = naviActive;
@@ -373,8 +398,8 @@ const Link = (function(exports){
                 e.preventDefault();
                 document.body.classList.remove("is-blue");
 
-                // const mn = e.currentTarget.parentNode;
-                // focusInPage = mn.dataset.num
+                const mn = e.currentTarget.parentNode;
+                focusInPage = mn.dataset.num
                 // console.log( `history index: ${ mn.dataset.num }` );
             });
         })
@@ -388,8 +413,8 @@ const Link = (function(exports){
                 e.preventDefault();
                 // console.log(e.currentTarget.tagName.toLowerCase())
                 // const url = document.querySelector('.nav_list > .nav_item:nth-child(3) a').href
-                
-                document.body.classList.remove("is-blue");
+
+                document.body.classList.remove('is-blue')
                 focusInPage = e.currentTarget.dataset.focus;
             });
         });
@@ -411,3 +436,4 @@ const goToFocus =(id, time)=>{
 
     gsap.to(window, { scrollTo: id, duration: time, ease: ease.material});
 }
+

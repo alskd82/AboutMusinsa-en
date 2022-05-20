@@ -7,7 +7,9 @@ class LoadFromOurNews {
         this.historyArr = []
         this.impactArr = []
 
-        this.fetchPage( "/fromournewsroom/from-our-newsroom/" );
+        this.src = opts.src;
+
+        this.fetchPage( this.src );
     }
 
     fetchPage(src){

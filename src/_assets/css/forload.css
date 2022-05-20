@@ -97,10 +97,10 @@ body.loaded .section-nav {
   height: calc(var(--vh, 1vh) * 100);
   -webkit-clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
           clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
-  -webkit-transition: -webkit-clip-path 400ms cubic-bezier(0.3, 0, 0.7, 0.4) 100ms;
-  transition: -webkit-clip-path 400ms cubic-bezier(0.3, 0, 0.7, 0.4) 100ms;
-  transition: clip-path 400ms cubic-bezier(0.3, 0, 0.7, 0.4) 100ms;
-  transition: clip-path 400ms cubic-bezier(0.3, 0, 0.7, 0.4) 100ms, -webkit-clip-path 400ms cubic-bezier(0.3, 0, 0.7, 0.4) 100ms;
+  -webkit-transition: -webkit-clip-path 450ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
+  transition: -webkit-clip-path 450ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
+  transition: clip-path 450ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
+  transition: clip-path 450ms cubic-bezier(0.4, 0, 0.2, 1) 100ms, -webkit-clip-path 450ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }

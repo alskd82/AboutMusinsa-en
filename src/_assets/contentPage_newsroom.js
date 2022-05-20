@@ -6,8 +6,8 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother);
 
 
 import BezierEasing from "./js/class/BezierEasing.js";
-import { scrollIntoView, ease } from "./js/utils.js";
-import { Navi, Footer , forScrollVariable_Reset, navShowHide, nav } from "./js/PC_Nav.js"
+import { scrollIntoView, ease } from "./js/common";
+import { Navi, Footer , forScrollVariable_Reset, navShowHide, nav } from "./js/nav"
 
 
 //===============================================================================================================================

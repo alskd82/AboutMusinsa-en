@@ -361,36 +361,19 @@ const HomeHistory_Mobile = (function(exports){
     const init=()=>{
         sectionHistory = document.querySelector('.m_section-history');
         if(!sectionHistory) return;
-        // swiper = new Swiper('.swiper', { 
-        //     spaceBetween: 0 ,
-        //     observer: true,
-        //     observeParents: true,
-        //     slidesPerView : 'auto',
-        // });
 
         sectionHistory.querySelectorAll(".m_history-slider_item").forEach( (ele,i)=> ele.dataset.num = i )
 
-        // const snapX = []
-        // document.querySelectorAll('.swiper-slide').forEach( (slide,i) =>{
-        //     let _x = (gsap.getProperty(slide, 'width')+8) * -i;
-        //     if(_x )
-        //     snapX.push( (gsap.getProperty(slide, 'width')+8) * -i )
-        // })
+        const limit = (gsap.getProperty('.m_history-slider_item', 'width') + 8) * document.querySelectorAll('.m_history-slider_item').length - window.innerWidth + 40
 
-        Draggable.create(".m_section-history .swiper-wrapper", {
+        Draggable.create(".m_history-slider_list", {
             type:"x",
-            edgeResistance: 0.65,
-            // bounds: {
-            //     minX: -gsap.getProperty('.swiper-slide', 'width') * (document.querySelectorAll('.swiper-slide').length) - 40,
-            //     maxX: 0
-            // },
-            // snap: snapX,
-            // inertia: true,
-            // onDragEnd: function() {
-                
-            //     let xx = InertiaPlugin.getVelocity( ".m_section-history .swiper-wrapper", 'x')
-            //     console.log("drag ended" , xx);
-            // }
+            edgeResistance: 0.7,
+            inertia: true,
+            bounds: {
+                minX: -limit,
+                maxX: 0
+            },
         });
 
     }

@@ -38,12 +38,20 @@ export default defineConfig({
 
         rollupOptions: {
             input: {
-                index: resolve(root, "index.html"),
-                history: resolve(root, "about" , "history.html"),
-                impact: resolve(root, "about" , "impact.html"),
-                service: resolve(root, "service.html"), 
-                newsroom: resolve(root, "newsroom.html"), 
-                contentPage: resolve(root, "contentPage", "contentPage.html")
+                // index: resolve(root, "index.html"),
+                // history: resolve(root, "about" , "history.html"),
+                // impact: resolve(root, "about" , "impact.html"),
+                // service: resolve(root, "service.html"), 
+                // newsroom: resolve(root, "newsroom.html"), 
+                
+                // fromournewsroom: resolve(root, "fromournewsroom/from-our-newsroom" ,"index.html"),
+                contentPage: resolve(root, "contentPage", "contentPage.html"),
+
+                // m_index: resolve(root, "m", "m.html"),
+                // m_history: resolve(root, "m", "m_history.html"),
+                // m_impact: resolve(root, "m", "m_impact.html"),
+                // m_service: resolve(root, "m","m_service.html"), 
+                // m_newsroom: resolve(root, "m","m_newsroom.html"), 
             },
 
             /* out 을 명시 안하면 assets 폴더 안에 다 담김 */

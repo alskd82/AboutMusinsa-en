@@ -18,10 +18,15 @@ const Newsroom = (function(exports){
     }
 
     const init =()=>{
-        newsroomCMS = document.querySelector('#CMS')
+        newsroomCMS = document.querySelector('#CMS');
         if(!newsroomCMS) return;
 
-        loadmore = new Loadmore({ nextBtn: '.bt_loadmore', cms: "#CMS", customScroll: { fn: createSmoother } })
+        if(!isMobile){
+            loadmore = new Loadmore({ nextBtn: '.bt_loadmore', cms: "#CMS", customScroll: { fn: createSmoother } })
+        } else {
+            loadmore = new Loadmore({ nextBtn: '.bt_loadmore', cms: "#CMS", customScroll: { fn: null } })
+        }
+
         addEvent();
     }
 

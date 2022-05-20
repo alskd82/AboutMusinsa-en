@@ -56,7 +56,8 @@ class LoadMore {
                 } else {
                     this.nextBtn.style.display = 'none';
                     // if(_this.customScroll != undefined) _this.customScroll.update() 
-                }
+                };
+
             }
         })()
     };

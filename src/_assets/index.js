@@ -189,7 +189,7 @@ const pageBeforeEnter =()=>{
     Link.homeHistory();
     Link.homeService();
 
-    FromOurNews = new LoadFromOurNews({id: nameSpace})
+    FromOurNews = new LoadFromOurNews({id: nameSpace, src: "/fromournewsroom/from-our-newsroom/"})
 }
 
 const pageEnter =()=>{

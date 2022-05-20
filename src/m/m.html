@@ -8,7 +8,7 @@
     <meta content="Musinsa" property="og:title" />
     <meta content="Musinsa" property="twitter:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.557916733.css" rel="stylesheet" type="text/css" />
+    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.420dc4f0c.css" rel="stylesheet" type="text/css" />
 
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
     <script type="text/javascript">
@@ -24,6 +24,7 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.3/lottie_svg.min.js"></script>
     <script defer src="https://image.msscdn.net/webflow/static/libs/odometer/odometer.min.js"></script>
 
+    <!-- 피씨 모바일 리디렉션 -->
     <script>
         if(window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) window.location = "microsoft-edge:" + window.location.href;
         
@@ -61,6 +62,7 @@
         let vh = window.innerHeight * 0.01;
         document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
     </script>
+    <!-- 피씨 모바일 리디렉션 -->
 
     <script defer type="module" src="../_assets/m_index.js"> </script>
 
@@ -74,7 +76,12 @@
 
     <nav class="m_section-nav">
         <div class="m_ham-wrap">
-            <div class="m_ham"></div>
+            <div class="m_ham">
+
+                <svg viewBox="0 0 66 60" class="line"> <rect x="20" y="25" width="26" height="2" style="fill: rgb(255,255,255)" /> </svg>
+                <svg viewBox="0 0 66 60" class="line"> <rect x="20" y="33" width="26" height="2" style="fill: rgb(255,255,255)" /> </svg>   
+                
+            </div>
         </div>
         <div class="m_nav-wrap">
             <div class="container-768_m-nav">
@@ -97,6 +104,7 @@
     </nav>
 
     <div data-barba="wrapper" data-smooth="wrapper" class="page-wrap">
+
         <section data-smooth="content">
             <main data-barba="container" data-barba-namespace="home" class="main-wrap">
 
@@ -105,8 +113,22 @@
                         <header class="m_billboard_header">
                             <h1 class="m_h1-billboard_title">MUSINSA is where you can discover your true self</h1>
                         </header>
-                        <div class="m_billboard_img-wrap w-embed"><video preload="auto" src="https://image.msscdn.net/webflow/static/newsroom/global/vid_mb.mp4" muted loop playsinline poster="https://image.msscdn.net/webflow/static/newsroom/global/poster_vid_mb.jpg" class="m_billboard_img"></video></div>
-                        <div class="m_arrow-bottom"><img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/627c8788fcfd56444ff1ce70_ic_arrow_bottom.svg" loading="lazy" alt="" /></div>
+
+                        <div class="m_billboard_img-wrap">
+                            <video src="https://image.msscdn.net/webflow/static/newsroom/global/vid_mb.mp4" muted loop playsinline 
+                                poster="https://image.msscdn.net/webflow/static/newsroom/global/poster_vid_mb.jpg"
+                                class="m_billboard_img">
+                            </video>
+                        </div>
+
+                        <!-- <div class="m_billboard_img-wrap canvas-video w-embed">
+                            <canvas> </canvas>
+                            <img class="video_poster" src="https://image.msscdn.net/webflow/static/newsroom/global/poster_vid_mb.jpg" alt="" >
+                            <video src="https://image.msscdn.net/webflow/static/newsroom/global/vid_mb.mp4" muted loop playsinline class="m_billboard_img"></video>
+                        </div> -->
+                        <div class="m_arrow-bottom">
+                            <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/627c8788fcfd56444ff1ce70_ic_arrow_bottom.svg" loading="lazy" alt="" />
+                        </div> 
                     </div>
                 </section>
 

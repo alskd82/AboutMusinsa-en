@@ -1,5 +1,7 @@
 @charset "UTF-8";
-* {
+html {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -104,7 +106,7 @@ a {
   stroke-width: 2;
   fill: none;
   /*getTotalLength() 로 둘레길이를 얻을 수 있음*/
-  stroke-dasharray: 188;
+  stroke-dasharray: 180;
   stroke-dashoffset: 0;
   -webkit-animation: circle-dashoffset 1.8s linear infinite;
           animation: circle-dashoffset 1.8s linear infinite;
@@ -112,19 +114,19 @@ a {
 
 @-webkit-keyframes circle-dashoffset {
   0% {
-    stroke-dashoffset: 185;
+    stroke-dashoffset: 180;
   }
   100% {
-    stroke-dashoffset: -185;
+    stroke-dashoffset: -180;
   }
 }
 
 @keyframes circle-dashoffset {
   0% {
-    stroke-dashoffset: 185;
+    stroke-dashoffset: 180;
   }
   100% {
-    stroke-dashoffset: -185;
+    stroke-dashoffset: -180;
   }
 }
 
@@ -280,6 +282,10 @@ a {
   color: #0078ff;
 }
 
+.m_ham svg {
+  position: absolute;
+}
+
 .m_billboard_img-wrap {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
@@ -290,6 +296,44 @@ a {
   height: calc(var(--vh, 1vh) * 100);
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.canvas-video > video {
+  position: relative;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  opacity: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+}
+
+.canvas-video > canvas {
+  display: block;
+  width: auto;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.canvas-video .video_poster {
+  display: block;
+  position: absolute;
+  width: auto;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.canvas-video.is-active .video_poster {
+  display: none;
 }
 
 .m_growth_lottie-area > svg {
