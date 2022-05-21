@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 
 const root = resolve(__dirname, 'src')
 const outDir = resolve(__dirname, 'dist')
-
+// const outDir = resolve(__dirname, 'dist_contentPage')
 
 function CustomHmr() {
     return {
@@ -39,19 +39,19 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 // index: resolve(root, "index.html"),
-                // history: resolve(root, "about" , "history.html"),
-                // impact: resolve(root, "about" , "impact.html"),
-                // service: resolve(root, "service.html"), 
-                // newsroom: resolve(root, "newsroom.html"), 
+                // history: resolve(root, "01_history.html"),
+                // impact: resolve(root, "02_impact.html"),
+                // service: resolve(root, "03_service.html"), 
+                // newsroom: resolve(root, "04_newsroom.html"), 
                 
                 // fromournewsroom: resolve(root, "fromournewsroom/from-our-newsroom" ,"index.html"),
                 contentPage: resolve(root, "contentPage", "contentPage.html"),
 
                 // m_index: resolve(root, "m", "m.html"),
-                // m_history: resolve(root, "m", "m_history.html"),
-                // m_impact: resolve(root, "m", "m_impact.html"),
-                // m_service: resolve(root, "m","m_service.html"), 
-                // m_newsroom: resolve(root, "m","m_newsroom.html"), 
+                // m_history: resolve(root, "m", "m_01_history.html"),
+                // m_impact: resolve(root, "m", "m_02_impact.html"),
+                // m_service: resolve(root, "m","m_03_service.html"), 
+                // m_newsroom: resolve(root, "m","m_04_newsroom.html"), 
             },
 
             /* out 을 명시 안하면 assets 폴더 안에 다 담김 */

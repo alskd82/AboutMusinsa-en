@@ -1,13 +1,14 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
 
-import BezierEasing from "./js/class/BezierEasing.js";
-import { scrollIntoView, ease } from "./js/common";
-import { Navi, Footer , forScrollVariable_Reset, navShowHide, nav } from "./js/nav"
+import { 
+    createSmoother,
+    getRelativePosition
+} from "./js/common";
+import { Navi, Footer, navShowHide, Mobile_Navi } from "./js/nav"
+import DraggableSlider from "./js/class/DraggableSlider"
 
 
 //===============================================================================================================================
@@ -16,55 +17,69 @@ import { Navi, Footer , forScrollVariable_Reset, navShowHide, nav } from "./js/n
 
 document.addEventListener('DOMContentLoaded', e =>{
     console.log("DOMContentLoaded");
-
-    // if( !document.querySelector("[data-barba]") ) return;
-
-    // barbaInit();
-
-    // ourstoryIndi = document.querySelector('.ourstory-indi');
-    // const ourstoryIndiLeft =()=> gsap.set( ".ourstory-indi_border", { width: (document.body.offsetWidth - 1440) / 2})
-    // ourstoryIndiLeft()
-    // window.addEventListener('resize' , e=> ourstoryIndiLeft())
-
-    // Link.navi()
-    Navi.init();
-    Navi.naviActive(3);
-    Footer.st();
     
-    createSmoother(true);
+    /* PC */
+    if(!isMobile){
+        createSmoother(true);
 
-    ScrollTrigger.config({ 
-        limitCallbacks: true,
-        ignoreMobileResize: true
-    })
-    // ScrollTrigger.addEventListener("refresh", e=> console.log("ScrollTrigger refresh") )
+        Navi.init();
+        Navi.naviActive(3);
+        Footer.st();
 
-    /* 스크롤 이벤트 */
-    navShowHide();
-    window.addEventListener('scroll', e => navShowHide() )
+        navShowHide();
+        window.addEventListener('scroll', e => navShowHide() );
+
+        ScrollTrigger.config({ 
+            limitCallbacks: true,
+            ignoreMobileResize: true
+        })
+        // ScrollTrigger.addEventListener("refresh", e=> console.log("ScrollTrigger refresh") )
+    }
+
+    /* Mobile */
+    else {
+        Mobile_Navi.init()
+        Mobile_Navi.naviActive(3);
+        AnotherArticle()
+    }
+
+
 });
 
-//===============================================================================================================================
-/*===== 스무스 스크롤  ======================*/
-//===============================================================================================================================
-let smoother;
-const createSmoother=(isTop)=>{
-    /* 삭제 후 다시 설치 방법 */
-    // if(smoother) smoother.kill();
-    // smoother = ScrollSmoother.create({
-    //     wrapper: `[data-smooth="wrapper"]`,
-    //     content: `[data-smooth="content"]`,
-    //     normalizeScroll: true, effects: true,
-    // });
 
-    /* 컨텐츠만 다시 바꿔치기 */
-    if(smoother) smoother.content(`[data-smooth="content"]`);
-    else {
-        smoother = ScrollSmoother.create({
-            wrapper: `[data-smooth="wrapper"]`,
-            content: `[data-smooth="content"]`,
-            normalizeScroll: true, effects: true,
-        });
-    };
-    isTop && setTimeout(() => smoother ? smoother.scrollTo(0) : window.scrollTo( 0, 0 ) , 0)
-};
+
+const AnotherArticle =()=>{
+    let CMS = document.querySelector('.cms_another-articles');
+    if(!CMS) return;
+    
+    const totalNum = document.querySelectorAll('.another-articles_item').length
+    const w = gsap.getProperty('.another-articles_item', 'width') + gsap.getProperty('.another-articles_item', 'margin-right');
+    
+    const snap = [];
+    document.querySelectorAll('.another-articles_item').forEach( (item, i)=> {
+        if( i === 0 ) snap.push( 0 )
+        else{
+            if( i === 1 ){
+                const itemX = getRelativePosition(item.parentNode, item).x;
+                const parentW = gsap.getProperty(item.parentNode, 'width');
+                const itemW = gsap.getProperty(item, 'width');
+
+                snap.push( -itemX + parentW/2 - itemW/2  );
+            } else {
+                snap.push(snap[i-1] - w);
+            }
+        }
+    
+    });
+
+    new DraggableSlider({
+        selector: ".another-articles_list",
+        totalNum: totalNum,
+        snap: snap,
+        min: -w * totalNum + window.innerWidth - 60,
+        max: 0,
+        slideItemSize: w
+    });      
+    
+    
+}

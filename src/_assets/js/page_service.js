@@ -3,7 +3,6 @@
 import { 
     ease, 
     scrollIntoView ,
-    // smoother
 } from "./common";
 
 import { gsap } from "gsap";

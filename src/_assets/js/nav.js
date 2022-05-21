@@ -205,8 +205,6 @@ const navShowHide=()=>{
 }
 
 
-
-
 // const scroll ={
 //     direction: undefined,
 //     isNavShowHideBlock: false,      // 네비 숨기는 기능 막기 
@@ -239,9 +237,89 @@ const Footer = (function(exports){
 })({})
 
 
+//===============================================================================================================================
+/*===== Mobile : 네비게이션  ======================*/
+//===============================================================================================================================
+const Mobile_Navi = (function(exports){
+    const btMenu = document.querySelector('.m_ham');
+    const navWrap = document.querySelector('.m_nav-wrap');
+
+    let delayedCall;
+    let pageY;
+
+    const naviOpen =()=>{
+        pageY = window.pageYOffset;
+        document.querySelector('.page-wrap').style.top = `-${pageY}px`;
+        document.body.classList.add('fixed');
+
+        navWrap.classList.add('is-active');
+        gsap.killTweensOf(naviInVisible);
+        navWrap.style.visibility = 'visible';
+
+        gsap.killTweensOf('.m_ham > svg.line > rect')
+        gsap.to( '.m_ham > svg.line:nth-child(1) > rect', .5, { rotation: 45, x:4, y:-4, fill: 'rgb(0,0,0)', ease: ease.standard });
+        gsap.to( '.m_ham > svg.line:nth-child(2) > rect' , .5, { rotation: -45, x:2.5, y:6, fill: 'rgb(0,0,0)', ease: ease.standard });
+    }
+
+    const naviClose =(isTop)=>{
+        document.body.classList.remove('fixed');
+        document.querySelector('.page-wrap').style.top = `-${0}px`;
+    
+        isTop ? window.scrollTo(0, 0) : window.scrollTo(0, pageY);
+        
+        navWrap.classList.remove('is-active');
+        gsap.delayedCall( 0.8, naviInVisible );
+
+        gsap.killTweensOf('.m_ham > svg.line > rect')
+        gsap.to( '.m_ham > svg.line:nth-child(1) > rect', .4, { rotation: 0, x:0, y:0, fill: 'rgb(255,255,255)', ease: ease.material, delay:0.1 });
+        gsap.to( '.m_ham > svg.line:nth-child(2) > rect' , .4, { rotation: 0, x:0, y:0, fill: 'rgb(255,255,255)', ease: ease.material, delay:0.1 });
+    }
+
+    const naviInVisible=()=> navWrap.style.visibility = 'hidden'
+
+    const addEvent=()=>{
+        btMenu.addEventListener('click', e=>{
+            
+            !document.body.classList.contains('fixed') ? naviOpen(): naviClose()
+        });
+        
+    }
+
+    const naviActive=(n, nameSpace)=>{ 
+        document.querySelectorAll('.m_nav-link').forEach((item,i)=>{
+            if( i === n )   item.classList.add('is-active')
+            else            item.classList.remove('is-active')
+        })
+        if( n === 1 && nameSpace === "history"){
+            document.querySelectorAll('.m_nav-link_smn')[0].classList.add('is-active');
+            document.querySelectorAll('.m_nav-link_smn')[1].classList.remove('is-active');
+        } else if( n === 1 && nameSpace === "impact") {
+            document.querySelectorAll('.m_nav-link_smn')[0].classList.remove('is-active');
+            document.querySelectorAll('.m_nav-link_smn')[1].classList.add('is-active');
+        } else{ 
+            document.querySelectorAll('.m_nav-link_smn')[0].classList.remove('is-active');
+            document.querySelectorAll('.m_nav-link_smn')[1].classList.remove('is-active');
+        }; 
+        
+    }
+
+    const init =()=>{
+        addEvent();
+        naviInVisible();
+    }
+
+    exports.naviActive = naviActive;
+    exports.naviOpen = naviOpen;
+    exports.naviClose = naviClose;
+    exports.init = init;
+    return exports;
+})({});
+
 
 
 export { 
     Navi, Footer ,
     nav, forScrollVariable_Reset, navShowHide,
+
+    Mobile_Navi,
 };

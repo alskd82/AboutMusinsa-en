@@ -1,8 +1,7 @@
-import Loadmore  from "./class/Loadmore.js";
-
-
-import {gsap} from "gsap";
+// import {gsap} from "gsap";
 import { ease, smoother, createSmoother } from "./common.js";
+
+import Loadmore  from "./class/Loadmore.js";
 
 //===============================================================================================================================
 /*=====  Newsroom ======================*/

@@ -4,11 +4,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Mobile -hist</title>
+    <title>MB - History</title>
     <meta content="Mobile -hist" property="og:title" />
     <meta content="Mobile -hist" property="twitter:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.420dc4f0c.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="../_assets/css/webflow.css">
+
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
     <script type="text/javascript">
         ! function (o, c) {
@@ -20,59 +22,31 @@
     </script>
     <link href="https://uploads-ssl.webflow.com/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="https://uploads-ssl.webflow.com/img/webclip.png" rel="apple-touch-icon" />
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.3/lottie_svg.min.js"></script>
-    <script defer src="https://image.msscdn.net/webflow/static/libs/odometer/odometer.min.js"></script>
+    
 
+    <script src="../_assets/redirectRouting.js"></script>
     <!-- 피씨 모바일 리디렉션 -->
     <script>
-        if(window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) window.location = "microsoft-edge:" + window.location.href;
-        
-        var isMobile = false;
-        var mobileInfo = new Array('Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows CE', 'SAMSUNG', 'LG', 'MOT', 'SonyEricsson','windows phone os 7');
-        for (var info in mobileInfo){
-            if (navigator.userAgent.match(mobileInfo[info]) != null){
-                isMobile = true;
-                break;
-            }
-        }
-        if(!isMobile){ // PC 화면으로 리디렉션 //
-            if(window.location.href.indexOf('/m') != -1){
-                if(window.location.href.indexOf('/history') != -1)          window.location = "/about/history.html";
-                else if(window.location.href.indexOf('/impact') != -1)      window.location = "/about/impact.html";
-                else if(window.location.href.indexOf('/service') != -1)     window.location = "/service.html";
-                else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/newsroom.html";
-                else{
-                    window.location = "/";
-                }
-            }
-        }
-        /*
-        if(isMobile){ // 모바일로 리디렉션 //
-            if(window.location.href.indexOf('/history') != -1)          window.location = "/m/m_history.html";
-            else if(window.location.href.indexOf('/impact') != -1)      window.location = "/m/m_impact.html";
-            else if(window.location.href.indexOf('/service') != -1)     window.location = "/m/m_service.html";
-            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/m/m_newsroom.html";
-            else{
-                window.location = "/m/m.html";
-            }
-        }
-        */
-
-        let vh = window.innerHeight * 0.01;
-        document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
+        redirection({
+            nowDesktop: false, 
+            dev: true
+        })
     </script>
-    <!-- 피씨 모바일 리디렉션 -->
+    <!-- //////////////////// -->
 
-    <script defer type="module" src="../_assets/m_index.js"> </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.3/lottie_svg.min.js"></script>
+    <script defer src="https://image.msscdn.net/webflow/static/libs/odometer/odometer.min.js"></script>
 
     <link rel="stylesheet" href="../_assets/css/forload.css">
     <link rel="stylesheet" href="../_assets/css/style.css">
 
+    <script defer type="module" src="../_assets/m_index.js"> </script>
 
 </head>
 
 <body class="body-black before-load">
     <div class="before-load loading"> <svg class="loading-circle"> <circle cx='50%' cy='50%' r=30></circle> </svg> </div>
+
     <nav class="m_section-nav">
         <div class="m_ham-wrap">
             <div class="m_ham">
@@ -88,14 +62,14 @@
 
                     <a href="/m/m.html" aria-current="page" class="m_nav-link w--current">Home</a>
                     <div class="m_nav-about">
-                        <a href="/m/m_history.html" class="m_nav-link">About</a>
+                        <a href="/m/m_01_history.html" class="m_nav-link">About</a>
                         <div class="m_nav-link_smn-wrap">
-                            <a href="/m/m_history.html" class="m_nav-link_smn">History</a>
-                            <a href="/m/m_impact.html" class="m_nav-link_smn">Impact</a>
+                            <a href="/m/m_01_history.html" class="m_nav-link_smn">History</a>
+                            <a href="/m/m_02_impact.html" class="m_nav-link_smn">Impact</a>
                         </div>
                     </div>
-                    <a href="/m/m_service.html" class="m_nav-link">Service</a>
-                    <a href="/m/m_newsroom.html" class="m_nav-link">Newsroom</a>
+                    <a href="/m/m_03_service.html" class="m_nav-link">Service</a>
+                    <a href="/m/m_04_newsroom.html" class="m_nav-link">Newsroom</a>
 
                 </div>
             </div>
@@ -266,37 +240,43 @@
                 <section class="m_section-news">
                     <div class="container-768">
                     <header>
-                        <h2 data-stagger-y="true" class="h2-mu24 is-center">From Our Newsroom</h2>
+                        <h2 data-stagger-alpha="true" class="h2-mu24 is-center">From Our Newsroom</h2>
                     </header>
                     <div data-stagger-y="true" class="m_news-slider">
                         <div class="m_news-slider_list">
-                        <article class="m_news-slider_item"><a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
-                            <div class="m_news-slider_img-wrap">
-                                <div class="news_item-img is-back"></div>
-                            </div>
-                            <header class="m_news-slider_item-header">
-                                <h3 class="h3-mu20">Heading</h3>
-                                <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
-                            </header>
-                            </a></article>
-                        <article class="m_news-slider_item"><a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
-                            <div class="m_news-slider_img-wrap">
-                                <div class="news_item-img is-back"></div>
-                            </div>
-                            <header class="m_news-slider_item-header">
-                                <h3 class="h3-mu20">Heading</h3>
-                                <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
-                            </header>
-                            </a></article>
-                        <article class="m_news-slider_item"><a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
-                            <div class="m_news-slider_img-wrap">
-                                <div class="news_item-img is-back"></div>
-                            </div>
-                            <header class="m_news-slider_item-header">
-                                <h3 class="h3-mu20">Heading</h3>
-                                <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
-                            </header>
-                            </a></article>
+                            <article class="m_news-slider_item">
+                                <a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
+                                    <div class="m_news-slider_img-wrap">
+                                        <div class="news_item-img is-back"></div>
+                                    </div>
+                                    <header class="m_news-slider_item-header">
+                                        <h3 class="h3-mu20">Heading</h3>
+                                        <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
+                                    </header>
+                                </a>
+                            </article>
+                            <article class="m_news-slider_item">
+                                <a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
+                                    <div class="m_news-slider_img-wrap">
+                                        <div class="news_item-img is-back"></div>
+                                    </div>
+                                    <header class="m_news-slider_item-header">
+                                        <h3 class="h3-mu20">Heading</h3>
+                                        <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
+                                    </header>
+                                </a>
+                            </article>
+                            <article class="m_news-slider_item">
+                                <a href="#" target="_blank" class="m_news-slider_link stop-barba w-inline-block">
+                                    <div class="m_news-slider_img-wrap">
+                                        <div class="news_item-img is-back"></div>
+                                    </div>
+                                    <header class="m_news-slider_item-header">
+                                        <h3 class="h3-mu20">Heading</h3>
+                                        <div class="mu14-150 is-b3b3b3 is-pt12">This is some text inside of a div block.</div>
+                                    </header>
+                                </a>
+                            </article>
                         </div>
                     </div>
                     </div>
@@ -331,20 +311,20 @@
 
                             <div class="m_footer-list">
                                 <div id="w-node-_8719c3e0-9766-edec-af6f-7d48e72d314f-e72d3149" class="div-block-2">
-                                    <a href="#" class="m_footer-item w-inline-block">
+                                    <a href="#" class="m_footer-item stop-barba w-inline-block">
                                         <div class="m_footer-item_link">MUSINSA.COM</div>
                                     </a>
                                     
-                                    <a href="#" class="m_footer-item w-inline-block">
+                                    <a href="#" class="m_footer-item stop-barba w-inline-block">
                                         <div class="m_footer-item_link is-last">HELP CENTER</div>
                                     </a>
                                 </div>
 
                                 <div id="w-node-_8719c3e0-9766-edec-af6f-7d48e72d3156-e72d3149" class="div-block-2">
-                                    <a href="#" class="m_footer-item w-inline-block">
+                                    <a href="#" class="m_footer-item stop-barba w-inline-block">
                                         <div class="m_footer-item_link">TERMS OF SERVICE</div>
                                     </a>
-                                    <a href="#" class="m_footer-item w-inline-block">
+                                    <a href="#" class="m_footer-item stop-barba w-inline-block">
                                         <div class="m_footer-item_link is-last">PRIVACY</div>
                                     </a>
                                 </div>
@@ -353,16 +333,16 @@
                             <div class="mu-14">© MUSINSA Inc. 2022. We love our users!</div>
 
                             <div class="m_footer_sns">
-                                <a href="#" class="m_footer_sns-link w-inline-block">
+                                <a href="#" class="m_footer_sns-link stop-barba w-inline-block">
                                     <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a502b2e5908c34c5e_facebook.svg" loading="lazy" alt="" />
                                 </a>
-                                <a href="#" class="m_footer_sns-link w-inline-block">
+                                <a href="#" class="m_footer_sns-link stop-barba w-inline-block">
                                     <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a55baed06a0042765_instgram.svg" loading="lazy" alt="" />
                                 </a>
-                                <a href="#" class="m_footer_sns-link w-inline-block">
+                                <a href="#" class="m_footer_sns-link stop-barba w-inline-block">
                                     <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a8ab88f70f2acf115_youtube.svg" loading="lazy" alt="" />
                                 </a>
-                                <a href="#" class="m_footer_sns-link w-inline-block">
+                                <a href="#" class="m_footer_sns-link stop-barba w-inline-block">
                                     <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47aa2c9d77543d543e5_twitter.svg" loading="lazy" alt="" />
                                 </a>
                             </div>

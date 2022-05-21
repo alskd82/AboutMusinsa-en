@@ -1,21 +1,16 @@
-import path_graph from "../global_graph_pc.json";
-import path_graph_m from "../global_graph_mo.json";
+import path_graph from "../lottie_path/global_graph_pc.json";
+import path_graph_m from "../lottie_path/global_graph_mo.json";
 
 import BezierEasing from "./class/BezierEasing.js";
 import { TextSplitWordsShow, TextSlitLinesMasking } from './class/TextMotion.js';
 import { getRelativePosition, ease, scrollIntoView } from "./common";
+import DraggableSlider from "./class/DraggableSlider"
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { Draggable } from "gsap/Draggable";
-import { InertiaPlugin } from "gsap/InertiaPlugin";
+gsap.registerPlugin(ScrollTrigger, SplitText, );
 
-gsap.registerPlugin(ScrollTrigger, SplitText, Draggable, InertiaPlugin );
-
-import Swiper from "swiper"
-
-// import {smoother} from "../index.js"
 
 //===============================================================================================================================
 /*=====  Home : Growth ======================*/
@@ -352,30 +347,45 @@ const HomeService = (function(exports){
 
 
 //===============================================================================================================================
-/*=====  Home : History - Mobile ======================*/
+/*=====  Home : History - Mobile => Draggable ======================*/
 //===============================================================================================================================
 const HomeHistory_Mobile = (function(exports){
     let sectionHistory;
-    let swiper;
 
     const init=()=>{
         sectionHistory = document.querySelector('.m_section-history');
         if(!sectionHistory) return;
 
         sectionHistory.querySelectorAll(".m_history-slider_item").forEach( (ele,i)=> ele.dataset.num = i )
+        
+        const totalNum = document.querySelectorAll('.m_history-slider_item').length
+        const w = gsap.getProperty('.m_news-slider_item', 'width') + gsap.getProperty('.m_news-slider_item', 'margin-right');
+        
+        const snap = [];
+        document.querySelectorAll('.m_history-slider_item').forEach( (item, i)=> {
+            if( i === 0 ) snap.push( 0 )
+            else{
+                if( i === 1 ){
+                    const itemX = getRelativePosition(item.parentNode, item).x;
+                    const parentW = gsap.getProperty(item.parentNode, 'width');
+                    const itemW = gsap.getProperty(item, 'width');
 
-        const limit = (gsap.getProperty('.m_history-slider_item', 'width') + 8) * document.querySelectorAll('.m_history-slider_item').length - window.innerWidth + 40
-
-        Draggable.create(".m_history-slider_list", {
-            type:"x",
-            edgeResistance: 0.7,
-            inertia: true,
-            bounds: {
-                minX: -limit,
-                maxX: 0
-            },
+                    snap.push( -itemX + parentW/2 - itemW/2  );
+                } else {
+                    snap.push(snap[i-1] - w);
+                }
+            }
+        
         });
 
+        new DraggableSlider({
+            selector: ".m_history-slider_list",
+            totalNum: document.querySelectorAll('.m_history-slider_item').length,
+            snap: snap,
+            min: -w * totalNum + window.innerWidth - 40,
+            max: 0,
+            slideItemSize: w
+        });        
     }
 
     exports.init = init;

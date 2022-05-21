@@ -10,22 +10,23 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother, SplitText);
 
 import BezierEasing from "./js/class/BezierEasing.js";
 
-import LoadFromOurNews from "./js/class/LoadFromOurNews.js"
+import { 
+    scrollIntoView, ease, 
+    BillboardText, StaggerMotion, ShopNow, LoadFromOurNews,
+    smoother, createSmoother 
+} from "./js/common.js";
+
+
 import { Navi, Footer , forScrollVariable_Reset, navShowHide, nav } from "./js/nav.js"
-
-import { scrollIntoView, ease, BillboardText, StaggerMotion, ShopNow, smoother, createSmoother } from "./js/common.js";
-
 import { HomeInit, HomeST } from "./js/page_home.js"
 import { OurStroy, AboutInit, AboutST } from "./js/page_about.js"
 import { Service } from "./js/page_service.js"
 import Newsroom from "./js/page_newsroom"
 
+
 let nameSpace;              //namesapce = "home"| "history" | "imapact" | "service"
 let ourstoryIndi;           // ourstory 하단 인디게이터
-let FromOurNews             // 각 화면에 보여줄 뉴스룸 콘텐츠
-
-
-
+let FromOurNews             // HOME & History & Impact 화면에 보여줄 뉴스룸 콘텐츠
 
 
 //===============================================================================================================================
@@ -197,20 +198,19 @@ const pageEnter =()=>{
 
     // gsap.delayedCall( .5, BillboardText.play) // ------------------------------------------- 텍스트 모션 시작
 
-    setTimeout(() =>{
+    nameSpace === "history" ? ourstoryIndi.classList.remove('is-hide') : ourstoryIndi.classList.add('is-hide');
+
+    gsap.delayedCall(0.5, ()=>{
         StaggerMotion.st();
         ShopNow.st();
         Footer.st();
 
         HomeST();
         AboutST();
-        Service.st()
-    
+        Service.st();
         ScrollTrigger.refresh(true)
-    }, 500);
-
-    nameSpace === "history" ? ourstoryIndi.classList.remove('is-hide') : ourstoryIndi.classList.add('is-hide');
-
+    })
+    
     load();
 }
 
@@ -244,10 +244,8 @@ const barbaInit =()=> {
         transitions: [
             {
                 name: "default-transition",
-                once({next}){
-                    nameSpace = next.namespace;
-                    console.log(`barbr once: ${nameSpace} enter`);
-                },
+
+                once: ({next}) => nameSpace = next.namespace,
                 
                 beforeLeave:({current}) => pageBeforeLeave(),
 

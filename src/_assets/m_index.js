@@ -5,30 +5,25 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-// import { Draggable } from "gsap/Draggable";
-// import { InertiaPlugin } from "gsap/InertiaPlugin";
 
 gsap.registerPlugin(
     ScrollTrigger, ScrollToPlugin, SplitText, 
-    // Draggable, InertiaPlugin,
 );
 
 import BezierEasing from "./js/class/BezierEasing.js";
 import { 
-    scrollIntoView, ease,
-    smoother, createSmoother, 
-    BillboardText, StaggerMotion, ShopNow, 
-    FromOurNews_Mobile 
+    scrollIntoView, ease, 
+    BillboardText, StaggerMotion, ShopNow, LoadFromOurNews,
+    FromOurNews_Mobile,
 } from "./js/common";
 
-import LoadFromOurNews from "./js/class/LoadFromOurNews.js"
+import {Mobile_Navi} from "./js/nav"
 import { HomeInit, HomeST } from "./js/page_home"
-
 import Newsroom from "./js/page_newsroom"
 
 
-let nameSpace;              //namesapce = "home"| "history" | "imapact" | "service"
-let FromOurNews             // 각 화면에 보여줄 뉴스룸 콘텐츠
+let nameSpace;              // namesapce = "home"| "history" | "imapact" | "service"
+let FromOurNews             // HOME & History & Impact 화면에 보여줄 뉴스룸 콘텐츠
 
 //===============================================================================================================================
 /*===== 페이지 첫 실행  ======================*/
@@ -41,7 +36,7 @@ document.addEventListener('DOMContentLoaded' , e=>{
     barbaInit();
 
     Link.navi();
-    Navi.init();
+    Mobile_Navi.init();
 
     pageBeforeLeave();
     pageBeforeEnter();
@@ -66,7 +61,7 @@ const load =()=>{
     
     /* 빌보드 영역만 먼저 로드하고 끝나면 화면 보이게 => 이후 전체이미지 로드 */
     if(nameSpace === "home"){
-        /*
+        
         const canvas = document.querySelector('.m_section-billboard canvas');
         const video = document.querySelector('.m_section-billboard video');
         const ctx = canvas.getContext("2d");
@@ -80,22 +75,33 @@ const load =()=>{
         }
         
         const play =()=>{
-            loadingComplete()
-            window.requestAnimationFrame(drawCanvas);
-            video.play();
-            document.querySelector('.canvas-video').classList.add('is-active');
+            loadingComplete();
+            (function(){
+                var promise = video.play();
+                    if (promise !== undefined) {
+                    promise.then(_ => {
+                        // 자동재생 환경 //
+                        drawCanvas();
+                        video.play();
+                        document.querySelector('.canvas-video').classList.add('is-active');
+                    }).catch(error => {
+                        // 자동재생 중지 환경 //
+                    });
+                }
+            })()
+            
         }
 
         imageLoad('.m_section-billboard' , { complete: gsap.delayedCall(.2, play) })
         imageLoad('.body-black');
-        */
-        const vid = document.querySelector('video')
-        const poster = new Image();
-        poster.src = vid.getAttribute('poster');
-        poster.onload =()=>{
-            gsap.delayedCall(.2, loadingComplete )
-            gsap.delayedCall( .8, ()=> vid.play() )
-        }
+        
+        // const vid = document.querySelector('video')
+        // const poster = new Image();
+        // poster.src = vid.getAttribute('poster');
+        // poster.onload =()=>{
+        //     gsap.delayedCall(.2, loadingComplete )
+        //     gsap.delayedCall( .8, ()=> vid.play() )
+        // }
 
     } else if(nameSpace != "newsroom"){
         imageLoad('.m_section-billboard' , { complete: gsap.delayedCall(.2,loadingComplete) })
@@ -153,10 +159,8 @@ const imageLoad =( selector, opt={ onComplete: undefined }) =>{
 /*===== 페이지 이동 시 발생  ======================*/
 //===============================================================================================================================
 const pageBeforeLeave =()=>{
-
     if(nameSpace) console.log(`beforeLeave: ${nameSpace}`);
 
-    // Navi.naviClose();
 
     ScrollTrigger.getAll().forEach((st,i)=> st.kill() );
     document.body.classList.remove("is-blue");
@@ -167,13 +171,14 @@ const pageBeforeEnter =()=>{
     nameSpace = document.querySelector(`[data-barba="container"]`).dataset.barbaNamespace;
     // console.log(`beforeEnter: ${nameSpace}`);
 
-    if(nameSpace === "home")             Navi.naviActive(0)
-    else if(nameSpace === "history")     Navi.naviActive(1)
-    else if(nameSpace === "impact")      Navi.naviActive(1)
-    else if(nameSpace === "service")     Navi.naviActive(2)
-    else if(nameSpace === "newsroom")    Navi.naviActive(3)
+    if(nameSpace === "home")             Mobile_Navi.naviActive(0, nameSpace)
+    else if(nameSpace === "history")     Mobile_Navi.naviActive(1, nameSpace)
+    else if(nameSpace === "impact")      Mobile_Navi.naviActive(1, nameSpace)
+    else if(nameSpace === "service")     Mobile_Navi.naviActive(2, nameSpace)
+    else if(nameSpace === "newsroom")    Mobile_Navi.naviActive(3, nameSpace)
     
-    // // createSmoother(true)
+    // setTimeout(() => smoother ? smoother.scrollTo(0) : window.scrollTo( 0, 0 ) , 0);
+    setTimeout(() => window.scrollTo( 0, 0 ) , 400);
 
     BillboardText.init(nameSpace);
     StaggerMotion.init();
@@ -191,13 +196,14 @@ const pageBeforeEnter =()=>{
 const pageEnter =()=>{
     console.log(`enter: ${nameSpace}`)    
 
-    StaggerMotion.st();
-    ShopNow.st();
+    gsap.delayedCall( 0.5, ()=>{
+        StaggerMotion.st();
+        ShopNow.st();
 
-    HomeST();
-
-    ScrollTrigger.refresh(true)
-
+        HomeST();
+        ScrollTrigger.refresh(true)
+    })
+    
     load()
 
     const arrow = document.querySelector(".m_arrow-bottom");
@@ -235,16 +241,10 @@ const barbaInit =()=> {
         transitions: [
             {
                 name: "default-transition",
-                once({next}){
-                    nameSpace = next.namespace;
-                    console.log(`barbr once: ${nameSpace} enter`);
-                },
+
+                once: ({next}) => nameSpace = next.namespace,
                 
-                beforeLeave({current}){
-                    pageBeforeLeave()
-                    // document.body.classList.remove("is-blue");
-                    // setTimeout(() => smoother ? smoother.scrollTo(0) : window.scrollTo( 0, 0 ) , 0)
-                },
+                beforeLeave: ({current}) => pageBeforeLeave(),
 
                 /* Leave Animation */
                 leave(data) {
@@ -255,7 +255,6 @@ const barbaInit =()=> {
                 },
                 beforeEnter({current, next}){
                     if(current.container) current.container.remove();
-                    setTimeout(() => smoother ? smoother.scrollTo(0) : window.scrollTo( 0, 0 ) , 0)
                     pageBeforeEnter();
                 },
 
@@ -276,85 +275,6 @@ const barbaInit =()=> {
 }
 
 
-//===============================================================================================================================
-/*===== 네비게이션  ======================*/
-//===============================================================================================================================
-const Navi = (function(exports){
-    const btMenu = document.querySelector('.m_ham');
-    const navWrap = document.querySelector('.m_nav-wrap');
-
-    let delayedCall;
-    let pageY;
-
-    const naviOpen =()=>{
-        pageY = window.pageYOffset;
-        document.querySelector('.page-wrap').style.top = `-${pageY}px`;
-        document.body.classList.add('fixed');
-
-        navWrap.classList.add('is-active');
-        gsap.killTweensOf(naviInVisible);
-        navWrap.style.visibility = 'visible';
-
-        gsap.killTweensOf('.m_ham > svg.line > rect')
-        gsap.to( '.m_ham > svg.line:nth-child(1) > rect', .5, { rotation: 45, x:4, y:-4, fill: 'rgb(0,0,0)', ease: ease.standard });
-        gsap.to( '.m_ham > svg.line:nth-child(2) > rect' , .5, { rotation: -45, x:2.5, y:6, fill: 'rgb(0,0,0)', ease: ease.standard });
-    }
-
-    const naviClose =(isTop)=>{
-        document.body.classList.remove('fixed');
-        document.querySelector('.page-wrap').style.top = `-${0}px`;
-    
-        isTop ? window.scrollTo(0, 0) : window.scrollTo(0, pageY);
-        
-        navWrap.classList.remove('is-active');
-        gsap.delayedCall( 0.8, naviInVisible );
-
-        gsap.killTweensOf('.m_ham > svg.line > rect')
-        gsap.to( '.m_ham > svg.line:nth-child(1) > rect', .4, { rotation: 0, x:0, y:0, fill: 'rgb(255,255,255)', ease: ease.material, delay:0.1 });
-        gsap.to( '.m_ham > svg.line:nth-child(2) > rect' , .4, { rotation: 0, x:0, y:0, fill: 'rgb(255,255,255)', ease: ease.material, delay:0.1 });
-    }
-
-    const naviInVisible=()=> navWrap.style.visibility = 'hidden'
-
-    const addEvent=()=>{
-        btMenu.addEventListener('click', e=>{
-            
-            !document.body.classList.contains('fixed') ? naviOpen(): naviClose()
-        });
-        
-    }
-
-    const naviActive=(n)=>{ 
-        document.querySelectorAll('.m_nav-link').forEach((item,i)=>{
-            if( i === n )   item.classList.add('is-active')
-            else            item.classList.remove('is-active')
-        })
-        if( n === 1 && nameSpace === "history"){
-            document.querySelectorAll('.m_nav-link_smn')[0].classList.add('is-active');
-            document.querySelectorAll('.m_nav-link_smn')[1].classList.remove('is-active');
-        } else if( n === 1 && nameSpace === "impact") {
-            document.querySelectorAll('.m_nav-link_smn')[0].classList.remove('is-active');
-            document.querySelectorAll('.m_nav-link_smn')[1].classList.add('is-active');
-        } else{ 
-            document.querySelectorAll('.m_nav-link_smn')[0].classList.remove('is-active');
-            document.querySelectorAll('.m_nav-link_smn')[1].classList.remove('is-active');
-        }; 
-        
-    }
-
-    const init =()=>{
-        addEvent();
-        naviInVisible();
-    }
-
-    exports.naviActive = naviActive;
-    exports.naviOpen = naviOpen;
-    exports.naviClose = naviClose;
-    exports.init = init;
-    return exports;
-})({});
-
-
 
 //===============================================================================================================================
 /*===== 링크 이동  ======================*/
@@ -372,7 +292,7 @@ const Link = (function(exports){
             mn.addEventListener('click', e => {  // ----------------------------------------------------------- mn 페이지 이동
                 // // if( e.currentTarget.dataset.num === "3" ) return
                 focusInPage = null;
-                Navi.naviClose();
+                Mobile_Navi.naviClose();
                 e.preventDefault(); 
             });
         });
@@ -380,7 +300,7 @@ const Link = (function(exports){
         smnArr.forEach( (smn,i) =>{
             smn.addEventListener('click', e => {    // -------------------------------------------------------- smn 페이지 이동
                 e.preventDefault();
-                Navi.naviClose();
+                Mobile_Navi.naviClose();
                 // focusInPage = e.currentTarget.dataset.focus;
                 // if(document.querySelector(focusInPage) ){ // --------------------------------------------------- 포커싱 이동
                 //     goToFocus(focusInPage, 1); 
@@ -433,7 +353,6 @@ const Link = (function(exports){
 //===============================================================================================================================
 const goToFocus =(id, time)=>{
     console.log( `focusInPage: ${id}`);
-
     gsap.to(window, { scrollTo: id, duration: time, ease: ease.material});
 }
 

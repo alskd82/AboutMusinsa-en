@@ -4,11 +4,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Newsroom</title>
+    <title>PC_Newsroom</title>
     <meta content="Newsroom" property="og:title" />
     <meta content="Newsroom" property="twitter:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/css/global-ae8640.webflow.420dc4f0c.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="./_assets/css/webflow.css">
     
     <script type="text/javascript">
         ! function (o, c) {
@@ -19,43 +20,13 @@
         }(window, document);
     </script>
 
+    <script src="./_assets/redirectRouting.js"></script>
     <!-- 피씨 모바일 리디렉션 -->
     <script>
-        if(window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) window.location = "microsoft-edge:" + window.location.href;
-        
-        var isMobile = false;
-        var mobileInfo = new Array('Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows CE', 'SAMSUNG', 'LG', 'MOT', 'SonyEricsson','windows phone os 7');
-        for (var info in mobileInfo){
-            if (navigator.userAgent.match(mobileInfo[info]) != null){
-                isMobile = true;
-                break;
-            }
-        }
-        /*
-        if(!isMobile){ // PC 화면으로 리디렉션 //
-            if(window.location.href.indexOf('/m') != -1){
-                if(window.location.href.indexOf('/history') != -1)          window.location = "/about/history.html";
-                else if(window.location.href.indexOf('/impact') != -1)      window.location = "/about/impact.html";
-                else if(window.location.href.indexOf('/service') != -1)     window.location = "/service.html";
-                else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/newsroom.html";
-                else{
-                    window.location = "/";
-                }
-            }
-        }
-        */
-        if(isMobile){ // 모바일로 리디렉션 //
-            if(window.location.href.indexOf('/history') != -1)          window.location = "/m/m_history.html";
-            else if(window.location.href.indexOf('/impact') != -1)      window.location = "/m/m_impact.html";
-            else if(window.location.href.indexOf('/service') != -1)     window.location = "/m/m_service.html";
-            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = "/m/m_newsroom.html";
-            else{
-                window.location = "/m/m.html";
-            }
-        }
-
-        let vh = window.innerHeight * 0.01;
-        document.querySelector(":root").style.setProperty("--vh", `${vh}px`);
+        redirection({
+            nowDesktop: true, 
+            dev: true
+        })
     </script>
     <!-- //////////////////// -->
 
@@ -67,6 +38,8 @@
 
     <link rel="stylesheet" href="./_assets/css/forload.css">
     <link rel="stylesheet" href="./_assets/css/style.css">
+
+    <script type="module" src="./_assets/index.js"></script>
 
 </head>
 
@@ -82,23 +55,26 @@
                 </a>
                 <div class="nav_list-wrap">
                     <div class="nav_smn is-hide">
-                        <a data-target="1" href="/about/history.html" class="nav_smn-link">History</a>
-                        <a data-target="1" href="/about/impact.html" class="nav_smn-link">Impact</a>
-                        <a data-target="2" data-focus="#Musinsa" href="/service.html" class="nav_smn-link">MUSINSA</a>
-                        <a data-target="2" data-focus="#TwentyNine" href="/service.html" class="nav_smn-link">29CM</a>
-                        <a data-target="2" data-focus="#StyleShare" href="/service.html"
-                            class="nav_smn-link">StyleShare</a>
-                        <a data-target="2" data-focus="#Soldout" href="/service.html" class="nav_smn-link">soldout</a>
-                        <a data-target="3" href="/newsroom.html" class="nav_smn-link">Press Relase</a></div>
+                        <a data-target="1" href="/01_history.html" class="nav_smn-link">History</a>
+                        <a data-target="1" href="/02_impact.html" class="nav_smn-link">Impact</a>
+                        <a data-target="2" data-focus="#Musinsa" href="/03_service.html" class="nav_smn-link">MUSINSA</a>
+                        <a data-target="2" data-focus="#TwentyNine" href="/03_service.html" class="nav_smn-link">29CM</a>
+                        <a data-target="2" data-focus="#StyleShare" href="/03_service.html" class="nav_smn-link">StyleShare</a>
+                        <a data-target="2" data-focus="#Soldout" href="/03_service.html" class="nav_smn-link">soldout</a>
+                        <a data-target="3" href="/04_newsroom.html" class="nav_smn-link">Press Relase</a></div>
                     <ul role="list" class="nav_list">
-                        <li class="nav_item"> <a data-num="0" href="/" aria-current="page"
-                                class="nav_link w--current">HOME</a> </li>
-                        <li class="nav_item"> <a data-smn="true" data-num="1" href="/about/history.html"
-                                class="nav_link">ABOUT</a> </li>
-                        <li class="nav_item"> <a data-smn="true" data-num="2" href="/service.html"
-                                class="nav_link">SERVICE</a> </li>
-                        <li class="nav_item"> <a data-smn="true" data-num="3" href="/newsroom.html"
-                                class="nav_link">NEWSROOM</a> </li>
+                        <li class="nav_item"> 
+                            <a data-num="0" href="/" aria-current="page" class="nav_link w--current">HOME</a> 
+                        </li>
+                        <li class="nav_item"> 
+                            <a data-smn="true" data-num="1" href="/01_history.html" class="nav_link">ABOUT</a> 
+                        </li>
+                        <li class="nav_item"> 
+                            <a data-smn="true" data-num="2" href="/03_service.html" class="nav_link">SERVICE</a> 
+                        </li>
+                        <li class="nav_item"> 
+                            <a data-smn="true" data-num="3" href="/04_newsroom.html" class="nav_link">NEWSROOM</a> 
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -192,8 +168,7 @@
                                             class="div-block"></div>
                                         <div class="newsbanner-cms_title-wrap">
                                             <div class="mu24-150 is-pb16">April 6, 2022</div>
-                                            <h2 class="h2-mu40 is-black is-lineh">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit.</h2>
+                                            <h2 class="h2-mu40 is-black is-lineh">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
                                         </div>
                                     </a>
                                 </div>
@@ -207,6 +182,7 @@
                         <header>
                             <h2 data-stagger-alpha="true" class="h2-mu40 is-center">Press Release</h2>
                         </header>
+
                         <div id="CMS" class="news_cms w-node-ff519031-eef8-fb4f-11c8-92ba6d699150-06915cb9 w-dyn-list">
                             <div role="list" class="news_list w-dyn-items">
 
@@ -327,8 +303,8 @@
                                     </a>
                                 </div>
 
-
                             </div>
+
                             <div role="navigation" aria-label="List" class="w-pagination-wrapper news_list-pagenation">
                                 <a href="?6d699150_page=2" aria-label="Next Page" class="w-pagination-next bt_loadmore stop-barba">
                                     <div class="ic_plus">
@@ -380,7 +356,7 @@
     <script src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/js/webflow.f69ab525d.js" type="text/javascript"></script>
     <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 
-    <script type="module" src="./_assets/index.js"></script>
+    
 </body>
 
 </html>

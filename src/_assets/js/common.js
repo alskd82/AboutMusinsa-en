@@ -1,6 +1,3 @@
-import BezierEasing from "./class/BezierEasing.js";
-import { TextSplitWordsShow, TextSlitLinesMasking } from './class/TextMotion.js';
-
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
@@ -12,6 +9,10 @@ gsap.registerPlugin(
     ScrollTrigger, ScrollSmoother, ScrollToPlugin, SplitText,
     Draggable, InertiaPlugin,
 );
+
+import BezierEasing from "./class/BezierEasing.js";
+import { TextSplitWordsShow, TextSlitLinesMasking } from './class/TextMotion.js';
+import DraggableSlider from "./class/DraggableSlider"
 
 
 
@@ -111,6 +112,30 @@ function getRelativePosition(standardElem, targetElem){ // https://lpla.tistory.
 }
 
 
+//===============================================================================================================================
+/*===== 스무스 스크롤  ======================*/
+//===============================================================================================================================
+let smoother;
+const createSmoother=(isTop)=>{
+    /* 삭제 후 다시 설치 방법 */
+    if(smoother) smoother.kill();
+    smoother = ScrollSmoother.create({
+        wrapper: `[data-smooth="wrapper"]`,
+        content: `[data-smooth="content"]`,
+        normalizeScroll: true, effects: true,
+    });
+
+    /* 컨텐츠만 다시 바꿔치기 */
+    // if(smoother) smoother.content(`[data-smooth="content"]`);
+    // else {
+    //     smoother = ScrollSmoother.create({
+    //         wrapper: `[data-smooth="wrapper"]`,
+    //         content: `[data-smooth="content"]`,
+    //         normalizeScroll: true, effects: true,
+    //     });
+    // };
+    isTop && setTimeout(() => smoother ? smoother.scrollTo(0) : window.scrollTo( 0, 0 ) , 0)
+};
 
 
 //===============================================================================================================================
@@ -290,6 +315,81 @@ const StaggerMotion = (function(exports){
 
 
 //===============================================================================================================================
+/*=====  From Our Newsroom  ======================*/
+//===============================================================================================================================
+
+class LoadFromOurNews {
+    constructor(opts){
+
+        this.id = opts.id;
+        this.isDesktop = opts.isDesktop === undefined ? true: opts.isDesktop;
+        this.homeArr = []
+        this.historyArr = []
+        this.impactArr = []
+
+        this.src = opts.src;
+
+        this.fetchPage( this.src );
+    }
+
+    fetchPage(src){
+        (async()=>{
+            const res = await fetch(src);
+            const contentType = res.headers.get('content-type');
+            if (contentType?.includes('application/json')){
+                const json = await res.json();
+            } else {
+                const html = await res.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                // console.log( doc )
+                // ------ items ---------- //
+                this.homeArr = doc.querySelectorAll('#home .news_item-link')
+                this.historyArr = doc.querySelectorAll('#history .news_item-link')
+                this.impactArr = doc.querySelectorAll('#impact .news_item-link');
+
+                // console.log( this.homeArr )
+
+                this.replaceLink();
+            }
+        })()
+    };
+
+    replaceLink(){
+        if(this.id === "newsroom") return
+
+        if(this.id === "home")           this.arr = this.homeArr
+        else if(this.id === "history")   this.arr = this.historyArr
+        else if(this.id === "impact")    this.arr = this.impactArr
+
+        let aArr, img, h3, date;
+        if(this.isDesktop){
+            aArr = document.querySelectorAll('.section-news a');
+            img = ".news_item-img";
+            h3 = ".h3-mu24"
+            date = ".news_item-date"
+        } else {
+            aArr = document.querySelectorAll('.m_section-news a');
+            img = ".news_item-img";
+            h3 = ".h3-mu20"
+            date = ".mu14-150"
+        }
+
+        aArr.forEach((link, i)=>{
+            link.href = this.arr[i].href;
+            link.querySelector(img).style.backgroundImage = this.arr[i].querySelector(".news_item-img").style.backgroundImage;
+            link.querySelector(h3).innerHTML = this.arr[i].querySelector(".h3-mu24").innerHTML
+            link.querySelector(date).innerHTML = this.arr[i].querySelector(".news_item-date").innerHTML
+
+        })
+
+    }   
+
+};
+
+
+//===============================================================================================================================
 /*=====  ShopNow ======================*/
 //===============================================================================================================================
 const ShopNow = (function(exports){
@@ -332,7 +432,7 @@ const ShopNow = (function(exports){
             gsap.to( arrow , {
                 x: -arrowPos.x + e.clientX,
                 y: -arrowPos.y + e.clientY,
-                duration: 1.5,
+                duration: 0,
                 // ease: 'Quad.easeOut'
             })
         })
@@ -386,7 +486,7 @@ const ShopNow = (function(exports){
         wrapper = !isMobile ? document.querySelector('.shopnow_img-wrap') : document.querySelector('.m_shopnow_img-wrap')
         img = !isMobile ? document.querySelector('.shopnow_img') : document.querySelector('.m_shopnow_img');
 
-        // mouseFollow();
+        // if(!isMobile) mouseFollow();
     };
 
     exports.st = st
@@ -396,7 +496,7 @@ const ShopNow = (function(exports){
 
 
 //===============================================================================================================================
-/*=====  Mobile From Our Newsroom   ======================*/
+/*=====  Mobile : From Our Newsroom => Draggable  ======================*/
 //===============================================================================================================================
 const FromOurNews_Mobile = (function(exports){
     let list;
@@ -404,44 +504,39 @@ const FromOurNews_Mobile = (function(exports){
     const init=()=>{
         list = document.querySelector('.m_section-news .m_news-slider_list');
         if(!list) return;
-        const limit = (gsap.getProperty( '.news_item-img', 'width')+8) * list.children.length - window.innerWidth + 40
-        Draggable.create(list, {
-            type:"x",
-            edgeResistance: .8,
-            bounds: {minX:0, maxX: -limit},
-            inertia: true,
+
+        const w = gsap.getProperty( '.news_item-img', 'width') + gsap.getProperty( '.news_item-img', 'margin-right');
+        const limit = -w * list.children.length + window.innerWidth - 60
+        const snap = []
+        document.querySelectorAll('.m_news-slider_item').forEach( (item, i)=> {
+            if( i===0) snap.push( 0 ) 
+            else{
+                if( i === 1 ){
+                    const itemX = getRelativePosition(item.parentNode, item).x;
+                    const parentW = gsap.getProperty(item.parentNode, 'width');
+                    const itemW = gsap.getProperty(item, 'width');
+
+                    snap.push( -itemX + parentW/2 - itemW/2  );
+                } else {
+                    snap.push(snap[i-1] - w);
+                }
+            }
         });
+
+        new DraggableSlider({
+            selector: list,
+            totalNum: list.children.length,
+            axis:"x",
+            snap: snap,
+            min: limit,
+            max: 0,
+            slideItemSize: w
+        })
     }
 
     exports.init = init;
     return exports;
 })({})
-
-
-//===============================================================================================================================
-/*===== 스무스 스크롤  ======================*/
-//===============================================================================================================================
-let smoother;
-const createSmoother=(isTop)=>{
-    /* 삭제 후 다시 설치 방법 */
-    if(smoother) smoother.kill();
-    smoother = ScrollSmoother.create({
-        wrapper: `[data-smooth="wrapper"]`,
-        content: `[data-smooth="content"]`,
-        normalizeScroll: true, effects: true,
-    });
-
-    /* 컨텐츠만 다시 바꿔치기 */
-    // if(smoother) smoother.content(`[data-smooth="content"]`);
-    // else {
-    //     smoother = ScrollSmoother.create({
-    //         wrapper: `[data-smooth="wrapper"]`,
-    //         content: `[data-smooth="content"]`,
-    //         normalizeScroll: true, effects: true,
-    //     });
-    // };
-    isTop && setTimeout(() => smoother ? smoother.scrollTo(0) : window.scrollTo( 0, 0 ) , 0)
-};
 
 
 
@@ -451,10 +546,12 @@ export {
     debounce, throttle,
     getRelativePosition,
 
+    smoother, createSmoother,
+
     BillboardText,
     StaggerMotion,
     ShopNow ,
-    smoother, createSmoother,
+    LoadFromOurNews,
     FromOurNews_Mobile,
 }
 
