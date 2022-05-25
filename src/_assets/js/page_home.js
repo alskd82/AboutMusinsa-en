@@ -261,6 +261,7 @@ const HomeService = (function(exports){
     let sectionService;
     let zIndexLevel;
     let isDesktop;
+    let overNum;
 
     const selectMn=(n)=>{
         sectionService.querySelectorAll('.home-service_item').forEach((el) =>{
@@ -270,6 +271,7 @@ const HomeService = (function(exports){
 
         sectionService.querySelectorAll('.home-service_img').forEach((ele) =>{
             if( ele.dataset.num === n ){
+                overNum = n;
                 // gsap.fromTo( ele , {zIndex: zIndexLevel++, width: '0%'}, {width: '100%', ease: ease.standard})
                 gsap.fromTo( ele, { 
                     clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)", // "path('M0 -100, L0 1300, L1600 1300, L0 1300 Z')",
@@ -283,6 +285,7 @@ const HomeService = (function(exports){
     }
 
     const addEvent=()=>{
+        /*
         sectionService.querySelector('.home-service_list').addEventListener('click', e =>{
             if(!e.target.classList.contains('home-service_item')) return;
             selectMn(e.target.dataset.num);
@@ -294,6 +297,12 @@ const HomeService = (function(exports){
             //         ease: ease.standard
             //     })
             // }
+        });
+        */
+        sectionService.querySelector('.home-service_list').addEventListener('mouseover', e =>{
+            if(!e.target.classList.contains('home-service_item')) return;
+            if(e.target.dataset.num === overNum) return
+            selectMn(e.target.dataset.num);
         });
     };
 

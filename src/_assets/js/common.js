@@ -27,7 +27,7 @@ const ease = {
 }
 
 const scrollIntoView = {
-    duration: 1.5, 
+    duration: 1.8, 
     autoAlpha: 1, 
     ease: 'Quart.easeOut', 
     x:0, y:0
@@ -154,16 +154,7 @@ const BillboardText = (function(exports){
         if(nameSpace === "home"){
             opts = {
                 words : new SplitText( h1, { type: "words" }).words,
-                splitIntersection: [[0] , [1,2,3,4], [5,6,7,8]],
-                duration: 1, ease: 'Quart.easeOut',
-                staggerTime: .1, gapTime: -.3,
-                x:0, y: 60,
-            }
-            for(let key in opts) title[key] = opts[key];
-        } else if(nameSpace === "service") {
-            opts = {
-                words : new SplitText( h1, { type: "words" }).words,
-                splitIntersection: [[0] , [1,2,3] , [4,5,6,7]],
+                splitIntersection: [[0] , [1,2,3], [4,5,6,7]],
                 duration: 1, ease: 'Quart.easeOut',
                 staggerTime: .1, gapTime: -.3,
                 x:0, y: 60,
@@ -214,7 +205,7 @@ const StaggerMotion = (function(exports){
                 start: !isMobile ? "top 80%": "top 92%",
                 onEnter: (self)=>{
                     gsap.set( ele, {autoAlpha: 1})
-                    stagger[i].play()
+                    stagger[i].play("lines")
                 },
                 once: true,
             });
@@ -289,13 +280,15 @@ const StaggerMotion = (function(exports){
                 new TextSlitLinesMasking({
                     splitText: new SplitText( ele, { 
                         type: "lines,words,chars", 
-                        // linesClass: "split-line", // over-flow:hidden 을 적용하려면 클래스로 추가하기
+                        // linesClass: "is-overflow-hidden", // over-flow:hidden 을 적용하려면 클래스로 추가하기
                     }),
-                    charsStagger: 0.01,
+                    // charsStagger: 0.01,
+                    wordStagger: 0,
+                    lineDelay: 0.15,
                     y: 60,
                     autoAlpha: true,
-                    duration: 1,
-                    ease: ease.standard,
+                    duration: 1.5,
+                    ease: 'Quart.easeOut',
                 })
             );
         });
@@ -432,7 +425,7 @@ const ShopNow = (function(exports){
             gsap.to( arrow , {
                 x: -arrowPos.x + e.clientX,
                 y: -arrowPos.y + e.clientY,
-                duration: 0,
+                duration: 0.25,
                 // ease: 'Quad.easeOut'
             })
         })
