@@ -19,6 +19,7 @@ const Newsroom = (function(exports){
     const init =()=>{
         newsroomCMS = document.querySelector('#CMS');
         if(!newsroomCMS) return;
+        if(!document.querySelector('.bt_loadmore')) return;
 
         if(!isMobile){
             loadmore = new Loadmore({ nextBtn: '.bt_loadmore', cms: "#CMS", customScroll: { fn: createSmoother } })

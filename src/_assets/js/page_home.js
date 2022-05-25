@@ -160,7 +160,7 @@ const HomeHistory = (function(exports){
         links.forEach((link, i)=>{
             itemTitles.push(
                 new TextSlitLinesMasking({
-                    splitText: new SplitText( link.querySelector('.history_slider-title'), { 
+                    splitText: new SplitText( link.parentNode.querySelector('.cms-history_richtext p'), { 
                         type: "lines,words,chars", linesClass: "is-overflow-hidden" 
                     }),
                     duration: .4,
@@ -174,7 +174,7 @@ const HomeHistory = (function(exports){
             );
 
             link.addEventListener('mouseover', e =>{
-                const parent = e.currentTarget.parentNode;
+                const parent = e.currentTarget.parentNode.parentNode;
                 itemTitles[parent.dataset.num].reset();
                 itemTitles[parent.dataset.num].play("lines")
             });
@@ -233,7 +233,7 @@ const HomeHistory = (function(exports){
         list =  sectionHistory.querySelector('.history-slider_list');
         items = gsap.utils.toArray(".history-slider_item");
         items.forEach((item, i)=> item.dataset.num = i );
-        links = gsap.utils.toArray(".history-slider_link");
+        links = gsap.utils.toArray(".history-slider_img-wrap");
 
         itemsWidth = gsap.getProperty(".history-slider_item", 'width') + gsap.getProperty(".history-slider_item", 'margin-right');
         gsap.set(list,{ width: itemsWidth * items.length});
@@ -244,9 +244,8 @@ const HomeHistory = (function(exports){
             gsap.set(item.children[0], { x: 120, autoAlpha: 0 })
         })
         
-        // showCMSItems()  // cms items 각각 등장 트리거
-        
-        addEvent();
+        // showCMSItems()  // cms items 각각 등장 트리거  
+        // addEvent(); // 타이틀을 ritch text 로 바꾸면서 사용 못하게 됨.
     };
 
     exports.st = st;

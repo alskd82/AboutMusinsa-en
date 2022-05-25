@@ -64,10 +64,10 @@ history.pushState(null, null, `?p=${urlParams.get('p', cmsNum)}`)
 //===============================================================================================================================
 /*===== debounce & throttle ======================*/
 //===============================================================================================================================
-function $( $selector, $context ) {
-    const context = $context || document;
-    return ( $selector.indexOf('#') > -1 ) ? context.getElementById( $selector.replace('#','') ) : context.querySelector( $selector );
-}
+// function $( $selector, $context ) {
+//     const context = $context || document;
+//     return ( $selector.indexOf('#') > -1 ) ? context.getElementById( $selector.replace('#','') ) : context.querySelector( $selector );
+// }
 
 function debounce(threshold, fn, immediate) {
     var slice = [].slice;
@@ -394,70 +394,64 @@ const ShopNow = (function(exports){
     const mouseFollow =()=>{
         let area = document.querySelector('.section-shopnow .container-wide')
         let arrow = document.querySelector('.img-arrow-wrap');
-        let isEnter = false;
-        let isMoveStart = false;
-        let arrowPos;
         
-        area.addEventListener('mouseenter', e=>{
-            isEnter = true;
-            isMoveStart = true;
+        let arrowDefaultX, arrowDefaultY;
+        let targetX, targetY;
+        let mouseX, mouseY;
+        let cacularMouseX, cacularMouseY;
+        let areaY;
+        let rAF;
 
-            arrowPos = { 
-                x: arrow.getBoundingClientRect().x  + gsap.getProperty(arrow, "width") / 2, 
-                y: arrow.getBoundingClientRect().y + gsap.getProperty(arrow, "height") / 2
-            }
-            gsap.killTweensOf( arrow )
-            gsap.to( ".img-arrow-bg" , { scale: 1, duration: 1.5, ease: 'Elastic.easeOut', delay:0.15 })
+        const followCursor =()=>{
+            targetX+= (cacularMouseX-targetX) * 0.1;
+            targetY+= (cacularMouseY-targetY) * 0.1;
+            gsap.set( arrow, { x: targetX, y: targetY });
+
+            rAF = window.requestAnimationFrame( followCursor );
+        };
+
+        const arrowDefaultPos =()=>{
+            arrowDefaultX = getRelativePosition(area , arrow).x
+            arrowDefaultY = getRelativePosition(area , arrow).y
+        }
+        arrowDefaultPos();
+        window.addEventListener( 'resize', e=> arrowDefaultPos() )
+
+        area.addEventListener('mouseenter', e=>{
+            rAF = window.requestAnimationFrame( followCursor )
+            gsap.killTweensOf( ".img-arrow-bg" )
+            gsap.to( ".img-arrow-bg" , { scale: 1, duration: 1.2, ease: 'Elastic.easeOut', delay:0})
         })
 
         area.addEventListener('mousemove', e=>{
-            if(!isEnter) return
-            // if(!isMoveStart){
-            //     arrowPos = { 
-            //         x: arrow.getBoundingClientRect().x  + gsap.getProperty(arrow, "width") / 2, 
-            //         y: arrow.getBoundingClientRect().y + gsap.getProperty(arrow, "height") / 2
-            //     }
-            //     gsap.killTweensOf( arrow )
-            //     gsap.to( ".img-arrow-bg" , { scale: 1, duration: 1.5, ease: 'Elastic.easeOut', delay:0.15 })
-            //     isMoveStart = true;
-            // }
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+            areaY = window.pageYOffset + area.getBoundingClientRect().top;
 
-            gsap.to( arrow , {
-                x: -arrowPos.x + e.clientX,
-                y: -arrowPos.y + e.clientY,
-                duration: 0.25,
-                // ease: 'Quad.easeOut'
-            })
+            cacularMouseX = mouseX - arrowDefaultX - (gsap.getProperty(arrow, 'width')/2);
+            cacularMouseY = mouseY - areaY - arrowDefaultY - (gsap.getProperty(arrow, 'height')/2);
+
+            targetX = gsap.getProperty(arrow, 'x');
+            targetY = gsap.getProperty(arrow, 'y');
         })
         
         area.addEventListener('mouseleave', e=>{
-            isEnter = false;
-            isMoveStart = false;
+            window.cancelAnimationFrame(rAF)
+
             gsap.killTweensOf( arrow )
-            gsap.to( arrow , { x: 0, y: 0, duration: .75, ease: 'Quart.easeOut' })
-            gsap.to( ".img-arrow-bg" , { scale: 0, duration: 1, ease: 'Quart.easeInOut' })
-        })
-
-        window.addEventListener('scroll', e=>{
-            
-            if(isMoveStart){
-                isMoveStart = false
-                gsap.killTweensOf( arrow )
-                gsap.to( arrow , { x: 0, y: 0, duration: .75, ease: 'Quart.easeOut' })
-                gsap.to( ".img-arrow-bg" , { scale: 0, duration: 1, ease: 'Quart.easeInOut' })
-            }
-        })
-
+            gsap.killTweensOf( ".img-arrow-bg" )
+            gsap.to( arrow , { x: 0, y: 0, duration: .6, ease: 'Quart.easeOut' })
+            gsap.to( ".img-arrow-bg" , { scale: 0, duration: .6, ease: 'Quart.easeInOut' })
+        });
         
     }
 
     const st =()=>{
-        if(!sectionShopNow) return;
 
         if(!isMobile){
             ani = gsap.fromTo( img, { 
                 y: -gsap.getProperty(img, 'height')  * .75,// + gsap.getProperty(wrapper, 'height') 
-            }, { duration: 1, y: -350 });
+            }, { duration: 1, y: -180 });
         } else {
             ani = gsap.fromTo( img, { y: -gsap.getProperty('.m_shopnow_img-wrap', 'height')*0.75 }, { duration: 1, y: 0 });
         }
@@ -479,7 +473,7 @@ const ShopNow = (function(exports){
         wrapper = !isMobile ? document.querySelector('.shopnow_img-wrap') : document.querySelector('.m_shopnow_img-wrap')
         img = !isMobile ? document.querySelector('.shopnow_img') : document.querySelector('.m_shopnow_img');
 
-        // if(!isMobile) mouseFollow();
+        if(!isMobile) mouseFollow();
     };
 
     exports.st = st

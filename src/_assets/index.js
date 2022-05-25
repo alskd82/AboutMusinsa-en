@@ -125,8 +125,8 @@ const loadingComplete =()=> {
 
 
     document.querySelector('.loading').classList.remove('before-load');
-    document.querySelector('div.m_billboard_img') && (function(){
-        gsap.fromTo( 'div.m_billboard_img', {scale: 1 } ,{scale: 1.12 ,ease: BezierEasing(0.6,0,0.1,1), duration: 2.5, delay: 0.3})
+    document.querySelector('div.billboard_img') && (function(){
+        gsap.fromTo( 'div.billboard_img', {scale: 1.3 } ,{scale: 1 ,ease: BezierEasing(0.6,0,0.1,1), duration: 2.5, delay: 0.3})
     })()
 
     gsap.delayedCall( 1.5, BillboardText.play) // ------------------------------------------- 텍스트 모션 시작
@@ -190,7 +190,9 @@ const pageBeforeEnter =()=>{
     Link.homeHistory();
     Link.homeService();
 
-    FromOurNews = new LoadFromOurNews({id: nameSpace, src: "/fromournewsroom/from-our-newsroom/"})
+    if(nameSpace != "home"){
+        FromOurNews = new LoadFromOurNews({id: nameSpace, src: "/fromournewsroom/from-our-newsroom/"})
+    }
 }
 
 const pageEnter =()=>{

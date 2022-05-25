@@ -21,7 +21,7 @@ body.loaded{
         clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
     .section-nav{
-        transition: 1s $ease-quart-out .5s;
+        transition: 1s $ease-quart-out 1s;
         transform: translate3d(0,0,0);
     }
 }
@@ -39,7 +39,7 @@ body.loaded{
 [data-stagger-y],
 [data-stagger-batch] { opacity: 0; }
 [data-stagger-y],
-[data-stagger-batch] { transform: translate3d(0,80px,0); }
+[data-stagger-batch] { transform: translate3d(0,100px,0); }
 
 /*//////////////////////////////////////*/
 /*=== From Our Newsroom ===================*/

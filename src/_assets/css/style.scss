@@ -107,6 +107,7 @@ a { color: inherit; text-decoration: none; }
 
 /*//////////////////////////////////////*/
 /*=== From Our Newsroom ===================*/
+.history-slider_item-txt{ pointer-events: none ;}
 .news_item{
     .news_item-link{
         transition: 200ms $ease-standard;
@@ -135,6 +136,40 @@ a { color: inherit; text-decoration: none; }
 .ourstory-indi_item {
     div{ pointer-events: none; }
 }
+
+/*///////////////////////////////*/
+/*=== History 연혁 타이틀 ===================*/
+.cms-history_richtext strong,
+.m_cms-history_richtext strong{
+	font-weight: normal;
+    color: white;
+} 
+
+
+.section-history{
+    .cms-history_richtext p{
+        font-size: 40px;
+        line-height: 150%;
+        color: 6e6e6e;
+    }
+    .cms-history_richtext strong {
+        font-weight: normal;
+        color: black;
+    }
+}
+
+.m_section-history{
+    .m_cms-history_richtext p{
+        font-size: 20px;
+        line-height: 150%;
+        color: 6e6e6e;
+    }
+    .m_cms-history_richtext strong {
+        font-weight: normal;
+        color: black;
+    }
+}
+
 
 
 /*//////////////////////////////////////*/
