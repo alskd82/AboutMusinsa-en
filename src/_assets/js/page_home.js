@@ -298,11 +298,31 @@ const HomeService = (function(exports){
             // }
         });
         */
-        sectionService.querySelector('.home-service_list').addEventListener('mouseover', e =>{
-            if(!e.target.classList.contains('home-service_item')) return;
-            if(e.target.dataset.num === overNum) return
-            selectMn(e.target.dataset.num);
-        });
+
+        sectionService.querySelectorAll('.home-service_link').forEach((ele,i)=>{
+            
+            ele.addEventListener('mouseover', e=>{
+                if(e.currentTarget.dataset.num === overNum) return
+                overNum = e.currentTarget.dataset.num;
+                selectMn( overNum );
+
+                for(let j=0; j<4; j++){
+                    sectionService.querySelectorAll('.home-service_link')[j].classList.remove( 'is-active' )
+                }
+                e.currentTarget.classList.add( 'is-active' )
+            })
+            
+        })
+        // sectionService.querySelector('.home-service_list').addEventListener('mouseover', e =>{
+
+        //     console.log('ook')
+            
+        //     // if(!e.target.classList.contains('home-service_item')) return;
+        //     if(e.target.dataset.num === overNum) return
+        //     overNum = e.target.dataset.num
+        //     console.log(overNum)
+        //     // selectMn(e.target.dataset.num);
+        // });
     };
 
 

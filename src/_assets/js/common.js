@@ -154,8 +154,8 @@ const BillboardText = (function(exports){
         if(nameSpace === "home"){
             opts = {
                 words : new SplitText( h1, { type: "words" }).words,
-                splitIntersection: [[0] , [1,2,3], [4,5,6,7]],
-                duration: 1, ease: 'Quart.easeOut',
+                splitIntersection: [[0] , [1,2,3], [4,5], [6,7]],
+                duration: .75, ease: 'Quart.easeOut',
                 staggerTime: .1, gapTime: -.3,
                 x:0, y: 60,
             }
@@ -164,7 +164,7 @@ const BillboardText = (function(exports){
             opts = {
                 words : new SplitText( h1, { type: "words" }).words,
                 splitIntersection: [[0] , [1]],
-                duration: 1, ease: 'Quart.easeOut',
+                duration: .75, ease: 'Quart.easeOut',
                 staggerTime: .1, gapTime: -.3,
                 x:0, y: 60,
             }

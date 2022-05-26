@@ -63,8 +63,6 @@ document.addEventListener('DOMContentLoaded', e =>{
 });
 
 
-
-
 //===============================================================================================================================
 /*===== 로드  ======================*/
 //===============================================================================================================================
@@ -83,14 +81,18 @@ const load =()=>{
             gsap.delayedCall(.2 ,function(){
                 loadingComplete();
                 document.querySelector('video').play();
+
+                imageLoad('.body-black');
             }) 
         }
         
-        imageLoad('.body-black');
-
     } else if(nameSpace != "newsroom"){
-        imageLoad('.section-billboard' , { complete: gsap.delayedCall(.2,loadingComplete) })
-        imageLoad('.body-black');
+        imageLoad('.section-billboard' , { 
+            complete: gsap.delayedCall(.2, function(){
+                loadingComplete()
+                imageLoad('.body-black');
+            }) 
+        });
 
     } else {
         loadingComplete()
@@ -333,7 +335,7 @@ const Link = (function(exports){
     const homeService=()=>{
         if(!document.querySelector('.home-service_img')) return;
 
-        document.querySelectorAll('.home-service_img').forEach( el =>{
+        document.querySelectorAll('.home-service_link').forEach( el =>{
             el.addEventListener('click', e => {  // ------------------------------------------------------------- service > 포키싱 이동
                 e.preventDefault();
                 // console.log(e.currentTarget.tagName.toLowerCase())
@@ -342,16 +344,16 @@ const Link = (function(exports){
             });
         });
 
-        document.querySelector('.home-service_list').addEventListener('click', e =>{
-            if(!e.target.classList.contains('home-service_item')) return;            
-            if(smoother){
-                gsap.to(smoother, {
-                    scrollTop: smoother.offset('.home-service_img-wrap', "center center"),
-                    duration: .7,
-                    ease: ease.standard
-                })
-            }
-        });
+        // document.querySelector('.home-service_list').addEventListener('click', e =>{
+        //     if(!e.target.classList.contains('home-service_item')) return;            
+        //     if(smoother){
+        //         gsap.to(smoother, {
+        //             scrollTop: smoother.offset('.home-service_img-wrap', "center center"),
+        //             duration: .7,
+        //             ease: ease.standard
+        //         })
+        //     }
+        // });
     
     }
 

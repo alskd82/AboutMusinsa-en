@@ -176,3 +176,5 @@
 }));
 
 export default BezierEasing;
+
+// import BezierEasing from "BezierEasing.ems.js";

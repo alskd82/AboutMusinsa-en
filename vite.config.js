@@ -45,14 +45,16 @@ export default defineConfig({
                 // newsroom: resolve(root, "04_newsroom.html"), 
                 
                 // fromournewsroom: resolve(root, "fromournewsroom/from-our-newsroom" ,"index.html"),
-                
-                contentPage: resolve(root, "contentPage", "contentPage.html"),
 
                 // m_index: resolve(root, "m", "m.html"),
                 // m_history: resolve(root, "m", "m_01_history.html"),
                 // m_impact: resolve(root, "m", "m_02_impact.html"),
                 // m_service: resolve(root, "m","m_03_service.html"), 
                 // m_newsroom: resolve(root, "m","m_04_newsroom.html"), 
+
+
+                
+                contentPage: resolve(root, "contentPage", "contentPage.html"),  
             },
 
             /* out 을 명시 안하면 assets 폴더 안에 다 담김 */

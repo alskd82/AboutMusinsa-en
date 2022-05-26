@@ -1,3 +1,7 @@
+// import { gsap } from "gsap";
+// import { SplitText } from "gsap/SplitText";
+// gsap.registerPlugin( SplitText );
+
 //===============================================================================================================================
 /*=====  단어별로 타이밍 맞춰 등장하기  ======================*/
 //===============================================================================================================================
@@ -57,46 +61,40 @@ class TextSplitWordsShow {
     }
 }
 
+//////////////////////////////////////////////////////////////////////////////
 
-
+const titleElem = document.querySelector('.title')
 let t = new TextSplitWordsShow({
-    // words : new SplitText( title, { type: "words" }).words,
-    splitIntersection: [[0] , [1,2,3], [4], [5,6,7]],
-    duration: .8,
-    ease: 'Quart.easeOut',
-    staggerTime: .1,
-    gapTime: -.4,
-    x: 0,
-    y: 60,
-})
+    words : new SplitText( titleElem, { type: "words" }).words,
+    splitIntersection: [[0] , [1,2,3,4], [5,6,7,8]],
+});
+t.play();
 
-/* 
-    옵션 값 바뀌기 가능.
+/*
+    옵션 바꿔서 다시 재생 가능
     바꾸면 init() 함수 호출.
 */
-const title = document.querySelector('.title');
-title.innerHTML = "I am a boy. You are a girl."
+setTimeout(() => {
+    // titleElem.style.opacity = 0;
+    titleElem.innerHTML = "I am a boy, you are a girl";
 
-const tOpts = {
-    words : new SplitText( title, { type: "words" }).words,
-    duration: 1,
-    ease: 'Quint.easeOut',
-    staggerTime: .1,
-    gapTime: -.4,
-    x: 30,
-    y: 0,
-};
-for(var key in tOpts) t[key] = tOpts[key]
+    const tOpts ={
+        words : new SplitText( titleElem, { type: "words" }).words,
+        splitIntersection: [[0] , [1,2,3], [4], [5,6,7]],
+        duration: 1,
+        ease: 'Quint.easeOut',
+        staggerTime: .1,
+        gapTime: -.4,
+        x: 30,
+        y: 0,
+    }
+    
+    for(var key in tOpts) t[key] = tOpts[key]
+    t.init()
+    t.play()
 
+}, 5000);
 
-// t.words = new SplitText( title, { type: "words" }).words;
-// t.splitIntersection = [[0] , [1,2,3], [4], [5,6,7]]
-t.init(); // 셋팅
- // 재생
-
-setTimeout(()=> {
-    t.play();
-}, 2000)
 
 //===============================================================================================================================
 /*===== 텍스트 마스킹 애니메이션 ======================*/
@@ -153,7 +151,7 @@ class TextSlitLinesMasking {
                     stagger: this.wordStagger,
                     delay: this.lineDelay * i,
                     autoAlpha: 1,
-                    onComplete:() => this.complete()
+                    onComplete:() => this.onComplete()
                 })
             })
 
@@ -165,34 +163,38 @@ class TextSlitLinesMasking {
                 duration: this.duration,
                 stagger: this.charsStagger,
                 autoAlpha: 1,
-                onComplete:() => this.complete()
+                onComplete:() => this.onComplete()
             });
         }
     }
 
-    complete(){
-        // console.log('complete')
+    onComplete(){
+        console.log('complete')
     }
 
 }
 
-// console.log(document.querySelector('.sentence').innerHTML)
+//////////////////////////////////////////////////////////////////////////////
+
 let m = new TextSlitLinesMasking({
     splitText: new SplitText(document.querySelector('.sentence'), { 
         type: "lines,words,chars", 
-        linesClass: "split-line", // over-flow:hidden 클래스 적용
+        linesClass: "is-overflow-hidden", // over-flow:hidden 클래스 적용
     }),
-    charsStagger: 0.02,
-    wordStagger: 0.1,
-    lineDelay: 1,
+    charsStagger: 0.02, // .play() 로 호출할 때만 필요 :: 0 이면 전체가 한꺼번에 등장 / 숫자면 한글자씩 등장
+    wordStagger: 0,   // .play("lines") 로 호출할 때만 필요:: 0 이면 한줄이 통으로 등장 / 숫자면 한 줄에서 단어별로 등장
+    lineDelay: 0,       // .play("lines") 로 호출할 때만 필요
     y: 80,
-    // autoAlpha: true,
+    autoAlpha: true,    // opactiy 애니메이션 진행여부
 })
+m.onComplete = function(){
+    console.log('oooook')
+}
 /*  
     m.play('lines');
     라인별 등장.
-    wordStagger: 수치를 0으로 하면 한줄 통째로 등장.
-                    수치 입력하면 한 줄에서 단어별로 등장.
+    wordStagger: 수치를 0으로 하면 한줄이 통째로 등장.
+                수치 입력하면 한 줄에서 단어별로 등장.
     lineDelay: 라인별 등장 딜레이
 */
 
@@ -200,27 +202,33 @@ let m = new TextSlitLinesMasking({
     m.play();
     한글자씩 등장...charsStagger 수치 활용
 */
+m.play();
 
 /* 
     옵션 값 바뀌기 가능.
 */
-const mOpts = {
-    duration: 1,
-    ease: 'Quint.easeOut',
-    staggerTime: .1,
-    lineDelay: 0,       // 라인 순차 애니메이션 때, 라인별 딜레이
-    gapTime: -.4,
-    x: 30,
-    y: 100,
-};
-for(var key in mOpts) m[key] = mOpts[key]
-m.play('lines');
+setTimeout(() => {
+    const mOpts = {
+        duration: 1,
+        ease: 'Quint.easeOut',
+        staggerTime: .1,
+        lineDelay: 1,       // 라인 순차 애니메이션 때, 라인별 딜레이
+        gapTime: -.4,
+        x: 0,
+        y: 100,
+    };
+
+    for(var key in mOpts) m[key] = mOpts[key]
+    m.init()
+    m.play('lines');
+}, 5000);
 
 
 
-//===============================================================================================================================
-/*=====  간략 함수 버전 ======================*/
-//===============================================================================================================================
+
+// //===============================================================================================================================
+// /*=====  간략 함수 버전 ======================*/
+// //===============================================================================================================================
 
 const quotes = document.querySelectorAll(".character");
 

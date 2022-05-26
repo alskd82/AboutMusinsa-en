@@ -69,22 +69,33 @@ a { color: inherit; text-decoration: none; }
 
 /*///////////////////////////////*/
 /*=== HOME : History ===================*/
-.history-slider_link{
-    position: relative;
-    width: 100%; height: 100%;;
-    div{ pointer-events: none;}
-}
 
-.history-slider_link{
-    .history-slider_item-txt{ 
-        transition: 200ms $ease-standard;
+.section-history{
+    .history-slider_link{
+        position: relative;
+        width: 100%; height: 100%;;
+        div{ pointer-events: none;}
     }
-}
 
-.history-slider_link:hover{
-    .history-slider_item-txt{ 
-        opacity: 1;
-        transition: 200ms $ease-standard;
+    .history-slider_link{
+        .history-slider_item-txt{
+            // opacity: 1; 
+            transition: 200ms $ease-standard;
+        }
+        .mu24-150{
+            transform: translate3d(0,-20px,0);
+            transition: transform 300ms $ease-standard;
+        }
+        .cms-history_richtext{
+            transform: translate3d(0,20px,0);
+            transition: transform 300ms $ease-standard;
+        }
+    }
+
+    .history-slider_link:hover{
+        .history-slider_item-txt{ opacity: 1; }
+        .mu24-150{ transform: translate3d(0,0,0); }
+        .cms-history_richtext{ transform: translate3d(0,0,0); }
     }
 }
 

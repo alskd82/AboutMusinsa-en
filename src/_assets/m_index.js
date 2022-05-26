@@ -113,9 +113,11 @@ const load =()=>{
     }
 }
 
-
 const loadingComplete =()=> {
     console.log( "loadingComplete" );
+
+    gsap.fromTo( "[data-barba='container']", {opacity: 0}, {opacity: 1, duration: 1, delay:.15, ease: ease.standard } )
+    focusInPage && (() => gsap.delayedCall( .8, pageTransitionComplete))()
     
     if(document.body.classList.contains('before-load')){
         document.body.classList.remove('before-load');
@@ -160,7 +162,6 @@ const imageLoad =( selector, opt={ onComplete: undefined }) =>{
 //===============================================================================================================================
 const pageBeforeLeave =()=>{
     if(nameSpace) console.log(`beforeLeave: ${nameSpace}`);
-
 
     ScrollTrigger.getAll().forEach((st,i)=> st.kill() );
     document.body.classList.remove("is-blue");
@@ -214,6 +215,7 @@ const pageEnter =()=>{
         gsap.to( window, {scrollTo: window.innerHeight, ease: ease.material, duration: 0.8 })
     })
 }
+
 const pageTransitionComplete =()=>{
     /* 포커싱 이동이 있다면... */
     if(nameSpace === "history"){
@@ -263,11 +265,8 @@ const barbaInit =()=> {
 
                 // /* Enter Animation */
                 enter(data){   
-                    pageEnter();                
-                    // gsap.set( data.next.container, { opacity: 0 } );
-                    gsap.fromTo( data.next.container, {opacity: 0}, {opacity: 1, duration: 1, delay:.15, ease: ease.standard } )
-                    focusInPage && (() => gsap.delayedCall( .8, pageTransitionComplete))()
-                    
+                    gsap.set( data.next.container, { opacity: 0 } );  
+                    pageEnter();                 
                 },
 
 
