@@ -27,6 +27,13 @@ body.fixed{
 a { color: inherit; text-decoration: none; }
 .is-hide { display: none; }
 .is-overflow-hidden{ overflow: hidden; }
+.is-ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 
 
 /*//////////////////////////////////////*/
@@ -111,7 +118,7 @@ a { color: inherit; text-decoration: none; }
 
 .home-service_item  {
     div{
-        pointer-events: none;
+        // pointer-events: none;
         transition: 200ms $ease-standard;
     }
 }

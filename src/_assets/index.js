@@ -333,8 +333,9 @@ const Link = (function(exports){
     }
 
     const homeService=()=>{
-        if(!document.querySelector('.home-service_img')) return;
+        if(!document.querySelector('.section-history')) return;
 
+        /*
         document.querySelectorAll('.home-service_link').forEach( el =>{
             el.addEventListener('click', e => {  // ------------------------------------------------------------- service > 포키싱 이동
                 e.preventDefault();
@@ -343,17 +344,27 @@ const Link = (function(exports){
                 focusInPage = e.currentTarget.dataset.focus;
             });
         });
+        */
+        document.querySelectorAll('.home-service_img-wrap > a').forEach( el =>{
+            el.addEventListener('click', e => { 
+                e.preventDefault();
+                // console.log(e.currentTarget.tagName.toLowerCase())
+                focusInPage = e.currentTarget.dataset.focus;
+            });
+        });
 
-        // document.querySelector('.home-service_list').addEventListener('click', e =>{
-        //     if(!e.target.classList.contains('home-service_item')) return;            
-        //     if(smoother){
-        //         gsap.to(smoother, {
-        //             scrollTop: smoother.offset('.home-service_img-wrap', "center center"),
-        //             duration: .7,
-        //             ease: ease.standard
-        //         })
-        //     }
-        // });
+        /*
+        document.querySelector('.home-service_list').addEventListener('click', e =>{
+            if(!e.target.classList.contains('home-service_item')) return;            
+            if(smoother){
+                gsap.to(smoother, {
+                    scrollTop: smoother.offset('.home-service_img-wrap', "center center"),
+                    duration: .7,
+                    ease: ease.standard
+                })
+            }
+        });
+        */
     
     }
 
