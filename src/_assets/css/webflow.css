@@ -1,4 +1,4 @@
-/* Generated on: Thu May 26 2022 13:18:23 GMT+0000 (Coordinated Universal Time) */
+/* Generated on: Fri Jun 24 2022 07:19:18 GMT+0000 (Coordinated Universal Time) */
 /* ==========================================================================
    normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css 
    ========================================================================== */
@@ -195,7 +195,7 @@
    }
    
    .billboard_img.is-back.is-history {
-     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/628f0ad369f4f52937845cc7_history_billboard.jpg");
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b5403cbc041a8463cea9ae_billboard_history.jpg");
    }
    
    .billboard_img.is-back.is-impact {
@@ -336,6 +336,10 @@
    
    .h3-mu60.is-w1180 {
      max-width: 1180px;
+   }
+   
+   .h3-mu60.is-blank {
+     position: relative;
    }
    
    .mu24-150 {
@@ -1035,7 +1039,7 @@
      top: 0%;
      right: 0%;
      bottom: 0%;
-     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/6260db9aaf5afd0ad2b33974_impact_responsiblity.jpg");
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b54698bc84bf78790e1cf5_impact-mission-min.jpg");
      background-position: 50% 50%;
      background-size: cover;
      background-repeat: no-repeat;
@@ -1449,15 +1453,20 @@
    }
    
    .home-service_img.is-back.is-29cm {
-     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62625d5c7ed14b6015c1394d_home_service-29cm.jpg");
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b5380c393fc5391f36a044_home_service-29%402.jpg");
    }
    
    .home-service_img.is-back.is-styleshare {
-     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/628cf907aedc0df551a834ef_home_service-StyleShare-min.jpg");
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b535c87b892d0977140f7a_home_service-StyleSharex2.jpg");
    }
    
    .home-service_img.is-back.is-soldout {
-     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/628cf907a2de3257502714d1_home_service-soldout-min.jpg");
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b53824108308e6c2d5382d_home_service-soldout%402.jpg");
+   }
+   
+   .home-service_img.is-back.is-lazynight {
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b5484450a0c9d41d6d5044_mockup-lazynight.jpg");
+     background-position: 50% 0%;
    }
    
    .home-service_mn-underline {
@@ -1924,15 +1933,20 @@
    }
    
    .m_home-service_img.is-back.is-29cm {
-     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62625d5c7ed14b6015c1394d_home_service-29cm.jpg");
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b5380c393fc5391f36a044_home_service-29%402.jpg");
    }
    
    .m_home-service_img.is-back.is-styleshare {
-     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/628cf907a2de3257502714d1_home_service-soldout-min.jpg");
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b53824108308e6c2d5382d_home_service-soldout%402.jpg");
    }
    
    .m_home-service_img.is-back.is-soldout {
-     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/628cf907aedc0df551a834ef_home_service-StyleShare-min.jpg");
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b535c87b892d0977140f7a_home_service-StyleSharex2.jpg");
+   }
+   
+   .m_home-service_img.is-back.is-lazynight {
+     background-image: url("https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/62b5484450a0c9d41d6d5044_mockup-lazynight.jpg");
+     background-position: 50% 0%;
    }
    
    .m_section-news {
@@ -2853,6 +2867,18 @@
    
    .home-service_link.is-active {
      opacity: 1;
+   }
+   
+   .blank-motion {
+     position: absolute;
+     left: 0%;
+     top: 0%;
+     right: 0%;
+     bottom: 0%;
+   }
+   
+   .h3-lottie {
+     position: relative;
    }
    
    @media screen and (max-width: 991px) {

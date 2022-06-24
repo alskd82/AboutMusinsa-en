@@ -1,7 +1,7 @@
 @charset "UTF-8";
 html {
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
+  /* -webkit-user-select: none; */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -46,6 +46,10 @@ a {
 
 .is-hide {
   display: none;
+}
+
+.is-hidden {
+  visibility: hidden;
 }
 
 .is-overflow-hidden {
