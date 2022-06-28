@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{ margin: 0; padding: 0; background-color: #222; overflow: hidden; }
+        .screen{
+            height: 500px;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            box-sizing: border-box;
+            max-width: 430px;
+            margin: 0 auto;
+            padding: 0 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            top:100px;
+
+        }
+
+        .q{
+            width: calc(100% / 5);
+            height: 100px;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+        .a{
+            display: block;
+            overflow: hidden;
+            position: relative;
+            width: 80%;
+            margin: 10% auto;
+            padding-top: 80%;
+            border-radius: 30%;
+            background-color: #f9f9f9;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        img, .lot{
+            position: absolute; left: 0; top: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.5/lottie_svg.min.js"></script>
+    <div class="screen">
+        
+        <div class="q"> <div class="a"> <div class="lot"></div></div> Lottie<br /> 27kb </div>
+        <div class="q"> <div class="a"> <img src="./assembler.png" alt=""> </div> assembler<br /> 930kb </div>
+        <div class="q"> <div class="a"> <img src="./ttt.gif" alt=""> </div> GIF <br /> 256kb </div>
+        
+        <div class="q"> <div class="a"></div> </div>
+        <div class="q"> <div class="a"></div> </div>
+    </div>
+
+    <script>
+        lottie.loadAnimation({
+            container: document.querySelector('.lot'),
+            loop: true, autoplay: true,
+            path: './lo.json'
+        })
+    </script>
+</body>
+</html>

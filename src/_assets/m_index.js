@@ -19,6 +19,7 @@ import {
 
 import {Mobile_Navi} from "./js/nav"
 import { HomeInit, HomeST } from "./js/page_home"
+import { Service } from "./js/page_service"
 import Newsroom from "./js/page_newsroom"
 
 
@@ -137,7 +138,7 @@ const loadingComplete =()=> {
         }) 
     }
     
-    ScrollTrigger.refresh(true)
+    // ScrollTrigger.refresh(true)
 }
 
 
@@ -187,6 +188,11 @@ const pageBeforeEnter =()=>{
     FromOurNews_Mobile.init();
 
     HomeInit();
+    if(nameSpace === "service") {
+        Service.addEvent(); // lazynight 앱스트어-플레이스토어 분기를 위해
+        Service.globalTitle(); // WHERE THE [] 로띠 모션 
+    }
+
     Newsroom.init();
 
     Link.homeHistory();
@@ -205,7 +211,7 @@ const pageEnter =()=>{
         ShopNow.st();
 
         HomeST();
-        ScrollTrigger.refresh(true)
+        // ScrollTrigger.refresh(true)
     })
     
     load()

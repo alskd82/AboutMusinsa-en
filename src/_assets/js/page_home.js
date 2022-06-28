@@ -34,7 +34,7 @@ const HomeGrowth = (function(exports){
         ScrollTrigger.create({
             // markers: true, id: "graph",
             trigger: lottieArea,
-            start: "50% 80%",
+            start: "50% 100%",
             onEnter: ()=> graph.play(),
         });
     }
@@ -106,7 +106,7 @@ const HomeCount = (function(exports){
         ScrollTrigger.create({
             // markers: true, id: "count",
             trigger: _trigger,
-            start: `top 70%`,
+            start: `top 90%`,
             onEnter:()=>{
                 textmasking.forEach(txt => txt.play("lines"))
                 gsap.to( _sysTxt ,{ duration: 1, ease: "Quart.easeInOut", autoAlpha: 1, delay:.2 })
@@ -169,7 +169,12 @@ const HomeHistory = (function(exports){
                     staggerTime: .1,
                     lineDelay: 0,       // 라인 순차 애니메이션 때, 라인별 딜레이
                     gapTime: 0,
-                    x: 0, y: 80,
+                    x: 0, 
+                    y: 80,
+                    // y: function(){
+                    //     if(isMobile) return 40
+                    //     else         return 80
+                    // },
                 }) 
             );
 
@@ -299,16 +304,16 @@ const HomeService = (function(exports){
         });
         */
 
-        sectionService.querySelectorAll('.home-service_link').forEach((ele,i)=>{
+        const homeServiceLinks = sectionService.querySelectorAll('.home-service_link');
+        homeServiceLinks.forEach((ele,i)=>{
             
             ele.addEventListener('mouseover', e=>{
                 if(e.currentTarget.dataset.num === overNum) return
                 overNum = e.currentTarget.dataset.num;
                 selectMn( overNum );
 
-                for(let j=0; j<4; j++){
-                    sectionService.querySelectorAll('.home-service_link')[j].classList.remove( 'is-active' )
-                }
+                for(let j=0; j<homeServiceLinks.length; j++) homeServiceLinks[j].classList.remove( 'is-active' )
+
                 e.currentTarget.classList.add( 'is-active' )
             })
             

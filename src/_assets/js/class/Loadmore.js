@@ -65,7 +65,7 @@ class LoadMore {
     itemInit(){ gsap.set(this.itemsArr , { autoAlpha: 0, y: this.initY }) };
     itemShow(){ gsap.to( this.itemsArr ,  .5, { stagger: 0.06, y:0, autoAlpha: 1, ease: 'Quad.easeOut'}) };
     autoScroll(){
-        const moduleH = gsap.getProperty( this.itemsArr[0] , 'height') * 0.5;
+        const moduleH = gsap.getProperty( this.itemsArr[0] , 'height') * 1/3;
         const windowY = window.pageYOffset;
         typeof( this.customScroll.fn ) === "function" && this.customScroll.fn()
         gsap.to(window, 1, { scrollTo: windowY + moduleH , ease: ease.material });

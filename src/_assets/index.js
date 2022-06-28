@@ -78,7 +78,7 @@ const load =()=>{
         const poster = new Image()
         poster.src = document.querySelector('video').getAttribute('poster');
         poster.onload =()=>{
-            gsap.delayedCall(.2 ,function(){
+            gsap.delayedCall(.4 ,function(){
                 loadingComplete();
                 document.querySelector('video').play();
 
@@ -88,7 +88,7 @@ const load =()=>{
         
     } else if(nameSpace != "newsroom"){
         imageLoad('.section-billboard' , { 
-            complete: gsap.delayedCall(.2, function(){
+            complete: gsap.delayedCall(.4, function(){
                 loadingComplete()
                 imageLoad('.body-black');
             }) 
@@ -181,12 +181,14 @@ const pageBeforeEnter =()=>{
     createSmoother(true);
 
     BillboardText.init(nameSpace);
-    StaggerMotion.init();
+    // StaggerMotion.init(); /* 웹폰트 불러오기 전에 셋팅하면 원치않는 줄바꿈 현상이 있음  -> pageEnter 에 넣었음 */
     ShopNow.init();
+    
 
     HomeInit();
     AboutInit();
-    Service.init();
+    Service.init(); 
+    if( nameSpace === "service" ) Service.globalTitle();
     Newsroom.init();
 
     Link.homeHistory();
@@ -197,6 +199,7 @@ const pageBeforeEnter =()=>{
     }
 }
 
+
 const pageEnter =()=>{
     console.log(`enter: ${nameSpace}`)
 
@@ -205,7 +208,9 @@ const pageEnter =()=>{
     nameSpace === "history" ? ourstoryIndi.classList.remove('is-hide') : ourstoryIndi.classList.add('is-hide');
 
     gsap.delayedCall(0.5, ()=>{
+        StaggerMotion.init(); /* 웹폰트 불러오기 전에 셋팅하면 원치않는 줄바꿈 현상이 있음 -> pageEnter 에 넣었음 */
         StaggerMotion.st();
+        
         ShopNow.st();
         Footer.st();
 
@@ -385,18 +390,19 @@ const  goToFocus =(id, time)=>{
 
     gsap.killTweensOf( forScrollVariable_Reset );
     nav.isNavShowHideBlock(true); 
-    document.querySelector(".section-nav").classList.add('is-blured')    
+    document.querySelector(".section-nav").classList.add('is-blured');    
     const opts ={
         duration: time, ease: ease.material,
         onUpdate:()=> nav.isNavShowHideBlock(true) ,
         onComplete: ()=> gsap.delayedCall( .5 , forScrollVariable_Reset )
     }
 
-    if(smoother){
-        gsap.to(smoother, { scrollTop: smoother.offset(id, "top top"), ...opts });
-    } else {
-        gsap.to(window, { scrollTo: id, ...opts });
-    }
+    /*
+    if(smoother) gsap.to(smoother, { scrollTop: smoother.offset(id, "top top"), ...opts });
+    else         gsap.to(window, { scrollTo: id, ...opts });
+    */
+    /* smoother.offset 을 쓰면 도큐멘트 사이즈보다 더 올라가는 현상이 있음 */
+    gsap.to(window, { scrollTo: {y: id, offsetY: 100}, ...opts });
 }
 
 

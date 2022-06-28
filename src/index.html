@@ -120,7 +120,8 @@
                         </header>
                         <div class="billboard_img-wrap" >
                             <div class="w-embed">
-                                <video class="billboard_img" style="opacity: .5;"
+                                <div class="" style="position: absolute; left:0; right:0; top:0; bottom:0; background-color: rgba(0,0,0,.5); z-index: 2;"></div>
+                                <video class="billboard_img"
                                 src="https://image.msscdn.net/webflow/static/newsroom/global/vid/global_pc.mp4" 
                                 muted loop playslines poster="https://image.msscdn.net/webflow/static/newsroom/global/vid/poster_pc.jpg"></video>
                             </div>
@@ -207,7 +208,7 @@
                                         <div class="history-slider_item-txt">
                                             <div class="mu24-150 is-b3b3b3 is-pb16">2022</div>
                                             <div class="cms-history_richtext w-richtext">
-                                                <p><strong>MUSINSA Kids,</strong> <br />which offers a curated selection of children&#x27;s fashion and lifestyle brands is launched</p>ㄴ
+                                                <p><strong>MUSINSA Kids,</strong> <br />which offers a curated selection of children&#x27;s fashion and lifestyle brands is launched</p>
                                             </div>
                                         </div>
                                         <a href="/01_history.html" class="history-slider_img-wrap w-inline-block">
@@ -371,31 +372,31 @@
                                     <h2 class="h2-mu32">Service</h2>
                                 </header>
                                 <ul role="list" class="home-service_list">
-                                    <li data-num="0" data-focus="#Musinsa" class="home-service_item">
+                                    <li class="home-service_item">
                                         <div data-num="0" data-focus="#Musinsa" class="home-service_link is-active w-inline-block">
                                             <div class="home-service_mn">MUSINSA</div>
                                             <div class="home-service_mn-underline is-hide"></div>
                                         </div>
                                     </li>
-                                    <li data-num="1" data-focus="#TwentyNine" class="home-service_item">
+                                    <li class="home-service_item">
                                         <div data-num="1" data-focus="#TwentyNine" class="home-service_link w-inline-block">
                                             <div class="home-service_mn">29cm</div>
                                             <div class="home-service_mn-underline is-hide"></div>
                                         </div>
                                     </li>
-                                    <li data-num="2" data-focus="#StyleShare" class="home-service_item">
+                                    <li class="home-service_item">
                                         <div data-num="2" data-focus="#StyleShare" class="home-service_link w-inline-block">
                                             <div class="home-service_mn">StyleShare</div>
                                             <div class="home-service_mn-underline is-hide"></div>
                                         </div>
                                     </li>
-                                    <li data-num="3" data-focus="Soldout" class="home-service_item">
+                                    <li class="home-service_item">
                                         <div data-num="3" data-focus="#Soldout" class="home-service_link w-inline-block">
                                             <div class="home-service_mn">soldout</div>
                                             <div class="home-service_mn-underline is-hide"></div>
                                         </div>
                                     </li>
-                                    <li data-num="4" data-focus="Lazynight" class="home-service_item">
+                                    <li class="home-service_item">
                                         <div data-num="4" data-focus="#Lazynight" class="home-service_link w-inline-block">
                                             <div class="home-service_mn">lazynight</div>
                                             <div class="home-service_mn-underline is-hide"></div>
@@ -421,33 +422,39 @@
                         </header>
                         <div class="w-dyn-list">
                             <div role="list" class="news_list w-dyn-items">
-                            <div role="listitem" class="news_item w-dyn-item"><a href="/newsroom/2022-0318" target="_blank" class="news_item-link stop-barba w-inline-block">
-                                <div class="news_item-img-wrap">
-                                    <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278ac786652425b2d135d29_220318_newsroom_en-min.jpg&quot;)" class="news_item-img is-back"></div>
+                                <div data-stagger-batch="true" role="listitem" class="news_item w-dyn-item">
+                                    <a href="/newsroom/2022-0318" target="_blank" class="news_item-link stop-barba w-inline-block">
+                                    <div class="news_item-img-wrap">
+                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/6278ac786652425b2d135d29_220318_newsroom_en-min.jpg&quot;)" class="news_item-img is-back"></div>
+                                    </div>
+                                    <header class="news_item-header">
+                                        <h3 class="h3-mu24 is-ellipsis">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU ARE IN MUSINSA&quot;</h3>
+                                        <div class="news_item-date">March 18, 2022</div>
+                                    </header>
+                                    </a>
                                 </div>
-                                <header class="news_item-header">
-                                    <h3 class="h3-mu24 is-ellipsis">MUSINSA launches a campaign with Yoo Ah In, &quot;YOU ARE IN MUSINSA&quot;</h3>
-                                    <div class="news_item-date">March 18, 2022</div>
-                                </header>
-                                </a></div>
-                            <div role="listitem" class="news_item w-dyn-item"><a href="/newsroom/2022-0307" target="_blank" class="news_item-link stop-barba w-inline-block">
-                                <div class="news_item-img-wrap">
-                                    <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/628de49042da360d01950527_220307_newsroom_en.png&quot;)" class="news_item-img is-back"></div>
+                                <div data-stagger-batch="true" role="listitem" class="news_item w-dyn-item">
+                                    <a href="/newsroom/2022-0307" target="_blank" class="news_item-link stop-barba w-inline-block">
+                                    <div class="news_item-img-wrap">
+                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/628de49042da360d01950527_220307_newsroom_en.png&quot;)" class="news_item-img is-back"></div>
+                                    </div>
+                                    <header class="news_item-header">
+                                        <h3 class="h3-mu24 is-ellipsis">Musinsa, Appointed as Official Online Partner of OTB &quot;You can purchase Maison Margiela, Marni, and Diesel at Musinsa&quot; </h3>
+                                        <div class="news_item-date">March 7, 2022</div>
+                                    </header>
+                                    </a>
                                 </div>
-                                <header class="news_item-header">
-                                    <h3 class="h3-mu24 is-ellipsis">Musinsa, Appointed as Official Online Partner of OTB &quot;You can purchase Maison Margiela, Marni, and Diesel at Musinsa&quot; </h3>
-                                    <div class="news_item-date">March 7, 2022</div>
-                                </header>
-                                </a></div>
-                            <div role="listitem" class="news_item w-dyn-item"><a href="/newsroom/2022-0309" target="_blank" class="news_item-link stop-barba w-inline-block">
-                                <div class="news_item-img-wrap">
-                                    <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/628de617ea7b60948a8fe5c8_6228918907fa1f7e2a7ef79a_%5B%EC%9D%B4%EB%AF%B8%EC%A7%80%5D%20LOEWE%20x%20On%20%EC%BA%A1%EC%8A%90%20%EC%BB%AC%EB%A0%89%EC%85%98%20%EC%8A%A4%EB%8B%88%EC%BB%A4%EC%A6%88.jpg&quot;)" class="news_item-img is-back"></div>
+                                <div data-stagger-batch="true" role="listitem" class="news_item w-dyn-item">
+                                    <a href="/newsroom/2022-0309" target="_blank" class="news_item-link stop-barba w-inline-block">
+                                    <div class="news_item-img-wrap">
+                                        <div style="background-image:url(&quot;https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/628de617ea7b60948a8fe5c8_6228918907fa1f7e2a7ef79a_%5B%EC%9D%B4%EB%AF%B8%EC%A7%80%5D%20LOEWE%20x%20On%20%EC%BA%A1%EC%8A%90%20%EC%BB%AC%EB%A0%89%EC%85%98%20%EC%8A%A4%EB%8B%88%EC%BB%A4%EC%A6%88.jpg&quot;)" class="news_item-img is-back"></div>
+                                    </div>
+                                    <header class="news_item-header">
+                                        <h3 class="h3-mu24 is-ellipsis">MUSINSA Boutique in Partnership with LOEWE - Exclusive Seller of LOEWE x On’s Limited Edition Capsule Collection in the Republic of Korea</h3>
+                                        <div class="news_item-date">March 9, 2021 </div>
+                                    </header>
+                                    </a>
                                 </div>
-                                <header class="news_item-header">
-                                    <h3 class="h3-mu24 is-ellipsis">MUSINSA Boutique in Partnership with LOEWE - Exclusive Seller of LOEWE x On’s Limited Edition Capsule Collection in the Republic of Korea</h3>
-                                    <div class="news_item-date">March 9, 2021 </div>
-                                </header>
-                                </a></div>
                             </div>
                         </div>
                     </div>

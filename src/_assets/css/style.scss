@@ -24,11 +24,11 @@ body.fixed{
     }
 }
 
-a { color: inherit; text-decoration: none; }
-.is-hide { display: none; }
-.is-hidden{ visibility: hidden; }
+a { color: inherit; text-decoration: none; } // 링크 태그 리셋
+.is-hide { display: none; }                  
+.is-hidden{ visibility: hidden; }     
 .is-overflow-hidden{ overflow: hidden; }
-.is-ellipsis{
+.is-ellipsis{                               // 3줄 이상 말 줄임표 넣기 
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

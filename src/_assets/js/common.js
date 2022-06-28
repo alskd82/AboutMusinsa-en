@@ -157,7 +157,11 @@ const BillboardText = (function(exports){
                 splitIntersection: [[0] , [1,2,3], [4,5], [6,7]],
                 duration: .75, ease: 'Quart.easeOut',
                 staggerTime: .1, gapTime: -.3,
-                x:0, y: 60,
+                x:0, 
+                y: function(){
+                    if(isMobile) return 20
+                    else         return 60
+                },
             }
             for(let key in opts) title[key] = opts[key];
         } else {
@@ -166,7 +170,11 @@ const BillboardText = (function(exports){
                 splitIntersection: [[0] , [1]],
                 duration: .75, ease: 'Quart.easeOut',
                 staggerTime: .1, gapTime: -.3,
-                x:0, y: 60,
+                x:0,
+                y: function(){
+                    if(isMobile) return 20
+                    else         return 60
+                },
             }
             for(let key in opts) title[key] = opts[key];
         }
@@ -202,7 +210,7 @@ const StaggerMotion = (function(exports){
             ScrollTrigger.create({
                 // markers: true, id: `stagger${i}`,
                 trigger: ele,
-                start: !isMobile ? "top 80%": "top 92%",
+                start: !isMobile ? "top 90%": "top 92%",
                 onEnter: (self)=>{
                     gsap.set( ele, {autoAlpha: 1})
                     stagger[i].play("lines")
@@ -215,7 +223,7 @@ const StaggerMotion = (function(exports){
             ScrollTrigger.create({
                 // markers: true, id: `y${i}`,
                 trigger: ele,
-                start: !isMobile ? "top 80%": "top 92%",
+                start: !isMobile ? "top 90%": "top 92%",
                 onEnter:(self)=> {
                     gsap.to( ele, {...scrollIntoView} )
                     self.kill();
@@ -228,7 +236,7 @@ const StaggerMotion = (function(exports){
             ScrollTrigger.create({
                 // markers: true, id: `alpha${i}`,
                 trigger: ele,
-                start: !isMobile ? "top 80%": "top 92%",
+                start: !isMobile ? "top 90%": "top 92%",
                 onEnter:(self)=> {
                     gsap.to( ele, {...scrollIntoView} )
                     self.kill();
@@ -250,27 +258,11 @@ const StaggerMotion = (function(exports){
             )},
             
             onEnterBack: batch => gsap.set(batch, {autoAlpha: 1, y: 0, overwrite: true}),
-            start: !isMobile ? "top 90%": "top 95%",
+            start: !isMobile ? "top 90%": "top 92%",
             // end: "top top",
             preventOverlaps: true
         });
         
-    }
-
-    const newsroom =()=>{
-        const sectionNews = document.querySelector('.section-news');
-        if(!sectionNews) return
-
-        gsap.to('.news_item', {
-            ...scrollIntoView,
-            stagger: 0.2,
-            scrollTrigger:{
-                // markers: true, id: 'news',
-                trigger: sectionNews.children[0],
-                start: "top 75%",
-                toggleClass: "is-active"
-            }
-        });
     }
 
     const init =()=>{
@@ -294,9 +286,6 @@ const StaggerMotion = (function(exports){
         });
 
         // gsap.utils.toArray('[data-stagger-p]').forEach((ele, i)=> gsap.set( ele, { y: 80, autoAlpha: 0}) )
-
-        // FromOurNewsroom //
-        newsroom();
 
     }
 
@@ -399,7 +388,7 @@ const ShopNow = (function(exports){
         let targetX, targetY;
         let mouseX, mouseY;
         let cacularMouseX, cacularMouseY;
-        let areaY;
+        let areaX, areaY;
         let rAF;
 
         const followCursor =()=>{
@@ -414,7 +403,13 @@ const ShopNow = (function(exports){
             arrowDefaultX = getRelativePosition(area , arrow).x
             arrowDefaultY = getRelativePosition(area , arrow).y
         }
-        arrowDefaultPos();
+        
+        arrowDefaultPos() /* arrow 의 위치를 너무 빨리 계산해 놓으면 간격오류가 생김 */
+        console.log( arrowDefaultX )
+        window.addEventListener( 'load', e=> {
+            arrowDefaultPos()
+            console.log( 'load:' + arrowDefaultX )
+        }); 
         window.addEventListener( 'resize', e=> arrowDefaultPos() )
 
         area.addEventListener('mouseenter', e=>{
@@ -426,9 +421,12 @@ const ShopNow = (function(exports){
         area.addEventListener('mousemove', e=>{
             mouseX = e.pageX;
             mouseY = e.pageY;
+            areaX = area.getBoundingClientRect().left;
             areaY = window.pageYOffset + area.getBoundingClientRect().top;
 
-            cacularMouseX = mouseX - arrowDefaultX - (gsap.getProperty(arrow, 'width')/2);
+            console.log( mouseX, areaX, arrowDefaultX )
+
+            cacularMouseX = mouseX - areaX - arrowDefaultX - (gsap.getProperty(arrow, 'width')/2);
             cacularMouseY = mouseY - areaY - arrowDefaultY - (gsap.getProperty(arrow, 'height')/2);
 
             targetX = gsap.getProperty(arrow, 'x');
@@ -455,6 +453,7 @@ const ShopNow = (function(exports){
         } else {
             ani = gsap.fromTo( img, { y: -gsap.getProperty('.m_shopnow_img-wrap', 'height')*0.75 }, { duration: 1, y: 0 });
         }
+        
         ScrollTrigger.create({
             // markers: true, id: "shownow",
             animation: ani,

@@ -2,8 +2,9 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 const root = resolve(__dirname, 'src')
-const outDir = resolve(__dirname, 'dist')
-// const outDir = resolve(__dirname, 'dist/contentPage')
+
+const outDir = resolve(__dirname, 'dist')            /* 메인 빌드용 */  
+// const outDir = resolve(__dirname, 'dist/contentPage')   /* CMS 컨텐츠 페이지 빌드용 */
 
 function CustomHmr() {
     return {
@@ -38,6 +39,8 @@ export default defineConfig({
 
         rollupOptions: {
             input: {
+
+                /* 메인 빌드용 */
                 index: resolve(root, "index.html"),
                 history: resolve(root, "01_history.html"),
                 impact: resolve(root, "02_impact.html"),
@@ -53,7 +56,7 @@ export default defineConfig({
                 m_newsroom: resolve(root, "m","m_04_newsroom.html"), 
 
 
-                
+                /* CMS 컨텐츠 페이지 빌드용 */
                 // contentPage: resolve(root, "contentPage", "contentPage.html"),  
             },
 
