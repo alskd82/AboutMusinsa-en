@@ -103,10 +103,18 @@ const load =()=>{
 const loadingComplete =()=> {
     console.log( "loadingComplete" );
     
+    
     if(document.body.classList.contains('before-load')){
         document.body.classList.remove('before-load');
         document.body.classList.add('loaded');
         setTimeout(() =>  document.body.classList.remove('loaded') , 3000);
+
+        const href = location.href;   // ----------------------------- href 에 # 이 있으면 포커싱 (뉴스룸 상세페이지에서 진입했을 때를 위해 )
+        if(href.indexOf('#') != -1){
+            setTimeout(() => {
+                goToFocus( href.substring( href .indexOf('#') ) , 1 )     
+            }, 850);
+        }
     } 
     else {
         if(nameSpace === "newsroom"){
@@ -225,7 +233,7 @@ const pageEnter =()=>{
 
 const pageTransitionComplete =()=>{
     // ScrollTrigger.refresh(true)
-
+    
     /* 포커싱 이동이 있다면... */
     if(nameSpace === "history"){
         if(!focusInPage) return
@@ -238,6 +246,8 @@ const pageTransitionComplete =()=>{
         focusInPage = null;
     }
 }
+
+
 
 //===============================================================================================================================
 /*===== Barbar ======================*/
@@ -305,6 +315,11 @@ const Link = (function(exports){
         });
 
         smnArr.forEach( (smn,i) =>{
+            
+            // if( smn.getAttribute('data-focus') ) {  // -------------------------------------------------------- smn URL 추가하기( 뉴스룸 상세페이지에만 추가할 것 )
+            //     smn.setAttribute('href', smn.getAttribute('href')+smn.getAttribute('data-focus'))
+            // };
+
             smn.addEventListener('click', e => {    // -------------------------------------------------------- smn 페이지 이동
                 // // if( e.currentTarget.dataset.target === "3" ) return
                 e.preventDefault();
