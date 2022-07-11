@@ -188,7 +188,7 @@ let m = new TextSlitLinesMasking({
     autoAlpha: true,    // opactiy 애니메이션 진행여부
 })
 m.onComplete = function(){
-    console.log('oooook')
+    console.log('TextSlitLinesMasking Complete')
 }
 /*  
     m.play('lines');

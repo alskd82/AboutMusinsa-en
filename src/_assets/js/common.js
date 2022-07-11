@@ -405,7 +405,6 @@ const ShopNow = (function(exports){
         }
         
         arrowDefaultPos() /* arrow 의 위치를 너무 빨리 계산해 놓으면 간격오류가 생김 */
-        console.log( arrowDefaultX )
         window.addEventListener( 'load', e=> {
             arrowDefaultPos()
             console.log( 'load:' + arrowDefaultX )

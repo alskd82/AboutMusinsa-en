@@ -1,5 +1,5 @@
-import path_graph from "../lottie_path/global_graph_pc.json";
-import path_graph_m from "../lottie_path/global_graph_mo.json";
+// import path_graph from "../lottie_path/global_graph_pc.json";
+// import path_graph_m from "../lottie_path/global_graph_mo.json";
 
 import BezierEasing from "./class/BezierEasing.js";
 import { TextSplitWordsShow, TextSlitLinesMasking } from './class/TextMotion.js';
@@ -22,9 +22,14 @@ const HomeGrowth = (function(exports){
     let isDesktop;
 
     const lottie_Fn=(ele)=>{
+        const path_graph = isDesktop ? 
+        document.querySelector('.growth_lottie-area').dataset.path :
+        document.querySelector('.m_growth_lottie-area').dataset.path 
+
         return lottie.loadAnimation({ 
             container: ele,  loop: false,  autoplay: false, 
-            animationData: isDesktop ? path_graph: path_graph_m,
+            // animationData: isDesktop ? path_graph: path_graph_m,
+            path: path_graph
         })
     };
 
@@ -48,6 +53,15 @@ const HomeGrowth = (function(exports){
         lottieArea = isDesktop ? document.querySelector('.growth_lottie-area') : document.querySelector('.m_growth_lottie-area')
         
         graph = lottie_Fn(lottieArea);
+        
+        const loopFrame = isDesktop ? 
+        document.querySelector('.growth_lottie-area').dataset.loopframe :
+        document.querySelector('.m_growth_lottie-area').dataset.loopframe 
+
+        graph.onComplete =()=> {
+            if(!loopFrame) return
+            graph.goToAndPlay(loopFrame, true)
+        }
     };
 
     exports.st = st;
