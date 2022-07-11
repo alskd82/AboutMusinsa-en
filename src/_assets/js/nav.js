@@ -42,7 +42,7 @@ const Navi = (function(exports){
     const smnHide =()=>{
         gsap.killTweensOf( navSmn )
         gsap.to( navSmn, 0.2, { 
-            autoAlpha: 0, ease: ease.standard, 
+            autoAlpha: 0, ease: ease.standard,
             onComplete: ()=> {
                 // navSmn.classList.add('is-hide') 
             }
@@ -89,7 +89,7 @@ const Navi = (function(exports){
                 navSmn.classList.remove('is-hide');
                 gsap.set( navSmn, {x: smnTargetX(hoverElem)});
                 
-                gsap.fromTo( navSmn, {y: -15, autoAlpha: 0 }, { y:0, autoAlpha: 1, duration: 0.3, ease: ease.standard, delay: .2})
+                gsap.to( navSmn, { y:0, autoAlpha: 1, duration: 0.3, ease: ease.standard})
             } else {
                 gsap.to( navSmn, {x: smnTargetX(hoverElem), duration: 0.3, ease: ease.standard })
             }
@@ -106,6 +106,7 @@ const Navi = (function(exports){
         if( !isEnter && !isSmnEnter ){
             smnHide()
             mnArr.forEach( mn => mn.classList.remove('is-active') )
+            gsap.set( navSmn, {y: -30, delay: 0.2 })
         }
         if(!isSmnEnter) smnActive(-1)
     };
@@ -130,6 +131,8 @@ const Navi = (function(exports){
         smnArr.forEach( (smn,i) =>{
             smn.addEventListener('mouseover', e => {isSmnEnter = true; smnActive(i)} );
         });
+
+        gsap.set( navSmn, {y: -30 })
     };
 
     /* 원뎁스  활성화 색 강제 부여하기 */
