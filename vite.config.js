@@ -57,7 +57,7 @@ export default defineConfig({
 
 
                 /* CMS 컨텐츠 페이지 빌드용 */
-                // contentPage: resolve(root, "contentPage", "contentPage.html"),  
+                // contentPage: resolve(root, "contentPage", "contentPage.html"),
             },
 
             /* out 을 명시 안하면 assets 폴더 안에 다 담김 */

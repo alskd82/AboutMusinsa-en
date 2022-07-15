@@ -17,7 +17,7 @@ const Navi = (function(exports){
     const mnArr = document.querySelectorAll('.nav_link');               // 원뎁스 메뉴들 a 태그들
     const smnArr = document.querySelectorAll('.nav_smn-link')           // 투뎁스 메뉴들 a 태그들
 
-    let hoverNum;
+    let hoverName;
     let hoverElem;
     let isEnter = false;     // 원뎁스 영역에 마우스 들어오면...
     let isSmnEnter = false;  // 투뎁스 영역에 마우스 들어오면..
@@ -68,7 +68,7 @@ const Navi = (function(exports){
         gsap.killTweensOf(check);
 
         hoverElem = mnArr[num];
-        hoverNum = hoverElem.dataset.num;
+        hoverName = hoverElem.dataset.name;
         // console.log(hoverNum, hoverElem)
 
         mnArr.forEach( (mn,i)=>{
@@ -81,7 +81,7 @@ const Navi = (function(exports){
         } else {
 
             smnArr.forEach((smn, i) =>{
-                (smn.dataset.target === hoverNum) ? smn.classList.remove('is-hide') : smn.classList.add('is-hide')
+                (smn.dataset.target === hoverName) ? smn.classList.remove('is-hide') : smn.classList.add('is-hide')
             });
 
             if( navSmn.classList.contains('is-hide') || gsap.getProperty(navSmn, "opacity") != 1 ){ //navSmn.classList.contains('is-hide')
@@ -251,6 +251,11 @@ const Mobile_Navi = (function(exports){
     let pageY;
 
     const naviOpen =()=>{
+        /*
+            현재 페이지 스크롤 범위 저장
+            .page-wrap top 값 변경
+            body fixed 로 변경
+        */
         pageY = window.pageYOffset;
         document.querySelector('.page-wrap').style.top = `-${pageY}px`;
         document.body.classList.add('fixed');
@@ -265,6 +270,11 @@ const Mobile_Navi = (function(exports){
     }
 
     const naviClose =(isTop)=>{
+        /*
+            body fixed 삭제
+            .page-wrap top 복구
+            페이지 스크롤 원위치
+         */
         document.body.classList.remove('fixed');
         document.querySelector('.page-wrap').style.top = `-${0}px`;
     

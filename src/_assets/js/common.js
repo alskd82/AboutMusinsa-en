@@ -454,7 +454,8 @@ const ShopNow = (function(exports){
         }
         
         ScrollTrigger.create({
-            // markers: true, id: "shownow",
+            // markers: true, 
+            id: "shownow",
             animation: ani,
             trigger: wrapper,
             start: `top bottom`, 
@@ -462,6 +463,7 @@ const ShopNow = (function(exports){
             scrub: true,
         });
     }
+
 
     const init=()=>{
         sectionShopNow = document.querySelector('.section-shopnow');

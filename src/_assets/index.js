@@ -74,7 +74,7 @@ const load =()=>{
     // document.body.classList.contains('load-before') ? sourceLoad('.section-billboard') : sourceLoad('.body-black');
 
     /* 빌보드 영역만 먼저 로드하고 끝나면 화면 보이게 => 이후 전체이미지 로드 */
-    if(nameSpace === "home"){
+    if(nameSpace === "home"){ // HOME
         const poster = new Image()
         poster.src = document.querySelector('video').getAttribute('poster');
         poster.onload =()=>{
@@ -86,7 +86,7 @@ const load =()=>{
             }) 
         }
         
-    } else if(nameSpace != "newsroom"){
+    } else if(nameSpace != "newsroom"){ // History| Impact | Servce
         imageLoad('.section-billboard' , { 
             complete: gsap.delayedCall(.4, function(){
                 loadingComplete()
@@ -94,7 +94,7 @@ const load =()=>{
             }) 
         });
 
-    } else {
+    } else { // Newsroom
         loadingComplete()
         imageLoad('.body-black');
     }
@@ -103,8 +103,7 @@ const load =()=>{
 const loadingComplete =()=> {
     console.log( "loadingComplete" );
     
-    
-    if(document.body.classList.contains('before-load')){
+    if(document.body.classList.contains('before-load')){ // --------- 첫 접속 : 네비게이션 등장
         document.body.classList.remove('before-load');
         document.body.classList.add('loaded');
         setTimeout(() =>  document.body.classList.remove('loaded') , 3000);
@@ -117,7 +116,7 @@ const loadingComplete =()=> {
         }
     } 
     else {
-        if(nameSpace === "newsroom"){
+        if(nameSpace === "newsroom"){ // ---------------------------- 뉴스룸: 마스킹 애니메이션 삭제 
             gsap.to( "[data-barba-namespace]", { opacity: 1 , duration: 0.7, ease: 'Cubic.easeInOut', });
         }
         else {
@@ -128,7 +127,7 @@ const loadingComplete =()=> {
                 clipPath: `polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)`,
                 duration: .8,
                 ease: BezierEasing(0.6,0,0.1,1),
-                onComplete: pageTransitionComplete
+                onComplete: pageTransitionComplete // 포커싱 이동을 해야하는지 여부 판단 
             })
         }
     }
@@ -143,7 +142,6 @@ const loadingComplete =()=> {
     ScrollTrigger.refresh(true)
 }
 
-
 const imageLoad =( selector, opt={ onComplete: undefined }) =>{
     let imgCount = 0;
 
@@ -151,7 +149,7 @@ const imageLoad =( selector, opt={ onComplete: undefined }) =>{
     loader.on( 'always', function( instance ) {
         loader.images.forEach( (img, i)=>{
             const result = img.isLoaded ? "loaded" : "broken";
-            // console.log( 'image is ' + result + ' for ' + img.img.src  );
+            console.log( 'image is ' + result + ' for ' + img.img.src  );
             imgCount++;
             if( imgCount === loader.images.length && typeof(opt.onComplete)=== "function" ) opt.onComplete();
         })

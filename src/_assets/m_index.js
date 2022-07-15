@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded' , e=>{
 
     Link.navi();
     Mobile_Navi.init();
+    footerDocument.init();
 
     pageBeforeLeave();
     pageBeforeEnter();
@@ -213,6 +214,7 @@ const pageEnter =()=>{
         HomeST();
         // ScrollTrigger.refresh(true)
     })
+    footerDocument.addEvent();
     
     load()
 
@@ -364,3 +366,73 @@ const goToFocus =(id, time)=>{
     gsap.to(window, { scrollTo: id, duration: time, ease: ease.material});
 }
 
+//===============================================================================================================================
+/*===== 모바일 정책문서 불러오기  ======================*/
+//===============================================================================================================================
+
+const footerDocument =(function(exports){
+    let popup, terms, privacy, closeBtn,
+        pageY, shopNowImgY;
+
+    async function preLoad( url, target ){
+        const res = await fetch(url);
+        const contentType = res.headers.get('content-type');
+        const html = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        target.appendChild( doc.querySelector('main') )
+    }
+
+
+    const open=(e)=>{    
+        ScrollTrigger.getById('shownow').disable(false)  
+        pageY = window.pageYOffset;
+        document.querySelector('.page-wrap').style.top = `-${pageY}px`;
+        document.body.classList.add('fixed');
+
+        e.preventDefault();
+        e.currentTarget.id === "Terms" ? terms.classList.remove('is-hide') : privacy.classList.remove('is-hide')
+        popup.classList.remove('is-hide')
+        gsap.to(popup, 0.4, {y: 0, ease: ease.standard})
+    }
+
+    const close=(e)=>{
+        document.body.classList.remove('fixed');
+        document.querySelector('.page-wrap').style.top = `-${0}px`;
+        window.scrollTo(0, pageY);
+
+        gsap.to(popup, 0.3, {y: window.innerHeight, ease: ease.exit, onComplete:()=>{
+            terms.scrollTop = 0
+            privacy.scrollTop = 0
+            popup.classList.add('is-hide')
+            terms.classList.add('is-hide')
+            privacy.classList.add('is-hide')
+        }})
+    }
+
+    const addEvent=()=>{
+        if(!document.querySelector('.popup')) return;
+        document.querySelector('#Terms').addEventListener('click', open);
+        document.querySelector('#Privacy').addEventListener('click', open);
+    }
+
+    const init=()=>{
+        if(!document.querySelector('.popup')) return;
+        popup = document.querySelector('.popup');
+        terms = popup.querySelector('.terms');
+        privacy = popup.querySelector('.privacy');
+        closeBtn = popup.querySelector('.btn-close'); 
+
+        preLoad(document.querySelector('#Terms').href, terms)
+        preLoad(document.querySelector('#Privacy').href , privacy)
+
+        // document.querySelector('#Terms').addEventListener('click', open);
+        // document.querySelector('#Privacy').addEventListener('click', open);
+        closeBtn.addEventListener('click', close);
+    }
+
+    exports.addEvent = addEvent;
+    exports.init = init;
+    return exports;
+})({});
