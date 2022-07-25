@@ -328,6 +328,31 @@ a {
 }
 
 /*//////////////////////////////////////*/
+/*=== 파트너스 브랜드 ===================*/
+.partner_item * {
+  pointer-events: none;
+}
+
+.partner_item {
+  -webkit-transition: opacity 0.2s cubic-bezier(0.33, 0.45, 0, 1);
+  transition: opacity 0.2s cubic-bezier(0.33, 0.45, 0, 1);
+}
+
+.partner_item.is-active > .partner_brandname {
+  opacity: 1;
+  -webkit-transition: opacity 0.4s cubic-bezier(0.33, 0.45, 0, 1);
+  transition: opacity 0.4s cubic-bezier(0.33, 0.45, 0, 1);
+}
+
+.section-partner_img-wrap {
+  pointer-events: none;
+}
+
+.section-partner_img-wrap .brand_img-wrap.is-row {
+  max-height: calc(100vh - 200px);
+}
+
+/*//////////////////////////////////////*/
 /*=== For Mobile ===================*/
 .m_nav-link.is-active {
   color: #0078ff;

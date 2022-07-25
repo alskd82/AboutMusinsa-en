@@ -5,29 +5,18 @@
 <head>
     <meta charset="utf-8" />
     <title>건강한 패션 생태계를 만드는 서포터, 무신사 파트너스</title>
-    <meta content="건강한 패션 생태계를 만드는 서포터, 무신사 파트너스" name="description" />
-    <meta content="건강한 패션 생태계를 만드는 서포터, 무신사 파트너스" property="og:title" />
-    <meta content="December 10, 2021" property="og:description" />
-    <meta content="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/626104f63c965140d767f2da_article_ex-1.jpg"
-        property="og:image" />
-    <meta content="건강한 패션 생태계를 만드는 서포터, 무신사 파트너스" property="twitter:title" />
-    <meta content="December 10, 2021" property="twitter:description" />
-    <meta content="https://uploads-ssl.webflow.com/626086608537dd5dfdb32261/626104f63c965140d767f2da_article_ex-1.jpg"
-        property="twitter:image" />
-    <meta property="og:type" content="website" />
-    <meta content="summary_large_image" name="twitter:card" />
+
     <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-    <link rel="stylesheet" href="../_assets/css/webflow.css">
-
+    
     <script src="../_assets/redirectRouting.js"></script>
 
 
-
+    <link rel="stylesheet" href="../_assets/css/webflow.css">
     <link rel="stylesheet" href="../_assets/css/forload.css">
     <link rel="stylesheet" href="../_assets/css/style.css">
 
-    <script type="module" src="../_assets/contentPage.js"></script>
+    <script type="module" defer src="../_assets/js/contentPage.js"></script>
 
 </head>
 
@@ -80,12 +69,13 @@
                         <a data-target="service" data-focus="#StyleShare" href="/03_service.html" class="nav_smn-link">StyleShare</a>
                         <a data-target="service" data-focus="#Soldout" href="/03_service.html" class="nav_smn-link">soldout</a>
                         <a data-target="service" data-focus="#Lazynight" href="/03_service.html" class="nav_smn-link">lazynight</a>
-                        <a data-target="newsroom" href="/04_newsroom.html" class="nav_smn-link">Press Release</a></div>
+                        <a data-target="newsroom" href="/05_newsroom.html" class="nav_smn-link">Press Release</a></div>
                     <ul role="list" class="nav_list">
                         <li class="nav_item"> <a data-name="home" href="/" aria-current="page" class="nav_link w--current">HOME</a> </li>
                         <li class="nav_item"> <a data-smn="true" data-name="about" href="/01_history.html" class="nav_link">ABOUT</a> </li>
                         <li class="nav_item"> <a data-smn="true" data-name="service" href="/03_service.html" class="nav_link">SERVICE</a> </li>
-                        <li class="nav_item"> <a data-smn="true" data-name="newsroom" href="/04_newsroom.html" class="nav_link">NEWSROOM</a> </li>
+                        <li class="nav_item"> <a data-name="partners" href="/04_partners.html" class="nav_link">PARTNERS</a> </li>
+                        <li class="nav_item"> <a data-smn="true" data-name="newsroom" href="/05_newsroom.html" class="nav_link">NEWSROOM</a> </li>
                     </ul>
                 </div>
             </div>
@@ -95,26 +85,25 @@
     <nav class="m_section-nav">
         <div class="m_ham-wrap">
             <div class="m_ham">
-
                 <svg viewBox="0 0 66 60" class="line"> <rect x="20" y="25" width="26" height="2" style="fill: rgb(255,255,255)" /> </svg>
                 <svg viewBox="0 0 66 60" class="line"> <rect x="20" y="33" width="26" height="2" style="fill: rgb(255,255,255)" /> </svg>   
-                
             </div>
         </div>
         <div class="m_nav-wrap">
             <div class="container-768_m-nav">
                 <div class="m_nav-link-wrap">
 
-                    <a href="/m/m.html" aria-current="page" class="m_nav-link w--current">Home</a>
+                    <a href="/m/m.html" aria-current="page" class="m_nav-link w--current" data-name="home" >Home</a>
                     <div class="m_nav-about">
-                        <a href="/m/m_01_history.html" class="m_nav-link">About</a>
+                        <a href="/m/m_01_history.html" class="m_nav-link" data-name="about">About</a>
                         <div class="m_nav-link_smn-wrap">
-                            <a href="/m/m_01_history.html" class="m_nav-link_smn">History</a>
-                            <a href="/m/m_02_impact.html" class="m_nav-link_smn">Impact</a>
+                            <a href="/m/m_01_history.html" class="m_nav-link_smn" data-name="history">History</a>
+                            <a href="/m/m_02_impact.html" class="m_nav-link_smn" data-name="impact">Impact</a>
                         </div>
                     </div>
-                    <a href="/m/m_03_service.html" class="m_nav-link">Service</a>
-                    <a href="/m/m_04_newsroom.html" class="m_nav-link">Newsroom</a>
+                    <a href="/m/m_03_service.html" class="m_nav-link" data-name="service">Service</a>
+                    <a href="/m/m_04_partners.html" class="m_nav-link" data-name="partners">Partners</a>
+                    <a href="/m/m_05_newsroom.html" class="m_nav-link" data-name="newsroom">Newsroom</a>
 
                 </div>
             </div>
@@ -224,35 +213,16 @@
                 <div class="container-max1440">
                     <div class="footer_wrap">
                         <div>
-                            <div class="footer-logo">
-                                <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb047dced7eb2bd71dbd7_logo_musinsa.svg" loading="lazy" alt="" />
-                            </div>
-                            
+                            <div class="footer-logo"><img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb047dced7eb2bd71dbd7_logo_musinsa.svg" loading="lazy" alt="" /></div>
                             <ul role="list" class="footer-list">
-                                <li class="footer-item"> <a href="https://global.musinsa.com" target="_blank" class="footer-item_link is-first stop-barba">MUSINSA.com</a> </li>
-                                <li class="footer-item"> <a href="https://help-global.musinsa.com/hc/en-us?_gl=1*19qskku*_ga*MTI5Njg1MTg3LjE2NTQyMTk3Mzc.*_ga_7P8BVDSTPN*MTY1Njk0MTIzMC43Mi4xLjE2NTY5NDE5MTUuMA" target="_blank" class="footer-item_link stop-barba">Help center</a></li>
-                                <li class="footer-item"> <a href="/document/terms-of-service.html" id="TermsOfService" aria-current="page" class="footer-item_link stop-barba w--current">Terms of Service</a></li>
+                                <li class="footer-item"><a href="https://global.musinsa.com" target="_blank" class="footer-item_link is-first stop-barba">MUSINSA.com</a></li>
+                                <li class="footer-item"><a href="https://help-global.musinsa.com/hc/en-us?_gl=1*19qskku*_ga*MTI5Njg1MTg3LjE2NTQyMTk3Mzc.*_ga_7P8BVDSTPN*MTY1Njk0MTIzMC43Mi4xLjE2NTY5NDE5MTUuMA" target="_blank" class="footer-item_link stop-barba">Help center</a></li>
+                                <li class="footer-item"><a href="/document/terms-of-service.html" id="TermsOfService" class="footer-item_link stop-barba">Terms of Service</a></li>
                                 <li class="footer-item"><a href="/document/privacy.html" class="footer-item_link is-last stop-barba">Privacy</a></li>
                             </ul>
-    
                             <div class="mu-16">© MUSINSA Inc. 2022. We love our users!</div>
-    
                         </div>
-    
-                        <div class="footer_sns">
-                            <a href="https://www.facebook.com/Global.MUSINSA/" target="_blank" class="footer_sns-link stop-barba w-inline-block">
-                                <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a502b2e5908c34c5e_facebook.svg" loading="lazy" alt="" />
-                            </a>
-                            <a href="https://www.instagram.com/musinsa_global/" target="_blank" class="footer_sns-link stop-barba w-inline-block">
-                                <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a55baed06a0042765_instgram.svg" loading="lazy" alt="" />
-                            </a>
-                            <a href="https://www.youtube.com/c/MUSINSATV" target="_blank" class="footer_sns-link stop-barba w-inline-block">
-                                <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a8ab88f70f2acf115_youtube.svg" loading="lazy" alt="" />
-                            </a>
-                            <a href="https://twitter.com/musinsa_global" target="_blank" class="footer_sns-link stop-barba w-inline-block">
-                                <img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47aa2c9d77543d543e5_twitter.svg" loading="lazy" alt="" />
-                            </a>
-                        </div>
+                        <div class="footer_sns"><a href="https://www.facebook.com/Global.MUSINSA/" target="_blank" class="footer_sns-link stop-barba w-inline-block"><img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a502b2e5908c34c5e_facebook.svg" loading="lazy" alt="" /></a><a href="https://www.instagram.com/musinsa_global/" target="_blank" class="footer_sns-link stop-barba w-inline-block"><img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a55baed06a0042765_instgram.svg" loading="lazy" alt="" /></a><a href="https://www.youtube.com/c/MUSINSATV" target="_blank" class="footer_sns-link stop-barba w-inline-block"><img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47a8ab88f70f2acf115_youtube.svg" loading="lazy" alt="" /></a><a href="https://twitter.com/musinsa_global" target="_blank" class="footer_sns-link stop-barba w-inline-block"><img src="https://uploads-ssl.webflow.com/625d0ed07079ed51be21d181/625fb47aa2c9d77543d543e5_twitter.svg" loading="lazy" alt="" /></a></div>
                     </div>
                 </div>
             </footer>

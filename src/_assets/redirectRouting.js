@@ -14,7 +14,8 @@ const redirection=( opts={nowDesktop: true, dev: true} )=>{
             if(window.location.href.indexOf('/history') != -1)          window.location = opts.dev ? "/m/m_01_history.html" : "/en/m/about/history/";
             else if(window.location.href.indexOf('/impact') != -1)      window.location = opts.dev ? "/m/m_02_impact.html" : "/en/m/about/impact/";
             else if(window.location.href.indexOf('/service') != -1)     window.location = opts.dev ? "/m/m_03_service.html" : "/en/m/service/";
-            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = opts.dev ? "/m/m_04_newsroom.html" : "/en/m/newsroom/";
+            else if(window.location.href.indexOf('/partners') != -1)    window.location = opts.dev ? "/m/m_04_partners.html" : "/en/m/partners/";
+            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = opts.dev ? "/m/m_05_newsroom.html" : "/en/m/newsroom/";
             else {
                 window.location = opts.dev ? "/m/m.html" : "/en/m/";
             }
@@ -25,7 +26,8 @@ const redirection=( opts={nowDesktop: true, dev: true} )=>{
             if(window.location.href.indexOf('/history') != -1)          window.location = opts.dev ? "01_history.html" : "/en/about/history/";
             else if(window.location.href.indexOf('/impact') != -1)      window.location = opts.dev ? "02_impact.html" : "/en/about/impact/";
             else if(window.location.href.indexOf('/service') != -1)     window.location = opts.dev ? "03_service.html" : "/en/service/";
-            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = opts.dev ? "04_newsroom.html" : "/en/newsroom/";
+            else if(window.location.href.indexOf('/partners') != -1)    window.location = opts.dev ? "04_partners.html" : "/en/partners/";
+            else if(window.location.href.indexOf('/newsroom') != -1)    window.location = opts.dev ? "05_newsroom.html" : "/en/newsroom/";
             else {
                 window.location = opts.dev ? "/" : "/en/";
             }

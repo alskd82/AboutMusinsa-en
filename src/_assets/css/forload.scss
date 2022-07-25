@@ -3,28 +3,39 @@
 /*///////////////////////////////*/
 /*=== Loading BODY ===================*/
 body.before-load{
-    // position: fixed; 
-    // left: 0; top: 0; right: 0; bottom: 0;
-    // overflow: hidden;
-    .page-wrap{
-        transition: 500ms $ease-quart-out;
-        clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
-    }
     .section-nav{
         transform: translate3d(0,-$nav-height,0);
     }
 }
 
 body.loaded{
-    .page-wrap{
-        transition: 1s cubic-bezier(.6,0,0,1);
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    }
     .section-nav{
         transition: 1s $ease-quart-out 1s;
         transform: translate3d(0,0,0);
     }
 }
+
+/*///////////////////////////////*/
+/*=================================*/
+.load-dim{
+    margin: 0 auto;
+    min-width: 1440px;
+    max-width: 2560px;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    z-index: 800;
+    position: fixed;
+    left: 0; top: 0; right: 0; 
+    background-color: rgba(0,0,0,1);
+}
+
+.load-dim.is-m{
+    width: 100vw;
+    min-width: auto;
+    max-width: 768px;
+    z-index: 1000;
+}
+
 
 
 /*//////////////////////////////////////*/
