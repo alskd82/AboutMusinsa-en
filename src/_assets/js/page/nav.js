@@ -307,8 +307,17 @@ const Mobile_Navi = (function(exports){
 
         if( nameSpace === "history" || nameSpace === "impact"){
             document.querySelector('.m_nav-link[data-name=about]').classList.add('is-active');
+            if(nameSpace === "history"){
+                document.querySelector('.m_nav-link_smn[data-name=history]').classList.add('is-active');
+                document.querySelector('.m_nav-link_smn[data-name=impact]').classList.remove('is-active');
+            } else {
+                document.querySelector('.m_nav-link_smn[data-name=history]').classList.remove('is-active');
+                document.querySelector('.m_nav-link_smn[data-name=impact]').classList.add('is-active');
+            }
         } else {
             document.querySelector('.m_nav-link[data-name=about]').classList.remove('is-active');
+            document.querySelector('.m_nav-link_smn[data-name=history]').classList.remove('is-active');
+            document.querySelector('.m_nav-link_smn[data-name=impact]').classList.remove('is-active');
         }
         
     }
