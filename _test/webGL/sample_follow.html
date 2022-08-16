@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Follow </title>
+    <style>
+        html, body { width: 100%; height: 100%; }
+        body{ 
+            margin: 0; padding: 0; 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #ffff00;
+            height: 100vh;
+        }
+        *{ box-sizing: border-box; }
+        
+        .img-wrap{ opacity: 1; position: absolute; top: 0; left:0;}
+        .img-wrap_1{ width: 40vw; height: 300px;}
+        .img-wrap_2{ width: 300px; height: 80vh;}
+        .img-wrap img{ width: 100%; height: 100%; object-fit: cover;}
+
+        #test{width: 500px; height: 500px;}
+    </style>
+</head>
+<body>
+
+    <div class="xy" style="position: fixed; left:0; top:0; z-index:100"></div>
+    
+    <section class="img-wrap img-wrap_1">  <img src="./Aladino/assets/images/3.jpeg" alt="" >  </section>
+    <section class="img-wrap img-wrap_2">  <img src="./Aladino/assets/images/3.jpeg" alt="" >  </section>
+
+    <!-- <section class="img-wrap" id="test">    </section> -->
+
+<script type="module">
+
+
+import Aladino from "./Aladino/src/index.js";
+
+const lerp =(start, end, amt)=> (1 - amt) * start + amt * end
+const map = (value, rangeA, rangeB, limit) => {
+    var fromHigh, fromLow, result, toHigh, toLow;
+    if (limit == null) limit = false;
+    (fromLow = rangeA[0]), (fromHigh = rangeA[1]);
+    (toLow = rangeB[0]), (toHigh = rangeB[1]);
+    result = toLow + ((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow);
+    if (limit === true) {
+        if (toLow < toHigh) {
+            if (result < toLow) return toLow;
+            if (result > toHigh) return toHigh;
+        } else {
+            if (result > toLow) return toLow;
+            if (result < toHigh) return toHigh;
+        }
+    }
+    return result;
+};
+export default class Pointer {
+    constructor(){
+        this.viewport = [0,0];  // 화면 크기
+        this.coords = [0,0];    // 마우스 위치
+        this.ndc = [0,0];       // 화면 위치 대비 마우스의 위치 계산(map)
+
+        this.onResize();
+        this.addEvent()
+    }
+
+    addEvent(){
+        window.addEventListener('mousemove', this.onMove.bind(this) )
+        window.addEventListener('resize', this.onResize.bind(this) )
+    }
+    removeEvent(){
+        window.removeEventListener('mousemove', this.onMove.bind(this));
+        window.removeEventListener('resize', this.onResize.bind(this));
+    }
+
+    onResize(){
+        this.viewport[0] = window.innerWidth;
+        this.viewport[1] = window.innerHeight;
+    }
+
+    onMove(e){
+        this.coords[0] = e.clientX;
+        this.coords[1] = e.clientY;
+        
+        /* 화면 위치 대비 마우스의 위치값 계산 */
+        this.ndc[0] = map(this.coords[0], [0, this.viewport[0]], [-1,1], true)
+        this.ndc[1] = map(this.coords[1], [0, this.viewport[1]], [1,-1], true)
+    }
+}
+
+
+//==========================================================================================
+const pointer = new Pointer();
+
+/* -- 좌표 찾기 샘플 -- */
+(function(){
+    const update =()=>{
+        document.querySelector('.xy').innerHTML = 
+        `
+            viewport = [${pointer.viewport[0]} , ${pointer.viewport[1]}] </br>
+            coords = [${pointer.coords[0]} , ${pointer.coords[1]}] </br>
+            ndc = [${pointer.ndc[0]} , ${pointer.ndc[1]}] 
+        `  
+        requestAnimationFrame(update)
+    };
+    update();
+})()
+/* ---------------------- */
+
+//==========================================================================================
+
+let elems = [
+    document.querySelector('.img-wrap_1'),
+    document.querySelector('.img-wrap_2'),
+]
+
+let urls= [
+    "./Aladino/assets/images/1.jpeg",
+    "./Aladino/assets/images/2.jpeg",
+    "./Aladino/assets/images/3.jpeg",
+    "./Aladino/assets/images/4.jpeg",
+    "./Aladino/assets/images/5.jpeg",
+    "./Aladino/assets/images/8.jpeg",
+]
+
+
+class Preloader {
+    constructor () {}
+    static series (imageArray) {        // 동기식(병렬처리)
+        let n = imageArray.length
+            for (let i = 0; i < n; i++) {
+            let img = new Image()
+            img.src = imageArray[i]
+        }
+    }
+    static parallel (imageArray, idx) { // 비동기식
+        let index = idx || 0
+        if (imageArray && imageArray.length > index) {
+            let img = new Image()
+            img.onload =()=> Preloader.parallel(imageArray, index + 1)
+            img.src = imageArray[index]
+        }
+    }
+
+    static inject(id){
+        let div = document.createElement("div")
+        div.id = id;
+        div.style.position = 'absoulte'
+        div.style.top = '-9999px';
+        div.style.left = '-9999px';
+        document.body.appendChild(div)
+    }
+}
+
+Preloader.series(urls);
+
+
+
+
+const aladino = new Aladino({
+    density: 20,
+    autoScroll: false,
+    post: {
+        /* 효과 적용 */
+        fragment: /* glsl */ `
+            precision highp float;
+            
+            uniform float time;
+            uniform float speed;
+            uniform vec2 viewport;
+            uniform sampler2D image;
+
+            float parabola(float x, float k) {
+                return pow(4.0*x*(1.0-x), k);
+            }
+
+            float random(vec2 co) {
+                return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+            }
+
+            void main() {
+                vec2 uv = gl_FragCoord.xy / viewport;
+                float spe = speed * 300.0;
+                float p = parabola(uv.x, 1.4);
+                float r = texture2D(image, uv + vec2(0.00 * spe, 0.0) * p).r;
+                float g = texture2D(image, uv + vec2(0.01 * spe, 0.0) * p).g;
+                float b = texture2D(image, uv + vec2(0.02 * spe, 0.0) * p).b;
+
+                gl_FragColor = vec4(r, g, b, 1.0);
+
+                float n = random(uv + mod(time, 3.0));  // noise 느낌 적용
+                float nn = 1.0;                         // 노출(밝기) 효과
+                gl_FragColor.rgb *= nn - (n * 0.2);
+            }
+        `,
+        uniforms: {
+            speed: 0, // fragment 안에 사용되는 변수 //
+        },
+    },
+});
+document.body.appendChild(aladino.canvas);
+const material = aladino.material({
+    vertex: /* glsl */ `
+        attribute vec2 position;
+        attribute vec2 uv;
+
+        uniform mat4 projection;
+        uniform float time;
+        uniform vec2 speed;
+
+        // uniform float speed;
+        // uniform float speed2;
+
+        varying vec2 vUv;
+
+        float parabola( float x, float k ) {
+            return pow( 4.0*x*(1.0-x), k );
+        }
+
+        void main() {
+            vUv = uv;
+
+            vec4 pos = vec4(position, 0.0, 1.0);
+
+            vec2 spee = speed * 0.03;
+            pos.x += parabola(uv.y, 1.0) * spee.x;
+            pos.y -= parabola(uv.x, 1.0) * spee.y;
+
+            // float spee = speed * 2.0;
+            // pos.x += parabola(uv.y, 1.0) * spee;
+            // vec4 pp = projection * vec4(position, 0.0, 1.0);
+            // float yy = ((pp / pp.w).x + 1.0) / 2.0;
+            // pos.z = parabola(clamp(yy, 0.0, 1.0), 2.4) * speed2 * 160.0;
+            // pos.z = clamp(pos.z, -6.0, 6.0);
+            
+            gl_Position = projection * pos;
+        }
+    `,
+    fragment: /* glsl */ `
+        precision highp float;
+
+        uniform vec2 size;
+        uniform vec2 sizeImage;
+        uniform sampler2D image;
+        uniform vec2 speed;
+
+        varying vec2 vUv;
+
+        vec4 coverTexture(sampler2D tex, vec2 imgSize, vec2 ouv) {
+            vec2 s = size;
+            vec2 i = imgSize;
+
+            float rs = s.x / s.y;
+            float ri = i.x / i.y;
+            vec2 new = rs < ri ? vec2(i.x * s.y / i.y, s.y) : vec2(s.x, i.y * s.x / i.x);
+            vec2 offset = (rs < ri ? vec2((new.x - s.x) / 2.0, 0.0) : vec2(0.0, (new.y - s.y) / 2.0)) / new;
+            vec2 uv = ouv * s / new + offset;
+        
+            return texture2D(tex, uv);
+        }
+
+        void main() {
+            // vec2 s = vUv;
+            // s -= .5;
+            // s *= 0.7;
+            // s -= (speed * 0.03);
+            // s += .5;
+            // // gl_FragColor = coverTexture(image, sizeImage, s);
+            gl_FragColor = coverTexture(image, sizeImage, vUv);
+        }
+    `,
+    // uniforms: {
+    //     speed: 0,
+    //     speed2: 0,
+    // },
+});
+const carpet = aladino.carpet(  elems[1] ,{
+    material,
+    uniforms: {
+        // image: aladino.texture( document.querySelector(".img-wrap > img").src ),
+        image: aladino.texture( urls[0] ),
+        speed: [0, 0], // 수치 변경되면 왜곡됨. 
+    },
+});
+
+
+let oldSpeed = [0, 0];
+
+const update = () => {
+    requestAnimationFrame(update);
+    /* 카펫의 이동 위치 */
+    carpet.position[0] = lerp( carpet.position[0], pointer.coords[0] - carpet.bounds.width / 2, 0.2 );
+    carpet.position[1] = lerp( carpet.position[1], pointer.coords[1] - carpet.bounds.height / 2, 0.2 );
+    // carpet.position[0] = (window.innerWidth - carpet.bounds.width)  / 2
+    // carpet.position[1] = (window.innerHeight - carpet.bounds.height) / 2
+
+    /* 카펫 왜곡 */
+    carpet.uniforms.speed[0] = lerp( carpet.uniforms.speed[0], (carpet.position[0] - oldSpeed[0]) * 0.1, 0.7 );
+    carpet.uniforms.speed[1] = lerp( carpet.uniforms.speed[1], (carpet.position[1] - oldSpeed[1]) * 0.1, 0.7 );
+    oldSpeed[0] = carpet.position[0];
+    oldSpeed[1] = carpet.position[1];
+
+    /* RGB 효과 */
+    aladino.post.uniforms.speed = lerp( aladino.post.uniforms.speed, carpet.uniforms.speed[0] * 0.001,  0.1 );
+
+
+};
+update();
+
+// carpet.dom.style.opacity = 1     // 원본 DOM 보이게 설정 
+aladino.canvas.style.zIndex = -1 // 캔버스를 제일 하단에 두기 - post 를사용해서 배경이 black 됨
+
+/*
+    옵션을 바꾸고 init() 을 시키거나 draw() 로 다시 그릴 수 있음.
+    aladino.autoTick = true;
+    aladino.init()
+    // aladino.draw()
+
+    carpet.dom 의 크기에 따라 이미지가 렌더링되는데...
+    carpet.dom 를 교체한 후 carpet.resize() 실행해줘야함.
+*/
+/*
+    이미지 추후 교체 가능
+    carpet.uniforms.image = aladino.texture( document.querySelector(".img-wrap > img").src)
+*/
+
+window.addEventListener('mousemove', e=>{
+    if(pointer.coords[0] < 200){
+        if(carpet.dom != elems[1]){
+            carpet.dom = elems[1]
+            carpet.resize()
+        }
+        carpet.uniforms.image = aladino.texture( urls[0] )
+    } else if(pointer.coords[0] < 400){
+        if(carpet.dom != elems[0]){
+            carpet.dom = elems[0]
+            carpet.resize()
+        }
+        carpet.uniforms.image = aladino.texture( urls[1] )
+    } else {
+        carpet.uniforms.image = aladino.texture( urls[2] )
+    }
+})
+
+</script>
+
+</body>
+</html>
