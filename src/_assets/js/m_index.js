@@ -286,7 +286,7 @@ const pageTransitionComplete =()=>{
     }
     else if(nameSpace === "service"){
         if(!focusInPage) return;
-        console.log(focusInPage)
+        console.log(`focusInPage = ${focusInPage}`)
         goToFocus( focusInPage , 1 )
         focusInPage = null;
     }
@@ -415,6 +415,7 @@ const goToFocus =(id, time)=>{
     console.log( `focusInPage: ${id}`);
     gsap.to(window, { scrollTo: id, duration: time, ease: ease.material});
 }
+
 
 //===============================================================================================================================
 /*===== 모바일 정책문서 불러오기  ======================*/

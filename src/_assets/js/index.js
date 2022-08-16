@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', e=>{
 
     Link.navi()
     Navi.init();
-    OurStroy.addEvent();
+    // OurStroy.addEvent();
 
     pageBeforeLeave();
     pageBeforeEnter();

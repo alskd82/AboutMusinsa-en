@@ -3,8 +3,8 @@ import { defineConfig } from 'vite'
 
 const root = resolve(__dirname, 'src')
 
-// const outDir = resolve(__dirname, 'dist')                /* 메인 빌드용 */  
-const outDir = resolve(__dirname, 'dist/contentPage')    /* CMS 컨텐츠 페이지 빌드용 */
+const outDir = resolve(__dirname, 'dist')             /* 메인 빌드용 */  
+// const outDir = resolve(__dirname, 'dist/contentPage')    /* CMS 컨텐츠 페이지 빌드용 */
 
 function CustomHmr() {
     return {
@@ -20,6 +20,13 @@ function CustomHmr() {
 
 export default defineConfig({
     root,
+
+    plugins:[
+        CustomHmr()
+    ],
+    server: {
+        host : true
+    },
 
     json:{
         stringify: true, // json 파일 parse 시켜줌
@@ -41,25 +48,25 @@ export default defineConfig({
             input: {
 
                 /* 메인 빌드용 */
-                // index: resolve(root, "index.html"),
-                // history: resolve(root, "01_history.html"),
-                // impact: resolve(root, "02_impact.html"),
-                // service: resolve(root, "03_service.html"), 
-                // partners: resolve(root, "04_partners.html"), 
-                // newsroom: resolve(root, "05_newsroom.html"), 
+                index: resolve(root, "index.html"),
+                history: resolve(root, "01_history.html"),
+                impact: resolve(root, "02_impact.html"),
+                service: resolve(root, "03_service.html"), 
+                partners: resolve(root, "04_partners.html"), 
+                newsroom: resolve(root, "05_newsroom.html"), 
                 
-                // fromournewsroom: resolve(root, "fromournewsroom/from-our-newsroom" ,"index.html"),
-                // brands: resolve(root, "partners/brands" ,"index.html"),
+                fromournewsroom: resolve(root, "fromournewsroom/from-our-newsroom" ,"index.html"),
+                brands: resolve(root, "partners/brands" ,"index.html"),
 
-                // m_index: resolve(root, "m", "m.html"),
-                // m_history: resolve(root, "m", "m_01_history.html"),
-                // m_impact: resolve(root, "m", "m_02_impact.html"),
-                // m_service: resolve(root, "m","m_03_service.html"), 
-                // m_partners: resolve(root, "m", "m_04_partners.html"), 
-                // m_newsroom: resolve(root, "m","m_05_newsroom.html"), 
+                m_index: resolve(root, "m", "m.html"),
+                m_history: resolve(root, "m", "m_01_history.html"),
+                m_impact: resolve(root, "m", "m_02_impact.html"),
+                m_service: resolve(root, "m","m_03_service.html"), 
+                m_partners: resolve(root, "m", "m_04_partners.html"), 
+                m_newsroom: resolve(root, "m","m_05_newsroom.html"), 
 
                 /* CMS 컨텐츠 페이지 빌드용 */
-                contentPage: resolve(root, "contentPage", "contentPage.html"),
+                // contentPage: resolve(root, "contentPage", "contentPage.html"),
             },
 
             /* out 을 명시 안하면 assets 폴더 안에 다 담김 */
@@ -73,11 +80,6 @@ export default defineConfig({
             }
         },
 
-    },
-    plugins:[
-        CustomHmr()
-    ],
-    server: {
-        host : true
     }
+    
 })

@@ -298,7 +298,7 @@ const Partners = (function(exports){
 
         /* 위치 이동 */
         defaultX = document.querySelector('.brand_img-wrap.is-row').getBoundingClientRect().left;
-        limitXmin = document.querySelector('.partner_list').getBoundingClientRect().left - 300;
+        limitXmin = document.querySelector('.partner_list').getBoundingClientRect().left - 200;
         tx = pointer.coords[0] - defaultX;
         if(pointer.coords[0] < limitXmin) tx = limitXmin - defaultX
         if(pointer.coords[0] > defaultX) tx = 0

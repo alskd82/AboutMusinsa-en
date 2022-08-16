@@ -189,6 +189,7 @@ const createSmoother=(isTop)=>{
         content: `[data-smooth="content"]`,
         normalizeScroll: true, effects: true,
     });
+    console.log( 'createSmoother , isTop ='+isTop)
 
     /* 컨텐츠만 다시 바꿔치기 */
     // if(smoother) smoother.content(`[data-smooth="content"]`);

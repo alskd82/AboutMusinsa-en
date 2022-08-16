@@ -12,17 +12,20 @@ import {ease , scrollIntoView, getRelativePosition  } from "./common"
 const OurStroy = (function(exports){
     let sectionOurstory;
     let ourstoryIndi = document.querySelector(".ourstory-indi");
-    let gageArr = document.querySelectorAll('.ourstory-indi_item_gage');
+    let gageArr = []; //document.querySelectorAll('.ourstory-indi_item_gage');
+    let indiData = []
 
     const addEvent =()=>{
         document.querySelector('.ourstory-indi_list').addEventListener('click', e =>{
             if( !e.target.classList.contains('ourstory-indi_item') ) return;
-            // console.log(e.target.dataset.year)
+            console.log(e.target.dataset.year)
             const targetEle = document.querySelector(`.ourstory_cms[data-year="${e.target.dataset.year}"]`);
+            // const targetEle = document.querySelectorAll(`.ourstory_cms-item[data-year="${e.target.dataset.year}"]`)[0]; // CMS LIST 를 하나만 썼을 때
 
             const targetY =()=>{
                 let targetY = getRelativePosition(document.body, targetEle).y;
                 let firstChildH = gsap.getProperty( targetEle.querySelector('.ourstory_cms-item'), "height" )
+                // let firstChildH = gsap.getProperty( targetEle, "height" ) // CMS LIST 를 하나만 썼을 때
                 
                 if( targetY - window.innerHeight/2 + firstChildH/2 < targetY){
                     return targetY - window.innerHeight/2 + firstChildH/2
@@ -39,19 +42,8 @@ const OurStroy = (function(exports){
 
     /* gage progress */
     const gage =()=> {
-        // gsap.set( gageArr, {clipPath: `polygon(0 0, 0 0, 0 100%, 0 100%)`});
-
-        /* Year 걸치기 */
-        document.querySelectorAll('.ourstory_cms-item').forEach( (ele,i)=>{
-            const header = document.querySelectorAll('.ourstory_cms-header')[i]
-            const headerH = gsap.getProperty(header, 'height');
-            ScrollTrigger.batch(ele, {
-                // markers: true, id:"year",
-                start: `top top`,
-                end: `bottom ${headerH + 120 + 120}`, // 헤더크기 + 상하 패딩  
-                pin: header,
-            })
-        })
+        gageArr = document.querySelectorAll('.ourstory-indi_item_gage');
+        gsap.set( gageArr, {clipPath: `polygon(0 0, 0 0, 0 100%, 0 100%)`});
 
         /* 연도별 인디케이터 */
         document.querySelectorAll('.ourstory_cms').forEach( (ele, i)=>{
@@ -68,6 +60,21 @@ const OurStroy = (function(exports){
                     gsap.to( gageArr[i], {clipPath: `polygon(0 0, ${progress}% 0, ${progress}% 100%, 0 100%)`,  duration: .1})
                 }
             });
+        })
+    }
+    
+    /* Year 걸치기 */
+    const yearFix=()=>{
+        /* Year 걸치기 */
+        document.querySelectorAll('.ourstory_cms-item').forEach( (ele,i)=>{
+            const header = document.querySelectorAll('.ourstory_cms-header')[i]
+            const headerH = gsap.getProperty(header, 'height');
+            ScrollTrigger.batch(ele, {
+                // markers: true, id:"year",
+                start: `top top`,
+                end: `bottom ${headerH + 120 + 120}`, // 헤더크기 + 상하 패딩  
+                pin: header,
+            })
         })
     }
 
@@ -93,6 +100,7 @@ const OurStroy = (function(exports){
             onEnterBack:() => indiShowHide("show"), 
         });
 
+        yearFix()
         gage()
     }
 
@@ -100,10 +108,30 @@ const OurStroy = (function(exports){
         sectionOurstory = document.querySelector(".section-ourstory");
         if(!sectionOurstory) return;
 
-        
+        //=== 연도별 indi 셋팅 ===//
+        indiData = {}
+        document.querySelector('ul.ourstory-indi_list').innerHTML = ''
+        gageArr = []; //document.querySelectorAll('.ourstory-indi_item_gage');
 
-        gsap.set( gageArr, {clipPath: `polygon(0 0, 0 0, 0 100%, 0 100%)`});
+        document.querySelectorAll('.ourstory_cms-header > h2').forEach( (year, i)=>{
+            if( !indiData[year.innerHTML] ){
+                indiData[year.innerHTML] = [];
+                document.querySelector('ul.ourstory-indi_list').innerHTML +=
+                    `<li data-year=${year.innerHTML} class="ourstory-indi_item">
+                        <div class="ourstory-indi_item_txt">
+                            <div class="mu24-150">${year.innerHTML}</div>
+                        </div>
+                        <div class="ourstory-indi_item_gage">
+                            <div class="mu24-150 is-white is-indi">${year.innerHTML}</div>
+                        </div>
+                    </li>`
+            }
+            indiData[year.innerHTML].push( year.parentElement.parentElement ) 
+            year.parentElement.parentElement.dataset.year = year.innerHTML
+        });
 
+
+        addEvent()
     }
 
     exports.st = st;

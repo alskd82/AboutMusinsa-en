@@ -82,6 +82,15 @@ body.loaded{
 .img-arrow-wrap{ pointer-events: none;}
 
 
+/*///////////////////////////////*/
+/*=== Partner Brands 링크 ===================*/
+.section-partner_header{
+	pointer-events: none;
+    a {
+        pointer-events: auto;
+    }
+}
+
 /*//////////////////////////////////////*/
 /*=== For Mobile ===================*/
 // .m_ham{

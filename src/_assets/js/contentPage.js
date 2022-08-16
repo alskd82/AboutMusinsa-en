@@ -5,7 +5,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 import { 
     ease,
-    createSmoother,
+    smoother, createSmoother,
     getRelativePosition
 } from "./page/common";
 import { Navi, Footer, navShowHide, Mobile_Navi } from "./page/nav"
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', e =>{
     
     /* PC */
     if(!isMobile){
-        createSmoother(true);
+        // createSmoother(true);
 
         Navi.init();
         /* 뉴스룸일 때 원뎁스 메뉴 활성화 */
@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', e =>{
             ignoreMobileResize: true
         })
         // ScrollTrigger.addEventListener("refresh", e=> console.log("ScrollTrigger refresh") )
+
     }
 
     /* Mobile */
@@ -50,7 +51,6 @@ document.addEventListener('DOMContentLoaded', e =>{
     footerDocument.init()
     footerDocument.addEvent();
 });
-
 
 
 const AnotherArticle =()=>{

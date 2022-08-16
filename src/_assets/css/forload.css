@@ -93,6 +93,16 @@ body.loaded .section-nav {
   pointer-events: none;
 }
 
+/*///////////////////////////////*/
+/*=== Partner Brands 링크 ===================*/
+.section-partner_header {
+  pointer-events: none;
+}
+
+.section-partner_header a {
+  pointer-events: auto;
+}
+
 /*//////////////////////////////////////*/
 /*=== For Mobile ===================*/
 .m_nav-wrap {
