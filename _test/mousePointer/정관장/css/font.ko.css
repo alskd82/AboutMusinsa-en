@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+/* Minguk Bold */
+@font-face {
+    font-family: 'Minguk';
+    src: url("../fonts/Minguk-Bold.eot");
+    src: url("../fonts/Minguk-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Minguk-BoldA1.woff") format("woff"), url("../fonts/Minguk-BoldA1.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Minguk Regular */
+@font-face {
+    font-family: 'Minguk';
+    src: url("../fonts/Minguk-Regular.eot");
+    src: url("../fonts/Minguk-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Minguk-RegularA1.woff") format("woff"), url("../fonts/Minguk-RegularA1.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* NOTO Sans KR Regular */
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/NotoSansKR-Regular.eot");
+    /* IE9 Compat Modes */
+    src: local("Noto Sans KR Regular"), local("NotoSansKR-Regular"), url("../fonts/NotoSansKR-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/NotoSansKR-Regular.woff2") format("woff2"), url("../fonts/NotoSansKR-Regular.woff") format("woff"), url("../fonts/NotoSansKR-Regular.ttf") format("truetype"), url("../fonts/NotoSansKR-Regular.svg#NotoSansKR") format("svg");
+    /* Legacy iOS */
+}
+
+/* NOTO Sans KR Medium */
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 500;
+    src: url("../fonts/NotoSansKR-Medium.eot");
+    /* IE9 Compat Modes */
+    src: local("Noto Sans KR Medium"), local("NotoSansKR-Medium"), url("../fonts/NotoSansKR-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/NotoSansKR-Medium.woff2") format("woff2"), url("../fonts/NotoSansKR-Medium.woff") format("woff"), url("../fonts/NotoSansKR-Medium.ttf") format("truetype"), url("../fonts/NotoSansKR-Medium.svg#NotoSansKR") format("svg");
+    /* Legacy iOS */
+}
+
+/* NOTO Sans KR Bold */
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/NotoSansKR-Bold.eot");
+    /* IE9 Compat Modes */
+    src: local("Noto Sans KR Bold"), local("NotoSansKR-Bold"), url("../fonts/NotoSansKR-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/NotoSansKR-Bold.woff") format("woff"), url("../fonts/NotoSansKR-Bold.ttf") format("truetype"), url("../fonts/NotoSansKR-Bold.svg#NotoSansKR") format("svg");
+    /* Legacy iOS */
+}
+
+/* 영문 세라 */
+@font-face {
+    font-family: 'CeraPro';
+    font-style: normal;
+    font-weight: 300;
+    src: url("../fonts/CeraPro-Light.eot");
+    src: url("../fonts/CeraPro-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/CeraPro-Light.woff") format("woff"), url("../fonts/CeraPro-Light.woff2") format("woff2"), url("../fonts/CeraPro-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'CeraPro';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/CeraPro-Regular.eot");
+    src: url("../fonts/CeraPro-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/CeraPro-Regular.woff") format("woff"), url("../fonts/CeraPro-Regular.woff2") format("woff2"), url("../fonts/CeraPro-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'CeraPro';
+    font-style: normal;
+    font-weight: 500;
+    src: url("../fonts/CeraPro-Medium.eot");
+    src: url("../fonts/CeraPro-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/CeraPro-Medium.woff") format("woff"), url("../fonts/CeraPro-Medium.woff2") format("woff2"), url("../fonts/CeraPro-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'CeraPro';
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/CeraPro-Medium.eot");
+    src: url("../fonts/CeraPro-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/CeraPro-Medium.woff") format("woff"), url("../fonts/CeraPro-Medium.woff2") format("woff2"), url("../fonts/CeraPro-Medium.ttf") format("truetype");
+}
+
+/*# sourceMappingURL=font.ko.css.map */

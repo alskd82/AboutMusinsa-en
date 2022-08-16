@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Preloading with CSS + Javascript </title>
+    <style>
+        body{ margin: 0; padding: 0; }
+    </style>
+</head>
+<body>
+    <div id="preload1"></div>
+    <div id="preload2"></div>
+    <div id="preload3"></div>
+    <div id="preload4"></div>
+    <div id="preload5"></div>
+    <div id="preload6"></div>
+    <div id="preload7"></div>
+    <div id="preload8"></div>
+    <div id="preload9"></div>
+    <div id="preload10"></div>
+
+    <script>
+const preloader = () => {
+    document.getElementById("preload1").style.background = "url(./img/img_1.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload2").style.background = "url(./img/img_2.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload3").style.background = "url(./img/img_3.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload4").style.background = "url(./img/img_4.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload5").style.background = "url(./img/img_5.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload6").style.background = "url(./img/img_6.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload7").style.background = "url(./img/img_7.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload8").style.background = "url(./img/img_8.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload9").style.background = "url(./img/img_9.jpg) no-repeat -9999px -9999px";
+    document.getElementById("preload10").style.background = "url(./img/img_10.jpg) no-repeat -9999px -9999px";
+};
+
+const addLoadEvent = (func) => {
+    const onloadEvent = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = func;
+    } else {
+        window.onload = () => {
+            if (onloadEvent) {
+                onloadEvent();
+            }
+            func();
+        }
+    }
+};
+
+addLoadEvent( preloader );
+
+    </script>
+    
+</body>
+</html>
